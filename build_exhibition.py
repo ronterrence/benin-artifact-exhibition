@@ -1,18 +1,13 @@
-import os
 import html
 from pathlib import Path
+
 import pandas as pd
 
 BASE_DIR = Path("benin_output")
 CSV_PATH = BASE_DIR / "artifact_manifest_enriched.csv"
-PLATES_DIR = BASE_DIR / "plates"
-
-#OUT_DIR = BASE_DIR / "html_exhibition"
-OUT_DIR = Path(".")
 ROOT_OUT = Path("index.html")
 HTML_OUT_DIR = BASE_DIR / "html_exhibition"
-HTML_OUT_DIR.mkdir(parents=True, exist_ok=True)
-# Optional human-readable cluster labels
+
 CLUSTER_LABELS = {
     0: "Cluster 00",
     1: "Cluster 01",
@@ -27,45 +22,41 @@ CLUSTER_LABELS = {
     10: "Cluster 10",
 }
 
-INTRO_TEXT = """
-A machine-assisted visual exhibition of Benin artifacts built from paired scans,
-CLIP similarity clustering, and catalog descriptions extracted from Pitt Rivers'
-Antique Works of Art from Benin.
-""".strip()
+INTRO_TEXT = (
+    "A machine-assisted visual exhibition of Benin artifacts built from paired scans, "
+    "CLIP similarity clustering, and catalog descriptions extracted from Pitt Rivers' "
+    "Antique Works of Art from Benin."
+)
 
 
-def esc(x):
+def esc(x) -> str:
     if pd.isna(x):
         return ""
     return html.escape(str(x))
 
 
-def ensure_dir(path: Path):
-    path.mkdir(parents=True, exist_ok=True)
-
-
-def build_card(row, rel_plate_path):
-    artifact_id = esc(row.get("artifact_id", ""))
-    title = esc(row.get("title", "")) or artifact_id
-    description = esc(row.get("description", ""))
+def build_card(row: pd.Series, img_path: str) -> str:
+    title = esc(row.get("title", "Untitled"))
+    desc = esc(str(row.get("description", ""))[:220])
+    artifact_id = esc(row["artifact_id"])
     cluster = esc(row.get("cluster", ""))
 
+    search_text = f"{artifact_id} {title} {desc}".lower()
+
     return f"""
-    <article class="card" data-artifact="{artifact_id.lower()}" data-text="{(title + ' ' + description).lower()}">
-      <div class="card-image">
-        <img src="{rel_plate_path}" alt="{title}">
-      </div>
-      <div class="card-body">
+    <article class="card" data-artifact="{artifact_id.lower()}" data-text="{search_text}">
+      <img src="{img_path}" alt="{artifact_id}">
+      <div class="card-content">
         <div class="artifact-id">{artifact_id}</div>
-        <h3>{title}</h3>
+        <div class="title">{title}</div>
         <div class="meta">Cluster: {cluster}</div>
-        <p>{description}</p>
+        <div class="description">{desc}</div>
       </div>
     </article>
     """
 
 
-def main():
+def main() -> None:
     if not CSV_PATH.exists():
         raise FileNotFoundError(f"Missing CSV: {CSV_PATH}")
 
@@ -73,19 +64,18 @@ def main():
 
     if "artifact_id" not in df.columns:
         raise ValueError("CSV must contain an 'artifact_id' column.")
-
     if "cluster" not in df.columns:
         raise ValueError("CSV must contain a 'cluster' column.")
 
-    ensure_dir(OUT_DIR)
+    HTML_OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Build cards grouped by cluster
     sections = []
 
-    for cluster_id, group in df.sort_values(["cluster", "artifact_id"]).groupby("cluster"):
+    grouped = df.sort_values(["cluster", "artifact_id"]).groupby("cluster")
+    for cluster_id, group in grouped:
         label = CLUSTER_LABELS.get(cluster_id, f"Cluster {cluster_id}")
-
         cards = []
+
         for _, row in group.iterrows():
             artifact_id = str(row["artifact_id"]).strip().lower()
             plate_path = Path("benin_output") / "plates" / f"{artifact_id}_plate.jpg"
@@ -96,7 +86,7 @@ def main():
             rel_plate_path = plate_path.as_posix()
             cards.append(build_card(row, rel_plate_path))
 
-    if cards:
+        if cards:
             sections.append(f"""
             <section class="cluster-section" id="cluster-{cluster_id}">
               <div class="section-header">
@@ -110,128 +100,132 @@ def main():
             """)
 
     css = """
-    :root {
-      --bg: #f5f1e8;
-      --ink: #1d1a17;
-      --muted: #6a625a;
-      --card: #fffaf2;
-      --line: #d8cfc3;
-      --accent: #7a4d1d;
-    }
-    * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.5;
+      font-family: Georgia, serif;
+      background: #0f0f0f;
+      color: #eaeaea;
     }
+
     header {
-      padding: 40px 24px 24px;
-      border-bottom: 1px solid var(--line);
-      background: #efe8dc;
+      padding: 60px 40px;
+      background: #111;
+      border-bottom: 1px solid #222;
       position: sticky;
       top: 0;
       z-index: 10;
     }
-    header h1 {
-      margin: 0 0 8px;
-      font-size: 2rem;
-    }
-    header p {
+
+    h1 {
       margin: 0;
-      max-width: 900px;
-      color: var(--muted);
+      font-size: 42px;
+      font-weight: 500;
     }
+
+    .subtitle {
+      color: #aaa;
+      margin-top: 10px;
+      max-width: 800px;
+      line-height: 1.6;
+    }
+
     .toolbar {
-      margin-top: 18px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
+      margin-top: 20px;
     }
+
     input[type="search"] {
       padding: 12px 14px;
       min-width: 320px;
-      border: 1px solid var(--line);
+      border: 1px solid #333;
       border-radius: 10px;
-      background: white;
+      background: #1a1a1a;
+      color: #eee;
       font-size: 1rem;
     }
+
     main {
-      padding: 24px;
-      max-width: 1500px;
+      max-width: 1600px;
       margin: 0 auto;
     }
+
     .cluster-section {
-      margin-bottom: 48px;
+      padding: 60px 40px;
     }
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-      border-bottom: 1px solid var(--line);
-      margin-bottom: 18px;
-    }
+
     .section-header h2 {
-      margin: 0 0 10px;
-      font-size: 1.4rem;
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 10px;
     }
+
     .section-header p {
-      color: var(--muted);
-      margin: 0 0 10px;
+      color: #888;
+      margin-bottom: 30px;
     }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 18px;
+      gap: 40px;
     }
+
     .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 16px;
+      background: #151515;
+      border: 1px solid #222;
+      border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 3px 10px rgba(0,0,0,.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .card-image {
-      background: white;
-      padding: 14px;
-      border-bottom: 1px solid var(--line);
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
-    .card-image img {
+
+    .card img {
       width: 100%;
-      height: auto;
       display: block;
+      background: #fff;
+      filter: grayscale(100%);
     }
-    .card-body {
-      padding: 14px 16px 18px;
+
+    .card-content {
+      padding: 20px;
     }
+
     .artifact-id {
-      color: var(--accent);
-      font-weight: bold;
-      font-size: .9rem;
+      font-size: 12px;
+      color: #888;
       margin-bottom: 6px;
     }
-    .card h3 {
-      margin: 0 0 8px;
-      font-size: 1rem;
-    }
-    .meta {
-      color: var(--muted);
-      font-size: .9rem;
+
+    .title {
+      font-size: 22px;
       margin-bottom: 10px;
+      line-height: 1.35;
     }
-    .card p {
-      margin: 0;
-      font-size: .95rem;
+
+    .meta {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 12px;
     }
+
+    .description {
+      font-size: 14px;
+      color: #bbb;
+      line-height: 1.7;
+    }
+
     .hidden {
       display: none !important;
     }
+
     footer {
-      padding: 30px 24px 50px;
-      color: var(--muted);
+      padding: 40px;
+      color: #888;
       text-align: center;
+      border-top: 1px solid #222;
     }
     """
 
@@ -244,7 +238,7 @@ def main():
       const q = searchBox.value.trim().toLowerCase();
 
       cards.forEach(card => {
-        const hay = card.dataset.text + ' ' + card.dataset.artifact;
+        const hay = (card.dataset.text || '') + ' ' + (card.dataset.artifact || '');
         const show = !q || hay.includes(q);
         card.classList.toggle('hidden', !show);
       });
@@ -270,7 +264,7 @@ def main():
     <body>
       <header>
         <h1>Benin Digital Exhibition</h1>
-        <p>{esc(INTRO_TEXT)}</p>
+        <div class="subtitle">{esc(INTRO_TEXT)}</div>
         <div class="toolbar">
           <input id="searchBox" type="search" placeholder="Search by artifact ID, title, or description">
         </div>
@@ -289,15 +283,12 @@ def main():
     </html>
     """
 
-    #out_file = OUT_DIR / "index.html"
-    #out_file.write_text(html_doc, encoding="utf-8")
-    # write BOTH versions
     ROOT_OUT.write_text(html_doc, encoding="utf-8")
     (HTML_OUT_DIR / "index.html").write_text(html_doc, encoding="utf-8")
-    
-    #print(f"Saved exhibition: {out_file}")
+
     print(f"Saved exhibition: {ROOT_OUT}")
     print(f"Also saved copy: {HTML_OUT_DIR / 'index.html'}")
+
 
 if __name__ == "__main__":
     main()
