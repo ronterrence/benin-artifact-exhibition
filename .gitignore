@@ -4,7 +4,6 @@ __pycache__/
 
 # Large outputs
 benin_output/clusters/
-benin_output/plates/
 archive/
 
 
