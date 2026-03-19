@@ -4,190 +4,1944 @@
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Benin Digital Exhibition</title>
+      <title>Benin Immersive Exhibition</title>
       <style>
+    :root {
+      --bg: #111111;
+      --panel: #1a1a1a;
+      --text: #f4f0e8;
+      --muted: #b7ada1;
+      --accent: #c08b48;
+      --line: rgba(255,255,255,0.08);
+    }
+    .wall-text {
+        max-width: 900px;
+        line-height: 1.7;
+        font-size: 1.05rem;
+        color: #ddd2c4;
+        margin-top: 10px;
+    }
+    .artifact-card {
+        text-decoration: none;
+        color: inherit;
+    }
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-    margin: 0;
-    font-family: "Georgia", serif;
-    background: #0b0b0b;
-    color: #eaeaea;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
     }
 
-    /* HERO */
     .hero {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: #000;
-    }
-
-    .hero-inner {
-    max-width: 700px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px;
+      background:
+        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.75)),
+        radial-gradient(circle at top left, #4c3215, transparent 40%),
+        radial-gradient(circle at bottom right, #2d2d2d, transparent 35%);
+      border-bottom: 1px solid var(--line);
     }
 
     .hero h1 {
-    font-size: 48px;
-    font-weight: 500;
-    margin-bottom: 20px;
-    }
-
-    .hero-sub {
-    color: #aaa;
-    font-size: 16px;
-    margin-bottom: 30px;
-    }
-
-    .enter-btn {
-    color: white;
-    text-decoration: none;
-    border: 1px solid #444;
-    padding: 12px 24px;
-    border-radius: 30px;
-    transition: 0.3s;
-    }
-
-    .enter-btn:hover {
-    background: white;
-    color: black;
-    }
-
-    /* CLUSTERS */
-    .cluster-section {
-    padding: 100px 60px;
-    border-top: 1px solid #1a1a1a;
-    }
-
-    .cluster-header h2 {
-      font-size: 28px;
-      margin-bottom: 5px;
-    }
-
-    .cluster-header p {
-      color: #777;
-      margin-bottom: 40px;
-    }
-
-    /* FEATURED */
-    .featured {
+      margin: 0 0 16px;
+      font-size: 3rem;
       max-width: 900px;
-      margin-bottom: 60px;
     }
 
-    .featured img {
-      width: 100%;
-      filter: grayscale(100%);
+    .hero p {
+      max-width: 900px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.7;
     }
 
-    /* GRID */
-    .grid {
+    .hero-nav {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-nav a {
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .hero-nav a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .room {
+      min-height: 100vh;
+      padding: 42px 30px 54px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #131313, #101010);
+    }
+
+    .room-header {
+      max-width: 1100px;
+      margin: 0 auto 24px;
+    }
+
+    .room-number {
+      color: var(--accent);
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    .room-header h2 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+    }
+
+    .room-header p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 900px;
+      line-height: 1.6;
+    }
+
+    .room-grid {
+      max-width: 1400px;
+      margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 40px;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 22px;
     }
 
-    /* CARD */
-    .card {
-      background: #111;
-      border: 1px solid #222;
-      border-radius: 6px;
+    .artifact-card {
+      position: relative;
       overflow: hidden;
-      transition: 0.3s;
+      border-radius: 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      min-height: 380px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.28);
     }
 
-    .card:hover {
-      transform: translateY(-6px);
-    }
-
-    .card img {
+    .artifact-card img {
       width: 100%;
+      height: 100%;
       display: block;
-      filter: grayscale(100%);
+      object-fit: cover;
+      transition: transform 0.5s ease;
     }
 
-    .card-content {
-      padding: 16px;
+    .artifact-card:hover img {
+      transform: scale(1.03);
+    }
+
+    .artifact-overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 20px 18px 18px;
+      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.82) 42%, rgba(0,0,0,0.95));
     }
 
     .artifact-id {
-      font-size: 12px;
-      color: #888;
+      font-size: 0.82rem;
+      color: var(--accent);
+      font-weight: bold;
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
     }
 
-    .title {
-      margin-top: 6px;
-      font-size: 14px;
+    .artifact-overlay h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      line-height: 1.35;
     }
 
-    .description {
-      margin-top: 8px;
-      font-size: 12px;
-      color: #aaa;
+    .artifact-overlay p {
+      margin: 0;
+      color: #ddd2c4;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .footer {
+      padding: 28px;
+      text-align: center;
+      color: var(--muted);
+      background: #0d0d0d;
     }
     </style>
     </head>
     <body>
+      <section class="hero">
+        <h1>Benin Immersive Exhibition</h1>
+        <p>An immersive digital exhibition built from paired Benin artifact scans, CLIP-based visual grouping,
+and catalog descriptions. Each room presents one visual family from the corpus.</p>
+        <div class="hero-nav">
+          <a href="#room-0">Warriors, Swords, and Regalia</a><a href="#room-1">Lamps, Bracelets, and Masks</a><a href="#room-2">Heads, Staffs, and Crocodiles</a><a href="#room-3">Heads, Swords, and Armlets</a><a href="#room-4">Swords, Bells, and Leopards</a><a href="#room-5">Bracelets, Heads, and Horses</a><a href="#room-6">Bells, Vessels, and Heads</a><a href="#room-7">Kings, Heads, and Ornaments</a><a href="#room-8">Masks, Kings, and Heads</a><a href="#room-9">Swords, Staffs, and Spears</a><a href="#room-10">Female Figures, Plaques, and Leopards</a>
+        </div>
+      </section>
+
       
-    <section class="hero">
-    <div class="hero-inner">
-    <h1>Benin Digital Exhibition</h1>
-    <p class="hero-sub">
-      A machine-generated visual grouping of Benin artifacts based on image similarity.
-    </p>
-    <div class="toolbar">
-      <input id="searchBox" type="search" placeholder="Search by artifact ID, title, or description">
-    </div>
-    <a href="#cluster-00" class="enter-btn">Enter Archive ↓</a>
-    </div>
-    </section>
+        <section class="room" id="room-0">
+        <div class="room-header">
+        <div class="room-number">Room 0</div>
+        <h2>Warriors, Swords, and Regalia</h2>
+        <p class="wall-text">This group, titled &#x27;Warriors, Swords, and Regalia&#x27;, brings together works centered around left, hand, right. These objects reflect recurring visual and symbolic elements within Benin court art, suggesting shared functions, status markers, or narrative roles. Motifs such as plaque, ornamented, plate appear frequently, pointing to connections between material culture, hierarchy, and ceremonial expression. Taken together, the works in this section reveal how form, ornament, and iconography combine to communicate authority, identity, and continuity within the Benin artistic tradition.</p>
+        </div>
+        <div class="room-grid">
+            
+    <a class="artifact-card" href="artifact_pages/fig_001.html">
+      <img src="../plates/fig_001_plate.jpg" alt="Bronze plaque, representing two warriors with broad leaf-shaped swords in their right hand">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_001</div>
+        <h3>Bronze plaque, representing two warriors with broad leaf-shaped swords in their right hand</h3>
+        <p>Bronze plaque, representing two warriors with broad leaf-shaped swords in their right hands. Coral or agate head-dress. Coral chokers, badge of rank. Leopards&#x27; teeth necklace. heads hanging on left sides. Coral scarf across shoulder. Leopards&#x27; Skirts...</p>
+      </div>
+    </a>
     
-      <main>
+    <a class="artifact-card" href="artifact_pages/fig_003.html">
+      <img src="../plates/fig_003_plate.jpg" alt="Bronze plaque, representing three warriors, two with feathers in head-dress The latter and">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_003</div>
+        <h3>Bronze plaque, representing three warriors, two with feathers in head-dress The latter and</h3>
+        <p>Bronze plaque, representing three warriors, two with feathers in head-dress The latter and trefoil leaves at top ; one with pot helmet, button on top. has a coral choker, badge of rank, and aU have leopards&#x27; teeth necklaces. Two have hands on The central ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_004.html">
+      <img src="../plates/fig_004_plate.jpg" alt="Bronze plaque, figure of warrior with spear in right hand, shield on left Head-dress of co">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_004</div>
+        <h3>Bronze plaque, figure of warrior with spear in right hand, shield on left Head-dress of co</h3>
+        <p>Bronze plaque, figure of warrior with spear in right hand, shield on left Head-dress of coral or agate, similar to that represented in shoulder. Plate XXI, Fig. 121. anklets. Quadrangular bell hanging from neck. Chain-like Coral choker, badge of rank, and leop...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_005.html">
+      <img src="../plates/fig_005_plate.jpg" alt="Bronze plaque, representing a warrior in centre, turned to his left">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_005</div>
+        <h3>Bronze plaque, representing a warrior in centre, turned to his left</h3>
+        <p>Bronze plaque, representing a warrior in centre, turned to his left. He has a beard and a necklace of leopards&#x27; teeth, but no coral choker. He has a high helmet, somewhat in the form of a grenadier cap. Quad- Dagger in sheath on right side, and various ra...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_007.html">
+      <img src="../plates/fig_007_plate.jpg" alt="Bronze plaque, representing a king or noble on horseback sitting sideways, his hands uphel">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_007</div>
+        <h3>Bronze plaque, representing a king or noble on horseback sitting sideways, his hands uphel</h3>
+        <p>Bronze plaque, representing a king or noble on horseback sitting sideways, his hands upheld by attendants, one of whom has a long thin Two attendants, with helmets or hair sword in his hand in sheath. represented by ribs, are holding up shields to shelter the ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_009.html">
+      <img src="../plates/fig_009_plate.jpg" alt="Bronze plaque, naked figure of boy ; hair in conventional bands ; three tribal marks over ">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_009</div>
+        <h3>Bronze plaque, naked figure of boy ; hair in conventional bands ; three tribal marks over </h3>
+        <p>Bronze plaque, naked figure of boy ; hair in conventional bands ; three tribal marks over each eye and band on forehead. Coral choker, badge of Four rosettes on ground and usual foil De Bry says that all young people went naked until rank. Armlets and anklets....</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_010.html">
+      <img src="../plates/fig_010_plate.jpg" alt="Bronze j&gt;laque, figure of warrior with helmet or hair rejaresented by ribs">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_010</div>
+        <h3>Bronze j&gt;laque, figure of warrior with helmet or hair rejaresented by ribs</h3>
+        <p>Bronze j&gt;laque, figure of warrior with helmet or hair rejaresented by ribs. Leaf-shaped sword upheld in right hand. A bundle of objects on head upheld by left. hand. Object resembling a despatch case on left side, fastened by a belt over right shoulder. Hum...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_011.html">
+      <img src="../plates/fig_011_plate.jpg" alt="Bronze plaque, representing a figure holding a ball, perhaps a Three tribal marks Skirt wo">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_011</div>
+        <h3>Bronze plaque, representing a figure holding a ball, perhaps a Three tribal marks Skirt wo</h3>
+        <p>Bronze plaque, representing a figure holding a ball, perhaps a Three tribal marks Skirt wound ujj Four Skirt ornamented with a head and hands. Crest on head-dress, feather in Coral choker, badge of rank. cannon ball, in front. behind left shoulder. over each e...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_013.html">
+      <img src="../plates/fig_013_plate.jpg" alt="Bronze plaque, figure sword in right hand">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_013</div>
+        <h3>Bronze plaque, figure sword in right hand</h3>
+        <p>Bronze plaque, figure sword in right hand. of warrior, feather in cap; broad leaf-shaped necklace. Leopards&#x27; teeth Coral sash ; ground ornamented with leaf-shaped foil, ornaments Coral choker, badge of rank. incised. staves in their right hands.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_014.html">
+      <img src="../plates/fig_014_plate.jpg" alt="Bronze segis or plaque, with representations of two figures with Coral chokers, badge of r">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_014</div>
+        <h3>Bronze segis or plaque, with representations of two figures with Coral chokers, badge of r</h3>
+        <p>Bronze segis or plaque, with representations of two figures with Coral chokers, badge of rank. On the breasts are two Maltese crosses hanging from the necks, which appear to be The objects held in left hands have been broken off. European Orders. The hats are ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_016.html">
+      <img src="../plates/fig_016_plate.jpg" alt="Bronze plaque, figure of warrior with pot helmet, button on top">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_016</div>
+        <h3>Bronze plaque, figure of warrior with pot helmet, button on top</h3>
+        <p>Bronze plaque, figure of warrior with pot helmet, button on top. Coral choker, badge of rank, on neck. Leopards&#x27; teeth necklace. Quadrangular bell on breast. Armlets, anklets, &amp;c. Four rosettes on ground, and the usual foil ornaments incised.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_017.html">
+      <img src="../plates/fig_017_plate.jpg" alt="Bronze plaque, figure of warrior with spear in right hand, shield in left Quadrangular bel">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_017</div>
+        <h3>Bronze plaque, figure of warrior with spear in right hand, shield in left Quadrangular bel</h3>
+        <p>Bronze plaque, figure of warrior with spear in right hand, shield in left Quadrangular bell hanging from neck. hand ; pot helmet, button on top. Coral choker, badge of rank. Leopard&#x27;s skin dress with head to front. On the ground are two horses&#x27; heads...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_079.html">
+      <img src="../plates/fig_079_plate.jpg" alt="Figure of a warrior on horseback">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_079</div>
+        <h3>Figure of a warrior on horseback</h3>
+        <p>Figure of a warrior on horseback. Spear in right hand, the blade Darts in left hand. having an ogee corrugated section, similar to those used in all parts of The edges of the blade are bent Africa where metal blades are used. over by rough usage, which makes i...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_084.html">
+      <img src="../plates/fig_084_plate.jpg" alt="Bronze figure firing a gun, probably representing an European, The barrel of the gun is br">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_084</div>
+        <h3>Bronze figure firing a gun, probably representing an European, The barrel of the gun is br</h3>
+        <p>Bronze figure firing a gun, probably representing an European, The barrel of the gun is broken with beard, presenting a flint-lock gun. off at the left hand. European morion of the sixteenth century on head, Sword or cutlass with European ornamented with inter...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_113.html">
+      <img src="../plates/fig_113_plate.jpg" alt="Bronze plaque, rep resenting a figure standing; long sjaear, multibarbed, with ogee-sectio">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_113</div>
+        <h3>Bronze plaque, rep resenting a figure standing; long sjaear, multibarbed, with ogee-sectio</h3>
+        <p>Bronze plaque, rep resenting a figure standing; long sjaear, multibarbed, with ogee-sectioned blade in right hand, pointing downwards, knob at butt end. There are twelve ducts running from the ground of the In left hand a broad leaf-shaped sword, plaque to the...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_130.html">
+      <img src="../plates/fig_130_plate.jpg" alt="Bronze plaque, representing two warriors shaped swords upheld in right hands">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_130</div>
+        <h3>Bronze plaque, representing two warriors shaped swords upheld in right hands</h3>
+        <p>Bronze plaque, representing two warriors shaped swords upheld in right hands. on the frontal. One figure has a beard. Peculiar head-dress, a broad band Hair parted in the middle and hanging down behind. Both have objects resembling bows slung upon with long, n...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_131.html">
+      <img src="../plates/fig_131_plate.jpg" alt="Bronze plaque, representing five figures; central figure holding a staff of unusual form i">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_131</div>
+        <h3>Bronze plaque, representing five figures; central figure holding a staff of unusual form i</h3>
+        <p>Bronze plaque, representing five figures; central figure holding a staff of unusual form in right hand ; coral choker ; oval head-dress ; small bells attached to straps hanging down from girdle ; anklets and armlets, the former adorned with crotals ; left hand...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_179.html">
+      <img src="../plates/fig_179_plate.jpg" alt="Bronze plaque, with five figures; the central figure with coral choker, badge of rank, cor">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_179</div>
+        <h3>Bronze plaque, with five figures; the central figure with coral choker, badge of rank, cor</h3>
+        <p>Bronze plaque, with five figures; the central figure with coral choker, badge of rank, coral or agate head-dress with feather, and sash. Broad leaf-shaped sword upheld in right hand ; spear, point down, in left. Two boys, one with ivory trumpet, the other hold...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_180.html">
+      <img src="../plates/fig_180_plate.jpg" alt="Bronze plaque, representing the figure of a warrior, with unusually Quadrangular bell on n">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_180</div>
+        <h3>Bronze plaque, representing the figure of a warrior, with unusually Quadrangular bell on n</h3>
+        <p>Bronze plaque, representing the figure of a warrior, with unusually Quadrangular bell on neck and teeth formed helmet, apparently of metal. cowrie shells. necklace. point downwards, in Shield on right arm, and spear with square cap at butt end, The ground is o...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_181.html">
+      <img src="../plates/fig_181_plate.jpg" alt="-Bronze plaque, rejiresenting three figures, the central one beating a drum The drum has p">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_181</div>
+        <h3>-Bronze plaque, rejiresenting three figures, the central one beating a drum The drum has p</h3>
+        <p>-Bronze plaque, rejiresenting three figures, the central one beating a drum The drum has pegs with knobs to with his fingers, and no drum-sticks. fasten down the skin, like Fig. 248, Plate XXXII, and similar to the Jekri I, New Series, drum figured Both the si...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_247.html">
+      <img src="../plates/fig_247_plate.jpg" alt="Bronze plaque, representing figure stan implement resembling a ranseur of the sixteenth or">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_247</div>
+        <h3>Bronze plaque, representing figure stan implement resembling a ranseur of the sixteenth or</h3>
+        <p>Bronze plaque, representing figure stan implement resembling a ranseur of the sixteenth or seventeenth century in right hand, point upwards. Hair combed straight out. Pot helmet. Bodice fastened with three buttons and tags, perhaps armour. side. Pleated kilt l...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_248.html">
+      <img src="../plates/fig_248_plate.jpg" alt="Bronze plaque, representing a figure playing a drum with sticks ; quad- rangular bell on n">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_248</div>
+        <h3>Bronze plaque, representing a figure playing a drum with sticks ; quad- rangular bell on n</h3>
+        <p>Bronze plaque, representing a figure playing a drum with sticks ; quad- rangular bell on neck, ornamented with a sinuous snake, head downwards. Head-dress with two feathers. Hair combed straight and coiled in plaits. A peculiar kind of straight line diaper pat...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_254.html">
+      <img src="../plates/fig_254_plate.jpg" alt="Bronze jalaque, representing a warrior, execution sword upheld in right hand ; broad leaf-">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_254</div>
+        <h3>Bronze jalaque, representing a warrior, execution sword upheld in right hand ; broad leaf-</h3>
+        <p>Bronze jalaque, representing a warrior, execution sword upheld in right hand ; broad leaf-shaped sword in left, with a twisted ring or pommel. Round bell Quadrangular bell on neck, ornamented with a sinuous snake. on side ; peculiar head-dress ; armlets ; obje...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_255.html">
+      <img src="../plates/fig_255_plate.jpg" alt="Bronze plaque, representing two figures, the right one having a broad leaf- shaped sword u">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_255</div>
+        <h3>Bronze plaque, representing two figures, the right one having a broad leaf- shaped sword u</h3>
+        <p>Bronze plaque, representing two figures, the right one having a broad leaf- shaped sword upheld in right hand, with a large ring extending from pommel ; teeth necklace, but no coral choker ; no bell on neck ; cylindro- Both figures hold the same spear, oval he...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_289.html">
+      <img src="../plates/fig_289_plate.jpg" alt="Bronze plaque, representing a human head with straight combed hair">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_289</div>
+        <h3>Bronze plaque, representing a human head with straight combed hair</h3>
+        <p>Bronze plaque, representing a human head with straight combed hair. The ground Aquiline nose, moustache and beard ; not of negro type. ornamented with the usual leaf ornament.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_291.html">
+      <img src="../plates/fig_291_plate.jpg" alt="- Bronze or brass plaque">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_291</div>
+        <h3>- Bronze or brass plaque</h3>
+        <p>- Bronze or brass plaque. Figure, full length; an unknown implement upheld in right hand, and an execution sword held horizontally in left hand. The dress ornamented with human Ground ornamented with heads, half-moons, and floral ornaments incised. Three triba...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_360.html">
+      <img src="../plates/fig_360_plate.jpg" alt="Bronze or brass plaque, representing a figure standing to front, holding a piece of ring-m">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_360</div>
+        <h3>Bronze or brass plaque, representing a figure standing to front, holding a piece of ring-m</h3>
+        <p>Bronze or brass plaque, representing a figure standing to front, holding a piece of ring-money (Manilla) in right hand, similar to Plate XXI, Fig. 6, &quot; Antiquities from Benin in the British Museum,&quot; where then* use and The dress has a single row of b...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_361.html">
+      <img src="../plates/fig_361_plate.jpg" alt="Bronze jDlaque, representing a figure, seated, holding apparently a hand- The dress has ca">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_361</div>
+        <h3>Bronze jDlaque, representing a figure, seated, holding apparently a hand- The dress has ca</h3>
+        <p>Bronze jDlaque, representing a figure, seated, holding apparently a hand- The dress has cannon in both hands, the butt of which is curved down. buttons on one side, as in the previous figure, and is surmounted by a vandyke ornamented collar of European type. B...</p>
+      </div>
+    </a>
+    
+          </div>
+        </section>
         
-      </main>
-      <footer>
-        Generated from paired artifact plates, CLIP clusters, and catalog descriptions.
-      </footer>
+        <section class="room" id="room-1">
+        <div class="room-header">
+        <div class="room-number">Room 1</div>
+        <h2>Lamps, Bracelets, and Masks</h2>
+        <p class="wall-text">This group, titled &#x27;Lamps, Bracelets, and Masks&#x27;, brings together works centered around copper, leopard, head. These objects reflect recurring visual and symbolic elements within Benin court art, suggesting shared functions, status markers, or narrative roles. Motifs such as inlaid, pupils, eyes appear frequently, pointing to connections between material culture, hierarchy, and ceremonial expression. Taken together, the works in this section reveal how form, ornament, and iconography combine to communicate authority, identity, and continuity within the Benin artistic tradition.</p>
+        </div>
+        <div class="room-grid">
+            
+    <a class="artifact-card" href="artifact_pages/fig_039.html">
+      <img src="../plates/fig_039_plate.jpg" alt="Brass bracelet, with negro heads of copper inlaid">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_039</div>
+        <h3>Brass bracelet, with negro heads of copper inlaid</h3>
+        <p>Brass bracelet, with negro heads of copper inlaid. The back is cut in a curved line, as if adapting it Mud-fish springing from nose on each side and turned up. Coral chokers, badges of rank. The ring is decorated with incised floral ornaments. HlS m&gt;i I&quo...</p>
+      </div>
+    </a>
     
-      <script>
-    const searchBox = document.getElementById('searchBox');
-    const cards = Array.from(document.querySelectorAll('.card'));
-    const sections = Array.from(document.querySelectorAll('.cluster-section'));
-
-    function applyFilter() {
-      const q = searchBox.value.trim().toLowerCase();
-
-      cards.forEach(card => {
-        const hay = card.dataset.text + ' ' + card.dataset.artifact;
-        const show = !q || hay.includes(q);
-        card.classList.toggle('hidden', !show);
-      });
-
-      sections.forEach(section => {
-        const visibleCards = section.querySelectorAll('.card:not(.hidden)');
-        section.classList.toggle('hidden', visibleCards.length === 0);
-      });
-    }
-
-    searchBox.addEventListener('input', applyFilter);
-
-    #/* ✅ ADD THIS PART BELOW */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href'))
-          .scrollIntoView({ behavior: 'smooth' });
-      });
-    });
+    <a class="artifact-card" href="artifact_pages/fig_058.html">
+      <img src="../plates/fig_058_plate.jpg" alt="Leopard&#x27;s mask head of brass, the pupils of the eyes represented by a copper band">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_058</div>
+        <h3>Leopard&#x27;s mask head of brass, the pupils of the eyes represented by a copper band</h3>
+        <p>Leopard&#x27;s mask head of brass, the pupils of the eyes represented by a copper band. A band of copper inlaid along the nose and forehead. A barbed figure on each cheek.</p>
+      </div>
+    </a>
     
-    function closeLightbox() {
-        document.getElementById('lightbox').style.display = 'none';
-    }
-    searchBox.addEventListener('input', applyFilter);
-    </script>
-    <div id="lightbox" onclick="closeLightbox()">
-        <img id="lightbox-img">
-    </div>
+    <a class="artifact-card" href="artifact_pages/fig_060.html">
+      <img src="../plates/fig_060_plate.jpg" alt="Leopard&#x27;s mask head of brass, the pupils of the eyes represented by bands">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_060</div>
+        <h3>Leopard&#x27;s mask head of brass, the pupils of the eyes represented by bands</h3>
+        <p>Leopard&#x27;s mask head of brass, the pupils of the eyes represented by bands. A barbed figure on each cheek. perhaps to receive crotals as in Figs. 58 and 59. Eyelets along the edges,</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_062.html">
+      <img src="../plates/fig_062_plate.jpg" alt="Leopard&#x27;s head in brass, the spots and pupils of eyes in copper">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_062</div>
+        <h3>Leopard&#x27;s head in brass, the spots and pupils of eyes in copper</h3>
+        <p>Leopard&#x27;s head in brass, the spots and pupils of eyes in copper. This appears to have been attached with a leather thong to the dress. The design appears to be purely native.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_153.html">
+      <img src="../plates/fig_153_plate.jpg" alt="Carved ivory head of leopard, the spots of lead, inlaid">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_153</div>
+        <h3>Carved ivory head of leopard, the spots of lead, inlaid</h3>
+        <p>Carved ivory head of leopard, the spots of lead, inlaid. resembles in form the bronze ones, Figs. 58-63, Plate X. It is apparently very old.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_310.html">
+      <img src="../plates/fig_310_plate.jpg" alt="Bronze lamp, aiyparently with gold in its composition">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_310</div>
+        <h3>Bronze lamp, aiyparently with gold in its composition</h3>
+        <p>Bronze lamp, aiyparently with gold in its composition. The basin The bands for suspension ornamented patched and riveted with copper. with straight line diaper pattern (Fig. 312) and broken guilloche pattern (Fig. 313), united at top in a human figure (Fig. 31...</p>
+      </div>
+    </a>
+    
+          </div>
+        </section>
+        
+        <section class="room" id="room-2">
+        <div class="room-header">
+        <div class="room-number">Room 2</div>
+        <h2>Heads, Staffs, and Crocodiles</h2>
+        <p class="wall-text">This group, titled &#x27;Heads, Staffs, and Crocodiles&#x27;, brings together works centered around benin, ornamented, plate. These objects reflect recurring visual and symbolic elements within Benin court art, suggesting shared functions, status markers, or narrative roles. Motifs such as human, head, antique appear frequently, pointing to connections between material culture, hierarchy, and ceremonial expression. Taken together, the works in this section reveal how form, ornament, and iconography combine to communicate authority, identity, and continuity within the Benin artistic tradition.</p>
+        </div>
+        <div class="room-grid">
+            
+    <a class="artifact-card" href="artifact_pages/fig_047.html">
+      <img src="../plates/fig_047_plate.jpg" alt="-Bracelet of bronze, ornamented with two rudely formed human heads ; some of the yellow ea">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_047</div>
+        <h3>-Bracelet of bronze, ornamented with two rudely formed human heads ; some of the yellow ea</h3>
+        <p>-Bracelet of bronze, ornamented with two rudely formed human heads ; some of the yellow earth of the mould appears to be adhering to the interstices. 41 4&gt; PLATE 8 D Antique Works of Art from Benin.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_167.html">
+      <img src="../plates/fig_167_plate.jpg" alt="Ivory carved tusk, 3 feet 6 inches long from bottom to point">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_167</div>
+        <h3>Ivory carved tusk, 3 feet 6 inches long from bottom to point</h3>
+        <p>Ivory carved tusk, 3 feet 6 inches long from bottom to point. Band at bottom with reticulated or square-shaped ornament probably derived from interlacing bands. Ornamentation includes a coiled serpent, leopard&#x27;s head and human head, human figures, elephan...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_176.html">
+      <img src="../plates/fig_176_plate.jpg" alt="Wooden head-dress">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_176</div>
+        <h3>Wooden head-dress</h3>
+        <p>Wooden head-dress. The horizontal bar appears to represent a shark with mouth and tail, ornamented with carved representations of The masks are animals and masks. The eyes of the large mask are formed Said to be from Benin, West Africa. quite characteristic of...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_231.html">
+      <img src="../plates/fig_231_plate.jpg" alt="Ten gold shells, which formed part of the King of Benin&#x27;s necklace">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_231</div>
+        <h3>Ten gold shells, which formed part of the King of Benin&#x27;s necklace</h3>
+        <p>Ten gold shells, which formed part of the King of Benin&#x27;s necklace. shells appear to he &quot; cerithidee.&quot; They are cast hollow. The The weight of the ten is 8f ounces.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_279.html">
+      <img src="../plates/fig_279_plate.jpg" alt="Bronze rod, pointed below ; perhaps the head of a staff intended Ornamented with a human f">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_279</div>
+        <h3>Bronze rod, pointed below ; perhaps the head of a staff intended Ornamented with a human f</h3>
+        <p>Bronze rod, pointed below ; perhaps the head of a staff intended Ornamented with a human figure sitting at to fit on to a wooden stem. top, with a human-headed staff in right hand, and a neolithic celt, edge Coral choker and head-dress with serpents hanging tr...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_296.html">
+      <img src="../plates/fig_296_plate.jpg" alt="Bronze plaque, representing a cow&#x27;s head, of natural form and proportions, with a rope bou">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_296</div>
+        <h3>Bronze plaque, representing a cow&#x27;s head, of natural form and proportions, with a rope bou</h3>
+        <p>Bronze plaque, representing a cow&#x27;s head, of natural form and proportions, with a rope bound round the horns.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_298.html">
+      <img src="../plates/fig_298_plate.jpg" alt="Bronze plaque">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_298</div>
+        <h3>Bronze plaque</h3>
+        <p>Bronze plaque. A sinuous serpent, head downwards. Ground orna- mented with the usual foil ornament incised.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_299.html">
+      <img src="../plates/fig_299_plate.jpg" alt="Bronze man on horseback, holding a shield, with barbed javelins, points downwards, on righ">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_299</div>
+        <h3>Bronze man on horseback, holding a shield, with barbed javelins, points downwards, on righ</h3>
+        <p>Bronze man on horseback, holding a shield, with barbed javelins, points downwards, on right arm. A band of crotals hung over right The dress is shoulder. The horse and rider The horse tucked up like a Band with crotals round peculiar and formed with lappets on...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_322.html">
+      <img src="../plates/fig_322_plate.jpg" alt="Circular brass fan, thickness of metal, &#x27;02 inch ; ornamented with bands The of guilloche ">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_322</div>
+        <h3>Circular brass fan, thickness of metal, &#x27;02 inch ; ornamented with bands The of guilloche </h3>
+        <p>Circular brass fan, thickness of metal, &#x27;02 inch ; ornamented with bands The of guilloche pattern, herring-bone, and straight line diaper patterns. handle is riveted to lie fan.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_337.html">
+      <img src="../plates/fig_337_plate.jpg" alt="Half of a bronze circlet or necklet, similar to Fig">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_337</div>
+        <h3>Half of a bronze circlet or necklet, similar to Fig</h3>
+        <p>Half of a bronze circlet or necklet, similar to Fig. 158, Plate XXV; ornamented with two human forms with attenuated bodies and conventional heads, consisting of circles with five circular punch-marks to rejn-esent the The arms of these features, and two other...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_354.html">
+      <img src="../plates/fig_354_plate.jpg" alt="Bronze staff, 4 feet 10| inches in length ; ornamented at top with the figure of a bird wi">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_354</div>
+        <h3>Bronze staff, 4 feet 10| inches in length ; ornamented at top with the figure of a bird wi</h3>
+        <p>Bronze staff, 4 feet 10| inches in length ; ornamented at top with the figure of a bird with a small ball in its mouth, and apparently Around it are ten leaf-shaped flanges ornamented surmounting a leopard. Below with sinuous serpents, holding birds and crocod...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_356.html">
+      <img src="../plates/fig_356_plate.jpg" alt="Bronze staff, surmounted bv a vulture holding something in its beak, as in Figs">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_356</div>
+        <h3>Bronze staff, surmounted bv a vulture holding something in its beak, as in Figs</h3>
+        <p>Bronze staff, surmounted bv a vulture holding something in its beak, as in Figs. 286 to 288, Plate XXXVII ; Fig. 271, Plate XXXV, and Figs. 354 and 355, Plate XLV. In Fig. 139, Plate XXIII, and in &quot; Antiquities from Benin in the British Museum,&quot; Plat...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_362.html">
+      <img src="../plates/fig_362_plate.jpg" alt="Iron axe, in carved wooden handle and shaft: with six wooden human faces, the pupils of th">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_362</div>
+        <h3>Iron axe, in carved wooden handle and shaft: with six wooden human faces, the pupils of th</h3>
+        <p>Iron axe, in carved wooden handle and shaft: with six wooden human faces, the pupils of the eyes inlaid with lead.</p>
+      </div>
+    </a>
+    
+          </div>
+        </section>
+        
+        <section class="room" id="room-3">
+        <div class="room-header">
+        <div class="room-number">Room 3</div>
+        <h2>Heads, Swords, and Armlets</h2>
+        <p class="wall-text">This group, titled &#x27;Heads, Swords, and Armlets&#x27;, brings together works centered around ornamented, plate, human. These objects reflect recurring visual and symbolic elements within Benin court art, suggesting shared functions, status markers, or narrative roles. Motifs such as pattern, hand, hands appear frequently, pointing to connections between material culture, hierarchy, and ceremonial expression. Taken together, the works in this section reveal how form, ornament, and iconography combine to communicate authority, identity, and continuity within the Benin artistic tradition.</p>
+        </div>
+        <div class="room-grid">
+            
+    <a class="artifact-card" href="artifact_pages/fig_027.html">
+      <img src="../plates/fig_027_plate.jpg" alt="Carved wooden panel, consisting of a chief in the centre ; broad leaf-shaped sword, with r">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_027</div>
+        <h3>Carved wooden panel, consisting of a chief in the centre ; broad leaf-shaped sword, with r</h3>
+        <p>Carved wooden panel, consisting of a chief in the centre ; broad leaf-shaped sword, with ring attached to pommel, upheld in right hand, studded with copper nails, and ornamented with representations of itself. In left hand a fan-shaped figure terminating in tw...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_102.html">
+      <img src="../plates/fig_102_plate.jpg" alt="Brass shield, 2 feet in diameter and &quot;08 inch in thickness, ornamented The outer one repre">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_102</div>
+        <h3>Brass shield, 2 feet in diameter and &quot;08 inch in thickness, ornamented The outer one repre</h3>
+        <p>Brass shield, 2 feet in diameter and &quot;08 inch in thickness, ornamented The outer one represents a row of leopards, with three concentric rings. A broad leaf-shaped with human heads and head-dresses alternating. sword, similar to Fig. 106, and two executio...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_112.html">
+      <img src="../plates/fig_112_plate.jpg" alt="Bronze segis, representing man on horseback to left, wearing single-edged sword with guard">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_112</div>
+        <h3>Bronze segis, representing man on horseback to left, wearing single-edged sword with guard</h3>
+        <p>Bronze segis, representing man on horseback to left, wearing single-edged sword with guard. A ranseur of the sixteenth or seventeenth century in The hair is straight and combed out, and may right hand, point down. The chain bridle is held up in left hand. prob...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_122.html">
+      <img src="../plates/fig_122_plate.jpg" alt="-Circular brass box, ornamented on the top with a central figure in repousse work, holding">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_122</div>
+        <h3>-Circular brass box, ornamented on the top with a central figure in repousse work, holding</h3>
+        <p>-Circular brass box, ornamented on the top with a central figure in repousse work, holding two crocodiles upright in each hand. The legs terminate in a band turned up on each side as shown in other designs in There are also circular heads having tribal marks o...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_128.html">
+      <img src="../plates/fig_128_plate.jpg" alt="Armlet entirely of brass, without other metal">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_128</div>
+        <h3>Armlet entirely of brass, without other metal</h3>
+        <p>Armlet entirely of brass, without other metal. their forearms elevated. upright figures and four horizontal heads. Ornamented with four The upright figures have The legs are very attenuated and the skirt Eyebrows extremely prominent, and the The armlet is surm...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_129.html">
+      <img src="../plates/fig_129_plate.jpg" alt="Bronze plaque, representing human figure with beard, riding to right ; a ranseur of the si">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_129</div>
+        <h3>Bronze plaque, representing human figure with beard, riding to right ; a ranseur of the si</h3>
+        <p>Bronze plaque, representing human figure with beard, riding to right ; a ranseur of the sixteenth or seventeenth century in right hand, point downwards. Hair combed out straight. Bodice Pleated kilt like Figs. 235 and 236, Plate XXXI, Twisted or plaited bridle...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_134.html">
+      <img src="../plates/fig_134_plate.jpg" alt="Figures in bronze, representing two rude human figures, male and female, attending an anim">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_134</div>
+        <h3>Figures in bronze, representing two rude human figures, male and female, attending an anim</h3>
+        <p>Figures in bronze, representing two rude human figures, male and female, attending an animal, probably a bear. A plate, or board, of three rows of circles with ten circles in each row, is laid out before the figures, and is perhaps a game of mancala, of which ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_139.html">
+      <img src="../plates/fig_139_plate.jpg" alt="A cylindrical stand of bronze, for carved tusks, representing on the outside four female f">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_139</div>
+        <h3>A cylindrical stand of bronze, for carved tusks, representing on the outside four female f</h3>
+        <p>A cylindrical stand of bronze, for carved tusks, representing on the outside four female figures standing, with bands of upright interlaced strap-work between. AU the figures are holding objects in their hands. One holds a laird, another a sistrum, which is be...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_141.html">
+      <img src="../plates/fig_141_plate.jpg" alt="Armlet of copper, ornamented with horizontal human heads of brass">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_141</div>
+        <h3>Armlet of copper, ornamented with horizontal human heads of brass</h3>
+        <p>Armlet of copper, ornamented with horizontal human heads of brass. The head-dresses are ornamented with fish-scale pattern, and the hair is combed The heads alternate with double-coiled mud-fish, resembling out straight. Fig. 276, Plate XXXVI. It is not quite ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_182.html">
+      <img src="../plates/fig_182_plate.jpg" alt="Brass oblong box, lid deficient">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_182</div>
+        <h3>Brass oblong box, lid deficient</h3>
+        <p>Brass oblong box, lid deficient. Lock of European form and ornamenta- Faces and sides of box ornamented with raised rosettes and incised tion. floral designs resembling that on Figs. 76 to 78, Plate XII, Fig. 225, Plate XXX, Fig. 282, Plate XXXVII, and Fig. 30...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_237.html">
+      <img src="../plates/fig_237_plate.jpg" alt="Armlet of ivory, ornamented with representations of human heads, birds and animals, carved">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_237</div>
+        <h3>Armlet of ivory, ornamented with representations of human heads, birds and animals, carved</h3>
+        <p>Armlet of ivory, ornamented with representations of human heads, birds and animals, carved on the surface, and also of degenerate elephants&#x27; heads, the proboscis, in each case, terminating in a human hand holding a palm branch ; horses&#x27; heads ; torto...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_258.html">
+      <img src="../plates/fig_258_plate.jpg" alt="Round execution block, with marks on the top for the thumbs and forehead of the victim ; e">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_258</div>
+        <h3>Round execution block, with marks on the top for the thumbs and forehead of the victim ; e</h3>
+        <p>Round execution block, with marks on the top for the thumbs and forehead of the victim ; elaborately ornamented all over. On the projection on which the forehead is intended to rest is a double row of cowrie shells, bound round. A band of guilloche pattern, in...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_264.html">
+      <img src="../plates/fig_264_plate.jpg" alt="Bronze plaque, representing a figure standing holding in both hands a The sword is narrowe">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_264</div>
+        <h3>Bronze plaque, representing a figure standing holding in both hands a The sword is narrowe</h3>
+        <p>Bronze plaque, representing a figure standing holding in both hands a The sword is narrower, leaf-shaped sword of the kind shown in No. 130. and the swell of the blade nearer the point than in the majority of specimens. A round bell is attached to the left sid...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_268.html">
+      <img src="../plates/fig_268_plate.jpg" alt="Long oval wooden bowl carved out of the solid">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_268</div>
+        <h3>Long oval wooden bowl carved out of the solid</h3>
+        <p>Long oval wooden bowl carved out of the solid. On one side (Fig. 269) is a row of five human figures in relief; the central figure has his hands upheld by attendants, who hold in their other hands shields having barbed javelins, points upward behind them. The ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_281.html">
+      <img src="../plates/fig_281_plate.jpg" alt="Large quadrangular bell">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_281</div>
+        <h3>Large quadrangular bell</h3>
+        <p>Large quadrangular bell.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_317.html">
+      <img src="../plates/fig_317_plate.jpg" alt="Wooden plaque, ornamented in the centre by a coil of interlaced strap On one side a broad ">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_317</div>
+        <h3>Wooden plaque, ornamented in the centre by a coil of interlaced strap On one side a broad </h3>
+        <p>Wooden plaque, ornamented in the centre by a coil of interlaced strap On one side a broad leaf work, bounded by two lines of zigzag pattern. shaped sword with a ring pommel, similar to Figs. 326 and 327, Plate XLII, The handle is ornamented with a and Figs. 32...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_318.html">
+      <img src="../plates/fig_318_plate.jpg" alt="Wooden seat, of oblong form, supported by four legs, with cross- All the ornamental portio">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_318</div>
+        <h3>Wooden seat, of oblong form, supported by four legs, with cross- All the ornamental portio</h3>
+        <p>Wooden seat, of oblong form, supported by four legs, with cross- All the ornamental portions are plated with thin brass, beaten on The top of the seat is ornamented in the centre and ends by bands of single and double guilloche pattern, and in the centre of th...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_331.html">
+      <img src="../plates/fig_331_plate.jpg" alt="Carved wooden board, lOg- feet in length and 1 foot 11 inches It is ornamented with five p">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_331</div>
+        <h3>Carved wooden board, lOg- feet in length and 1 foot 11 inches It is ornamented with five p</h3>
+        <p>Carved wooden board, lOg- feet in length and 1 foot 11 inches It is ornamented with five panels in Each panel has a circle with radiating lines, bounded by lines of The several panels are separated by broad bands of The interlaced strap-Avork varies in design,...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_333.html">
+      <img src="../plates/fig_333_plate.jpg" alt="Round execution block and stand of wood, elaborately carved with figures of men and animal">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_333</div>
+        <h3>Round execution block and stand of wood, elaborately carved with figures of men and animal</h3>
+        <p>Round execution block and stand of wood, elaborately carved with figures of men and animals. On the top is a pointed spike of wood, 5 inches in height, on which the head of the victim appears to have rested, and below this on the surface at the top of the bloc...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_336.html">
+      <img src="../plates/fig_336_plate.jpg" alt="Wooden casket in the form oi an ox&#x27;s head, coated with thin brass From the forehead two hu">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_336</div>
+        <h3>Wooden casket in the form oi an ox&#x27;s head, coated with thin brass From the forehead two hu</h3>
+        <p>Wooden casket in the form oi an ox&#x27;s head, coated with thin brass From the forehead two human hands rise up holding the Along the forehead and along the sides are three lines of single The pupils of the eyes are inlaid with It appears to be a box or caske...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_342.html">
+      <img src="../plates/fig_342_plate.jpg" alt="Bronze figure of boy, with the palms of the hands erect and open, as if Serpent, head down">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_342</div>
+        <h3>Bronze figure of boy, with the palms of the hands erect and open, as if Serpent, head down</h3>
+        <p>Bronze figure of boy, with the palms of the hands erect and open, as if Serpent, head downwards, on forehead. denying having stolen anything. Three incised tribal marks over each eye.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_346.html">
+      <img src="../plates/fig_346_plate.jpg" alt="Quadrangular bronze bell, ornamented with mud-fish and a human It is reticulated on all si">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_346</div>
+        <h3>Quadrangular bronze bell, ornamented with mud-fish and a human It is reticulated on all si</h3>
+        <p>Quadrangular bronze bell, ornamented with mud-fish and a human It is reticulated on all sides and could have emitted no head in relief. sound. human face in relief.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_369.html">
+      <img src="../plates/fig_369_plate.jpg" alt="Bronze plaque, representing a sacrificial scene; it contains eight human figures, and a bu">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_369</div>
+        <h3>Bronze plaque, representing a sacrificial scene; it contains eight human figures, and a bu</h3>
+        <p>Bronze plaque, representing a sacrificial scene; it contains eight human figures, and a bullock just in the act of being slaughtered. All the= figures except one have native features, dress, etc., and wear the insignia The remaining figure is evidently intende...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_384.html">
+      <img src="../plates/fig_384_plate.jpg" alt="Metal armlet, ornamented with five rows of inlaid copper conventionalized cat-fishes and h">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_384</div>
+        <h3>Metal armlet, ornamented with five rows of inlaid copper conventionalized cat-fishes and h</h3>
+        <p>Metal armlet, ornamented with five rows of inlaid copper conventionalized cat-fishes and human faces ; the latter have long hair, long whiskers, and long noses. Height, 5-| inches.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_385.html">
+      <img src="../plates/fig_385_plate.jpg" alt="Metal box, cylindrical in form, ornamented with three longitudinal rows of ox skulls in re">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_385</div>
+        <h3>Metal box, cylindrical in form, ornamented with three longitudinal rows of ox skulls in re</h3>
+        <p>Metal box, cylindrical in form, ornamented with three longitudinal rows of ox skulls in relief, and incised human faces. Height, 7 inches.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_389.html">
+      <img src="../plates/fig_389_plate.jpg" alt="Quadrangular bronze bell, ornamented on three sides with open reticulated work, framed in ">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_389</div>
+        <h3>Quadrangular bronze bell, ornamented on three sides with open reticulated work, framed in </h3>
+        <p>Quadrangular bronze bell, ornamented on three sides with open reticulated work, framed in by a border of the guilloche pattern. A conventional face, Near the base with long hair and beard, is on one of the reticulated sides. of the ornamented side is a small r...</p>
+      </div>
+    </a>
+    
+          </div>
+        </section>
+        
+        <section class="room" id="room-4">
+        <div class="room-header">
+        <div class="room-number">Room 4</div>
+        <h2>Swords, Bells, and Leopards</h2>
+        <p class="wall-text">This group, titled &#x27;Swords, Bells, and Leopards&#x27;, brings together works centered around iron, blade, sword. These objects reflect recurring visual and symbolic elements within Benin court art, suggesting shared functions, status markers, or narrative roles. Motifs such as handle, ornamented, similar appear frequently, pointing to connections between material culture, hierarchy, and ceremonial expression. Taken together, the works in this section reveal how form, ornament, and iconography combine to communicate authority, identity, and continuity within the Benin artistic tradition.</p>
+        </div>
+        <div class="room-grid">
+            
+    <a class="artifact-card" href="artifact_pages/fig_198.html">
+      <img src="../plates/fig_198_plate.jpg" alt="Broad knife-shaped sword of iron ; the wooden handle bound On one side the blade is engrav">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_198</div>
+        <h3>Broad knife-shaped sword of iron ; the wooden handle bound On one side the blade is engrav</h3>
+        <p>Broad knife-shaped sword of iron ; the wooden handle bound On one side the blade is engraved with brass and iron bands alternating. with a human figure and an execution sword traced in lines of dots and incised lines, as is frequently the case in Australian re...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_202.html">
+      <img src="../plates/fig_202_plate.jpg" alt="Brass dancing sword or wand, said to be used by virgins in The handle is ornamented with t">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_202</div>
+        <h3>Brass dancing sword or wand, said to be used by virgins in The handle is ornamented with t</h3>
+        <p>Brass dancing sword or wand, said to be used by virgins in The handle is ornamented with two figures, which appear to The blade is engraved with guilloche pattern on be holding some objects. their dances. both sides.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_210.html">
+      <img src="../plates/fig_210_plate.jpg" alt="Brass dancing sword or wand, said to be used by virgins in their The handle is ornamented ">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_210</div>
+        <h3>Brass dancing sword or wand, said to be used by virgins in their The handle is ornamented </h3>
+        <p>Brass dancing sword or wand, said to be used by virgins in their The handle is ornamented with four figures, which are in pairs They appear to be holding swords and other objects. The back to back. blade is ornamented on one side with bands of strap-work, and ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_215.html">
+      <img src="../plates/fig_215_plate.jpg" alt="Iron spear, length 4 feet 11 inches, the head having an ogee section, similar to those use">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_215</div>
+        <h3>Iron spear, length 4 feet 11 inches, the head having an ogee section, similar to those use</h3>
+        <p>Iron spear, length 4 feet 11 inches, the head having an ogee section, similar to those used at the present time on the Gaboon and elsewhere in West Africa. Below the spear-head the shaft is ornamented with bronze figures of leopards in two places and two degen...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_251.html">
+      <img src="../plates/fig_251_plate.jpg" alt="Top of a bronze mace, with slits resembling a crotal and a figure The figure with an objec">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_251</div>
+        <h3>Top of a bronze mace, with slits resembling a crotal and a figure The figure with an objec</h3>
+        <p>Top of a bronze mace, with slits resembling a crotal and a figure The figure with an object, probably a neolithic celt, in the right hand. appears to be bent forward.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_261.html">
+      <img src="../plates/fig_261_plate.jpg" alt="Ivory horn, mouth-piece on convex side">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_261</div>
+        <h3>Ivory horn, mouth-piece on convex side</h3>
+        <p>Ivory horn, mouth-piece on convex side.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_284.html">
+      <img src="../plates/fig_284_plate.jpg" alt="Brass or bronze sword, the pommel in the form of a twisted ring, as so frequently shown on">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_284</div>
+        <h3>Brass or bronze sword, the pommel in the form of a twisted ring, as so frequently shown on</h3>
+        <p>Brass or bronze sword, the pommel in the form of a twisted ring, as so frequently shown on the plaques, see Figs. 4, 113, 179, 255, etc. The blade is of unusual form, very broad, and rounded at the end.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_302.html">
+      <img src="../plates/fig_302_plate.jpg" alt="Elephant&#x27;s tusk formed as a trumpet">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_302</div>
+        <h3>Elephant&#x27;s tusk formed as a trumpet</h3>
+        <p>Elephant&#x27;s tusk formed as a trumpet. convex side ; with rattle. The mouthpiece on the The loose pieces of the rattle carved out of the Ornamented with three bands of guilloche pattern ; straight line diaper pattern, and degenerate mud-fish solid, through ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_306.html">
+      <img src="../plates/fig_306_plate.jpg" alt="Thin brass head ornament for horse, and a broad band to go along the top The figure on the">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_306</div>
+        <h3>Thin brass head ornament for horse, and a broad band to go along the top The figure on the</h3>
+        <p>Thin brass head ornament for horse, and a broad band to go along the top The figure on the lower part represents a crocodile, The band for the head downwards, ornamented with rows of copper rivets. of the head and mane. head is ornamented with a floral ornamen...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_307.html">
+      <img src="../plates/fig_307_plate.jpg" alt="Lower portion of an iron staff&quot;, surrounded by bands of brass, ornamented with leopards&#x27; h">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_307</div>
+        <h3>Lower portion of an iron staff&quot;, surrounded by bands of brass, ornamented with leopards&#x27; h</h3>
+        <p>Lower portion of an iron staff&quot;, surrounded by bands of brass, ornamented with leopards&#x27; heads, frogs, looped strands and guilloche pattern.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_326.html">
+      <img src="../plates/fig_326_plate.jpg" alt="Broad leai-shaped iron sword, similar to Figs">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_326</div>
+        <h3>Broad leai-shaped iron sword, similar to Figs</h3>
+        <p>Broad leai-shaped iron sword, similar to Figs. 328 and 329, The handle enclosed in a large ring of metal, 7 inches in The blade, which is &quot;08 inch in thickness, is jjerforated by a Plate XLIII. diameter. pattern of holes. 86 Antique Works of Art from Beni...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_328.html">
+      <img src="../plates/fig_328_plate.jpg" alt="Broad leaf-shaped iron sword, similar to Figs">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_328</div>
+        <h3>Broad leaf-shaped iron sword, similar to Figs</h3>
+        <p>Broad leaf-shaped iron sword, similar to Figs. 326 and 327, The handle enclosed in a large ring of metal, 8 inches by Plate XLIT. 5^ inches interior measurement, twisted in two places. had a grip of wood, which has disappeared. It has probably The blade, which...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_330.html">
+      <img src="../plates/fig_330_plate.jpg" alt="Iron staff, similar to the bronze one, Figs">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_330</div>
+        <h3>Iron staff, similar to the bronze one, Figs</h3>
+        <p>Iron staff, similar to the bronze one, Figs. 354 and 355, Plate XLV. In the cluster at the top is the figure of a bird surmounting an animal, probably a chameleon, similar to the one half-way down the stem, and various implements and weapons, points surrounded...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_338.html">
+      <img src="../plates/fig_338_plate.jpg" alt="Bronze sword, perhaps an execution sword, but rather too small for that The blade is ornam">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_338</div>
+        <h3>Bronze sword, perhaps an execution sword, but rather too small for that The blade is ornam</h3>
+        <p>Bronze sword, perhaps an execution sword, but rather too small for that The blade is ornamented on both The cutting edge is on the sides with incised semicircles and curved lines. purpose ; with wooden grip and pommel. convex side.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_341.html">
+      <img src="../plates/fig_341_plate.jpg" alt="Bronze bell or sistrum, with small bell attached ; both ornamented with an incised lozenge">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_341</div>
+        <h3>Bronze bell or sistrum, with small bell attached ; both ornamented with an incised lozenge</h3>
+        <p>Bronze bell or sistrum, with small bell attached ; both ornamented with an incised lozenge -shaped pattern. A similar double bell, from Yoruba, is figured by Mr. Ling Roth in &quot; The Reliquary,&quot; 1898, p. 165.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_350.html">
+      <img src="../plates/fig_350_plate.jpg" alt="Bronze trumpet, slightly curved, the mouth-hole on the convex side, similar in form to the">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_350</div>
+        <h3>Bronze trumpet, slightly curved, the mouth-hole on the convex side, similar in form to the</h3>
+        <p>Bronze trumpet, slightly curved, the mouth-hole on the convex side, similar in form to the ivory trumpets, Figs. 178, 192 and 193. Pro- jecting blades, like celts, on the large end, as in the sistrum in Figs. 232 234, Plate XXXI. A somewhat similar instrument ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_376.html">
+      <img src="../plates/fig_376_plate.jpg" alt="Modern Benin sword; the blade is iron and decorated with There are seven brass rivets inci">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_376</div>
+        <h3>Modern Benin sword; the blade is iron and decorated with There are seven brass rivets inci</h3>
+        <p>Modern Benin sword; the blade is iron and decorated with There are seven brass rivets incised birds and a nondescript animal. hammered into the blade. The handle is covered with leather. Length of blade, 17f inches.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_378.html">
+      <img src="../plates/fig_378_plate.jpg" alt="Is a copper weapon which has had a wooden shaft">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_378</div>
+        <h3>Is a copper weapon which has had a wooden shaft</h3>
+        <p>Is a copper weapon which has had a wooden shaft. This weapon is of too soft a metal to be of much use. Figs. 3 SO and 381.-An iron weapon of an old make. The blade is decorated with an incised figure of a snake. Length of blade, 21^ inches. CO LU H&lt; co **. ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_382.html">
+      <img src="../plates/fig_382_plate.jpg" alt="Cubical metal lamp, with handle, chain and hook for suspension">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_382</div>
+        <h3>Cubical metal lamp, with handle, chain and hook for suspension</h3>
+        <p>Cubical metal lamp, with handle, chain and hook for suspension. Human face in relief on the sides, fish-scale groundwork, raised rope-pattern borders, four legs, and circular bottom with incised concentric circles.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_386.html">
+      <img src="../plates/fig_386_plate.jpg" alt="Wooden comb, with carved design">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_386</div>
+        <h3>Wooden comb, with carved design</h3>
+        <p>Wooden comb, with carved design.</p>
+      </div>
+    </a>
+    
+          </div>
+        </section>
+        
+        <section class="room" id="room-5">
+        <div class="room-header">
+        <div class="room-number">Room 5</div>
+        <h2>Bracelets, Heads, and Horses</h2>
+        <p class="wall-text">This group, titled &#x27;Bracelets, Heads, and Horses&#x27;, brings together works centered around plate, figs, bracelet. These objects reflect recurring visual and symbolic elements within Benin court art, suggesting shared functions, status markers, or narrative roles. Motifs such as ornamented, this, carved appear frequently, pointing to connections between material culture, hierarchy, and ceremonial expression. Taken together, the works in this section reveal how form, ornament, and iconography combine to communicate authority, identity, and continuity within the Benin artistic tradition.</p>
+        </div>
+        <div class="room-grid">
+            
+    <a class="artifact-card" href="artifact_pages/fig_073.html">
+      <img src="../plates/fig_073_plate.jpg" alt="Three triangular brass bells">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_073</div>
+        <h3>Three triangular brass bells</h3>
+        <p>Three triangular brass bells. the front and fish -scale pattern. Fig. 73-has a negro head in relief on Fig. 74 has the eyes, nose and mouth of a human face only. Fig. 75 has a spiral in place of a face.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_121.html">
+      <img src="../plates/fig_121_plate.jpg" alt="Head-dress composed entirely of agate">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_121</div>
+        <h3>Head-dress composed entirely of agate</h3>
+        <p>Head-dress composed entirely of agate. It serves to explain the construc- tion of the head-dresses on the bronze plaques and figures, showing how the reticulated effect on the plaques is formed by beads of agate strung together The rosettes of agate, and the t...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_183.html">
+      <img src="../plates/fig_183_plate.jpg" alt="Wooden head-dress, with carved representations of animals on top">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_183</div>
+        <h3>Wooden head-dress, with carved representations of animals on top</h3>
+        <p>Wooden head-dress, with carved representations of animals on top. Said to be from Benin, West Africa. It was brought over from West Africa, It is similar in character to Figs. 176 and 177, with things from Benin. Plate XXVI. It is perhaps Jekri, see a paper by...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_184.html">
+      <img src="../plates/fig_184_plate.jpg" alt="Large maucala board of bronze">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_184</div>
+        <h3>Large maucala board of bronze</h3>
+        <p>Large maucala board of bronze. this collection, Fig. 116, Plate XX, has only ten circular holes. are ornamented with rectangular forms linked together. distributed all over Africa, especially where Arab influence is seen. It has 352 holes; another in The sides...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_225.html">
+      <img src="../plates/fig_225_plate.jpg" alt="Brass object of unknown use, ornamented on the outside with three half-moons and a floral ">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_225</div>
+        <h3>Brass object of unknown use, ornamented on the outside with three half-moons and a floral </h3>
+        <p>Brass object of unknown use, ornamented on the outside with three half-moons and a floral pattern in incised lines, similar to that on the brass sistrum, Figs. 76 to 78, Plate XII ; the brass box, Fig. 182, Plate XXVII, and the large quadrangular bell, Figs. 2...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_295.html">
+      <img src="../plates/fig_295_plate.jpg" alt="Bronze plaque, head of horse, very much elongated">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_295</div>
+        <h3>Bronze plaque, head of horse, very much elongated</h3>
+        <p>Bronze plaque, head of horse, very much elongated. For the elongation of a horse&#x27;s head, see the figure of horse and rider in Figs. 299 and 300.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_314.html">
+      <img src="../plates/fig_314_plate.jpg" alt="Wooden stool, the top slightly basin-shaped; the stem carved to represent two interlaced s">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_314</div>
+        <h3>Wooden stool, the top slightly basin-shaped; the stem carved to represent two interlaced s</h3>
+        <p>Wooden stool, the top slightly basin-shaped; the stem carved to represent two interlaced serpents, but the interlacing is not continuous, being broken by a square hole pierced through the centre of the shaft. The heads of the serpents are conventional and they...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_372.html">
+      <img src="../plates/fig_372_plate.jpg" alt="A carved ivorv box in the form of a mud or cat fish">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_372</div>
+        <h3>A carved ivorv box in the form of a mud or cat fish</h3>
+        <p>A carved ivorv box in the form of a mud or cat fish. The eyes, are inlaid with lead. 369 PLATE 47. 96 Antique Works of Art from. Benin.</p>
+      </div>
+    </a>
+    
+          </div>
+        </section>
+        
+        <section class="room" id="room-6">
+        <div class="room-header">
+        <div class="room-number">Room 6</div>
+        <h2>Bells, Vessels, and Heads</h2>
+        <p class="wall-text">This group, titled &#x27;Bells, Vessels, and Heads&#x27;, brings together works centered around human, plate, similar. These objects reflect recurring visual and symbolic elements within Benin court art, suggesting shared functions, status markers, or narrative roles. Motifs such as bell, represented, vessel appear frequently, pointing to connections between material culture, hierarchy, and ceremonial expression. Taken together, the works in this section reveal how form, ornament, and iconography combine to communicate authority, identity, and continuity within the Benin artistic tradition.</p>
+        </div>
+        <div class="room-grid">
+            
+    <a class="artifact-card" href="artifact_pages/fig_045.html">
+      <img src="../plates/fig_045_plate.jpg" alt="Bronze vessel, somewhat in the form of a coffee-pot">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_045</div>
+        <h3>Bronze vessel, somewhat in the form of a coffee-pot</h3>
+        <p>Bronze vessel, somewhat in the form of a coffee-pot. Handle at back, consisting of a snake with a sinuous body, head downwards, holding a full-length human figure in its mouth. The spout consists of a human figure, seated, with two tails ; and the spout spring...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_051.html">
+      <img src="../plates/fig_051_plate.jpg" alt="Bronze pointed dish on stand, with ribbed cover, rabbetted">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_051</div>
+        <h3>Bronze pointed dish on stand, with ribbed cover, rabbetted</h3>
+        <p>Bronze pointed dish on stand, with ribbed cover, rabbetted.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_143.html">
+      <img src="../plates/fig_143_plate.jpg" alt="Bronze or brass figure of cock, 22 inches high, including The feathers are represented in ">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_143</div>
+        <h3>Bronze or brass figure of cock, 22 inches high, including The feathers are represented in </h3>
+        <p>Bronze or brass figure of cock, 22 inches high, including The feathers are represented in straight and curved lines of The pupils of the eyes are inlaid copper, of lozenge-shaped On the top of the pedestal in The sides of the base are ornamented with interlace...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_151.html">
+      <img src="../plates/fig_151_plate.jpg" alt="Brass A^essel, resembling a coffee pot">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_151</div>
+        <h3>Brass A^essel, resembling a coffee pot</h3>
+        <p>Brass A^essel, resembling a coffee pot. A human figure sitting in The handle at back front, out of the mouth of which the spout emerges. represents a sinuous snake with the head downwards, like that of Fig. 46, Bands of fish-scale pattern surround the vessel. ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_219.html">
+      <img src="../plates/fig_219_plate.jpg" alt="Carved cocoa-nut, representing a native on a horse to left, hold- ing up chain-bridle in l">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_219</div>
+        <h3>Carved cocoa-nut, representing a native on a horse to left, hold- ing up chain-bridle in l</h3>
+        <p>Carved cocoa-nut, representing a native on a horse to left, hold- ing up chain-bridle in left hand ; spear in light hand, point down. Horse very ill-formed and indistinct. Another carving represents a figure, One of the figures is apparently in boat, holding s...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_249.html">
+      <img src="../plates/fig_249_plate.jpg" alt="Large bronze cover, use unknown ; the ribs ornamented in the usual incised style of Benin ">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_249</div>
+        <h3>Large bronze cover, use unknown ; the ribs ornamented in the usual incised style of Benin </h3>
+        <p>Large bronze cover, use unknown ; the ribs ornamented in the usual incised style of Benin work.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_301.html">
+      <img src="../plates/fig_301_plate.jpg" alt="Bronze cock, the feathers represented by herring-hone pattern">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_301</div>
+        <h3>Bronze cock, the feathers represented by herring-hone pattern</h3>
+        <p>Bronze cock, the feathers represented by herring-hone pattern.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_390.html">
+      <img src="../plates/fig_390_plate.jpg" alt="Large metal bell">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_390</div>
+        <h3>Large metal bell</h3>
+        <p>Large metal bell. snakes issuing from the nostrils. On one side is a human face in relief, with Each of the two snakes grasps a mud The ears project from the sides of the head-dress, or cat fish in its jaws. and the neck has a frill consisting of a double row ...</p>
+      </div>
+    </a>
+    
+          </div>
+        </section>
+        
+        <section class="room" id="room-7">
+        <div class="room-header">
+        <div class="room-number">Room 7</div>
+        <h2>Kings, Heads, and Ornaments</h2>
+        <p class="wall-text">This group, titled &#x27;Kings, Heads, and Ornaments&#x27;, brings together works centered around human, head, ornamented. These objects reflect recurring visual and symbolic elements within Benin court art, suggesting shared functions, status markers, or narrative roles. Motifs such as pattern, which, benin appear frequently, pointing to connections between material culture, hierarchy, and ceremonial expression. Taken together, the works in this section reveal how form, ornament, and iconography combine to communicate authority, identity, and continuity within the Benin artistic tradition.</p>
+        </div>
+        <div class="room-grid">
+            
+    <a class="artifact-card" href="artifact_pages/fig_019.html">
+      <img src="../plates/fig_019_plate.jpg" alt="Stained ivory carving of figure on horse">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_019</div>
+        <h3>Stained ivory carving of figure on horse</h3>
+        <p>Stained ivory carving of figure on horse. Coral choker; spear in right hand, the shaft broken. Tribal marks on forehead incised. Chain- bridle or head-collar. Degenerate guilloche pattern on base. Straight line diaper pattern represented in various parts. The ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_022.html">
+      <img src="../plates/fig_022_plate.jpg" alt="Ivory carving of figure on horse, with spear in right hand and bell on neck, and long hair">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_022</div>
+        <h3>Ivory carving of figure on horse, with spear in right hand and bell on neck, and long hair</h3>
+        <p>Ivory carving of figure on horse, with spear in right hand and bell on neck, and long hair. rate guilloche pattern on base. The bridle formed as a head-collar. Degene- The stand formed as a socket for a pole ornamented with bands of interlaced pattern and the ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_028.html">
+      <img src="../plates/fig_028_plate.jpg" alt="Ivory carved tusk, 4 feet 1 inch long from bottom to point ; The other ornamentation trave">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_028</div>
+        <h3>Ivory carved tusk, 4 feet 1 inch long from bottom to point ; The other ornamentation trave</h3>
+        <p>Ivory carved tusk, 4 feet 1 inch long from bottom to point ; The other ornamentation traversed by five bands of interlaced strap-work. consists of :-Human figures with hands crossed on breast ; bird standing on pedestal ; human figures with hands holding sashe...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_053.html">
+      <img src="../plates/fig_053_plate.jpg" alt="Head of a mace, ornamented with leopard and keepers and heads unknown ; perhaps an Europea">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_053</div>
+        <h3>Head of a mace, ornamented with leopard and keepers and heads unknown ; perhaps an Europea</h3>
+        <p>Head of a mace, ornamented with leopard and keepers and heads unknown ; perhaps an European ecclesiastical utensil. Use copper. in bas-relief; decorated with interlaced strap-work, with brass inlaid in The human heads are partly negro, whilst others from their...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_066.html">
+      <img src="../plates/fig_066_plate.jpg" alt="The historic mace ol office of Duboar, late King of Benin ; 5 feet 4 inches long, and made">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_066</div>
+        <h3>The historic mace ol office of Duboar, late King of Benin ; 5 feet 4 inches long, and made</h3>
+        <p>The historic mace ol office of Duboar, late King of Benin ; 5 feet 4 inches long, and made of brass. This was found by an officer of the expedition in the state apartment of the palaver house, and was evidently left behind by the king&#x27;s people on account ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_076.html">
+      <img src="../plates/fig_076_plate.jpg" alt="Sistrum in brass,*representing two cups, the lower one ornamented The upper fgures on each">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_076</div>
+        <h3>Sistrum in brass,*representing two cups, the lower one ornamented The upper fgures on each</h3>
+        <p>Sistrum in brass,*representing two cups, the lower one ornamented The upper fgures on each side represent with a figure holding a ball. a king with the arms upheld by attendants on both sides ; on one side the attendants are kneeling. A hand holding a plaque o...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_155.html">
+      <img src="../plates/fig_155_plate.jpg" alt="Ivory carved sistrum, with a large and a small bell, similar to the On the side of the lar">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_155</div>
+        <h3>Ivory carved sistrum, with a large and a small bell, similar to the On the side of the lar</h3>
+        <p>Ivory carved sistrum, with a large and a small bell, similar to the On the side of the large bell is a brass one, Figs. 76-78, Plate XII. chief standing with his hands upheld by attendants in the usual manner a snake-headed sash hangs from waist. On the top tw...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_161.html">
+      <img src="../plates/fig_161_plate.jpg" alt="Bronze staff of office, 4 feet 11 inches in length, weighing 14 lbs">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_161</div>
+        <h3>Bronze staff of office, 4 feet 11 inches in length, weighing 14 lbs</h3>
+        <p>Bronze staff of office, 4 feet 11 inches in length, weighing 14 lbs. : it has two elongated crotals in the upper end, with long slits for the emission Between the slits are vertical of the sound, enclosing loose rods of iron. 51 bands of guilloche pattern with...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_164.html">
+      <img src="../plates/fig_164_plate.jpg" alt="Carved ivory figure of a woman (?) standing, the arms deficient; They were fitted into squ">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_164</div>
+        <h3>Carved ivory figure of a woman (?) standing, the arms deficient; They were fitted into squ</h3>
+        <p>Carved ivory figure of a woman (?) standing, the arms deficient; They were fitted into square sockets on each side, and were fastened by large bronze nails, one of which remains. A row of five leopards&#x27; heads hanging from the waist-belt, edged with rows o...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_190.html">
+      <img src="../plates/fig_190_plate.jpg" alt="A dagger or prod of ivory">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_190</div>
+        <h3>A dagger or prod of ivory</h3>
+        <p>A dagger or prod of ivory. Negro head on the upper part, below which is a human- female figure reversed and crouched ; the hands holding the breasts ; the legs crouched up. Stained yellow ; blunt pointed.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_192.html">
+      <img src="../plates/fig_192_plate.jpg" alt="Point of elephant&#x27;s tusk, carved with a representation of a At point, a skeleton of a croc">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_192</div>
+        <h3>Point of elephant&#x27;s tusk, carved with a representation of a At point, a skeleton of a croc</h3>
+        <p>Point of elephant&#x27;s tusk, carved with a representation of a At point, a skeleton of a crocodile, and a human human figure kneeling. head at base, the mouth of which is peculiar. It appears to be a whistle or musical instrument.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_194.html">
+      <img src="../plates/fig_194_plate.jpg" alt="Knife with ivory handle">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_194</div>
+        <h3>Knife with ivory handle</h3>
+        <p>Knife with ivory handle. The brass sheath ornamented with human figures, a floral ornament, and a man on a horse.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_196.html">
+      <img src="../plates/fig_196_plate.jpg" alt="Pointed rod of bronze, ornamented with two heads">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_196</div>
+        <h3>Pointed rod of bronze, ornamented with two heads</h3>
+        <p>Pointed rod of bronze, ornamented with two heads. Head-dress of upper head ornamented with bands of straight line diaper pattern. Crocodile head holding lower part of the rod in mouth.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_204.html">
+      <img src="../plates/fig_204_plate.jpg" alt="Three brass dancing swords or wands, said to be used by virgins Each handle is ornamented ">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_204</div>
+        <h3>Three brass dancing swords or wands, said to be used by virgins Each handle is ornamented </h3>
+        <p>Three brass dancing swords or wands, said to be used by virgins Each handle is ornamented by four rudely cast figures in their dances. back to back, carrying objects in their hands, two of which can be identified as birds, and two or three have leaf-shaped swo...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_212.html">
+      <img src="../plates/fig_212_plate.jpg" alt="Iron wedge-shaped sword, single-edged, enlarging to a broad Ivory handle ; the grip carved">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_212</div>
+        <h3>Iron wedge-shaped sword, single-edged, enlarging to a broad Ivory handle ; the grip carved</h3>
+        <p>Iron wedge-shaped sword, single-edged, enlarging to a broad Ivory handle ; the grip carved in pointed leaves and studded with end. lead ; pommel in form of a leopard&#x27;s head ; the eyes inlaid with lead ; The scabbard worked in a band carved as two scaly sn...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_272.html">
+      <img src="../plates/fig_272_plate.jpg" alt="Wooden comb, the handle carved as links of a chain, with a figure at top">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_272</div>
+        <h3>Wooden comb, the handle carved as links of a chain, with a figure at top</h3>
+        <p>Wooden comb, the handle carved as links of a chain, with a figure at top.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_304.html">
+      <img src="../plates/fig_304_plate.jpg" alt="Portion of an iron staff, ornamented with bands of bronze, on which are figured human face">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_304</div>
+        <h3>Portion of an iron staff, ornamented with bands of bronze, on which are figured human face</h3>
+        <p>Portion of an iron staff, ornamented with bands of bronze, on which are figured human faces, leopards&#x27; heads and bands of looped strands, similar to those on Figs. 139 and 140, Plate XXIII.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_365.html">
+      <img src="../plates/fig_365_plate.jpg" alt="Small human head in earthenware, being the only one of that The pupils of the eyes are inl">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_365</div>
+        <h3>Small human head in earthenware, being the only one of that The pupils of the eyes are inl</h3>
+        <p>Small human head in earthenware, being the only one of that The pupils of the eyes are inlaid with iron ; material in tins collection. two iron bands on the forehead, of which the traces have nearly dis- The Hole in top of head like those of bronze. Coral chok...</p>
+      </div>
+    </a>
+    
+          </div>
+        </section>
+        
+        <section class="room" id="room-8">
+        <div class="room-header">
+        <div class="room-number">Room 8</div>
+        <h2>Masks, Kings, and Heads</h2>
+        <p class="wall-text">This group, titled &#x27;Masks, Kings, and Heads&#x27;, brings together works centered around inlaid, coral, head. These objects reflect recurring visual and symbolic elements within Benin court art, suggesting shared functions, status markers, or narrative roles. Motifs such as eyes, over, marks appear frequently, pointing to connections between material culture, hierarchy, and ceremonial expression. Taken together, the works in this section reveal how form, ornament, and iconography combine to communicate authority, identity, and continuity within the Benin artistic tradition.</p>
+        </div>
+        <div class="room-grid">
+            
+    <a class="artifact-card" href="artifact_pages/fig_025.html">
+      <img src="../plates/fig_025_plate.jpg" alt="Ivory carving of a human face">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_025</div>
+        <h3>Ivory carving of a human face</h3>
+        <p>Ivory carving of a human face. Eyes and bands on forehead inlaid. Straight line diaper pattern on head-dress, above which are con- ventionalised mud-fish. Four bands of coral across forehead. Ears long; Found hidden in an oaken chest inside the sleeping apartm...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_082.html">
+      <img src="../plates/fig_082_plate.jpg" alt="Well-formed bronze head of a negress">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_082</div>
+        <h3>Well-formed bronze head of a negress</h3>
+        <p>Well-formed bronze head of a negress. Reticulated head-dress Coral necklace. of agate or coral. been inlaid probably with brass. The pupils of the eyes inlaid apparently with iron. Pendant of agate on centre of forehead. The upper lip has Eleven bands of coral...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_088.html">
+      <img src="../plates/fig_088_plate.jpg" alt="Well-formed head in bronze, the forehead decorated with two The pupils of the The hair in ">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_088</div>
+        <h3>Well-formed head in bronze, the forehead decorated with two The pupils of the The hair in </h3>
+        <p>Well-formed head in bronze, the forehead decorated with two The pupils of the The hair in conventional inlaid bands and four raised tribal marks over each eye. eyes inlaid apparently with iron. Coral necklace. bands of ridges ; the ears unusually well formed.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_094.html">
+      <img src="../plates/fig_094_plate.jpg" alt="Bronze cast of human head">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_094</div>
+        <h3>Bronze cast of human head</h3>
+        <p>Bronze cast of human head. Negro features. Three tribal marks Pupils of eyes inlaid with iron. over each eye. Reticulated head-dress and rosettes of coral or agate, similar to that represented in Plate XXI, Twelve bands of coral and a band Coral choker, badge ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_098.html">
+      <img src="../plates/fig_098_plate.jpg" alt="Well-formed head in bronze, the forehead decorated with two The inlaid bands and four rais">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_098</div>
+        <h3>Well-formed head in bronze, the forehead decorated with two The inlaid bands and four rais</h3>
+        <p>Well-formed head in bronze, the forehead decorated with two The inlaid bands and four raised cicatrices (tribal marks) over each eye. pupils of the eyes inlaid apparently with iron, coral necklace, a badge of The hair in The metal is very thin, being only 1mm....</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_132.html">
+      <img src="../plates/fig_132_plate.jpg" alt="Small head of boy, in bronze, with three raised tribal marks over each eye, and two vertic">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_132</div>
+        <h3>Small head of boy, in bronze, with three raised tribal marks over each eye, and two vertic</h3>
+        <p>Small head of boy, in bronze, with three raised tribal marks over each eye, and two vertical marks on forehead. Head-dress with crest.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_137.html">
+      <img src="../plates/fig_137_plate.jpg" alt="A very rude head of bronze; probably used as the stand for a Four tribal marks over each e">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_137</div>
+        <h3>A very rude head of bronze; probably used as the stand for a Four tribal marks over each e</h3>
+        <p>A very rude head of bronze; probably used as the stand for a Four tribal marks over each eye ; the eyes projecting like carved tusk. those of Figs. , Plate . This is the rudest head in the collection.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_149.html">
+      <img src="../plates/fig_149_plate.jpg" alt="Bronze head of girl">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_149</div>
+        <h3>Bronze head of girl</h3>
+        <p>Bronze head of girl. Three tribal marks incised over each eye ; pupils of eyes of iron, inlaid ; necklace of agate or coral.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_265.html">
+      <img src="../plates/fig_265_plate.jpg" alt="Bronze grotesque mask, intended probably as a stand for the The eyeballs project like thos">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_265</div>
+        <h3>Bronze grotesque mask, intended probably as a stand for the The eyeballs project like thos</h3>
+        <p>Bronze grotesque mask, intended probably as a stand for the The eyeballs project like those of Three tribal marks over each eye, and four over the The forehead is very projecting ; the nose aquiline and very broad. carved ivory tusks in the Ju-Ju houses. the h...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_343.html">
+      <img src="../plates/fig_343_plate.jpg" alt="Human mask, of bronze">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_343</div>
+        <h3>Human mask, of bronze</h3>
+        <p>Human mask, of bronze. Coral necklace. The pupils of the eyes inlaid with iron.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_392.html">
+      <img src="../plates/fig_392_plate.jpg" alt="Carved wooden head, which may have been a mask">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_392</div>
+        <h3>Carved wooden head, which may have been a mask</h3>
+        <p>Carved wooden head, which may have been a mask. Represents the head of a negro ; it is hollow, and may have been intended for a mask, The hair is represented by as there are open slits underneath each eye. The three black lines over the eyes represent The lowe...</p>
+      </div>
+    </a>
+    
+          </div>
+        </section>
+        
+        <section class="room" id="room-9">
+        <div class="room-header">
+        <div class="room-number">Room 9</div>
+        <h2>Swords, Staffs, and Spears</h2>
+        <p class="wall-text">This group, titled &#x27;Swords, Staffs, and Spears&#x27;, brings together works centered around human, iron, ornamented. These objects reflect recurring visual and symbolic elements within Benin court art, suggesting shared functions, status markers, or narrative roles. Motifs such as plate, hand, sword appear frequently, pointing to connections between material culture, hierarchy, and ceremonial expression. Taken together, the works in this section reveal how form, ornament, and iconography combine to communicate authority, identity, and continuity within the Benin artistic tradition.</p>
+        </div>
+        <div class="room-grid">
+            
+    <a class="artifact-card" href="artifact_pages/fig_103.html">
+      <img src="../plates/fig_103_plate.jpg" alt="Iron dart, or spear, 5 feet 1 inch long, with wooden shaft">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_103</div>
+        <h3>Iron dart, or spear, 5 feet 1 inch long, with wooden shaft</h3>
+        <p>Iron dart, or spear, 5 feet 1 inch long, with wooden shaft.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_104.html">
+      <img src="../plates/fig_104_plate.jpg" alt="Iron dart, 3 feet 7\ inches long, with barbed head and iron shaft">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_104</div>
+        <h3>Iron dart, 3 feet 7\ inches long, with barbed head and iron shaft</h3>
+        <p>Iron dart, 3 feet 7\ inches long, with barbed head and iron shaft.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_110.html">
+      <img src="../plates/fig_110_plate.jpg" alt="Iron execution sword, 3 feet 1 inch long, hilt and pommel of brass, with The edge is on th">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_110</div>
+        <h3>Iron execution sword, 3 feet 1 inch long, hilt and pommel of brass, with The edge is on th</h3>
+        <p>Iron execution sword, 3 feet 1 inch long, hilt and pommel of brass, with The edge is on the copper inlaid ornamentation. The grip bound with brass wire. It is single-edged, the edge being on the convex side. It resembles the swords engraved on the circular shi...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_135.html">
+      <img src="../plates/fig_135_plate.jpg" alt="Brass bottle, hung by chain, and ornamented with representation of twisted The rings twine">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_135</div>
+        <h3>Brass bottle, hung by chain, and ornamented with representation of twisted The rings twine</h3>
+        <p>Brass bottle, hung by chain, and ornamented with representation of twisted The rings twine, and a guilloche pattern without pellets round the swell. for hanging it are similar to those on the powder flask, Figs. 56 and 57, Plate IX. A similar brass bottle, but...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_166.html">
+      <img src="../plates/fig_166_plate.jpg" alt="Coral whip or whisk, probably a badge of office">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_166</div>
+        <h3>Coral whip or whisk, probably a badge of office</h3>
+        <p>Coral whip or whisk, probably a badge of office. The lips are very thick and the nose broad. Four tags, two of which are ornamented with crocodiles embroidered with metal. Figs. 16V and 168.-Ivory carved tusk, 3 feet 6 inches long from bottom to point. Band at...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_178.html">
+      <img src="../plates/fig_178_plate.jpg" alt="Ivory trumpet, made of the j)oint of an elephant&#x27;s tusk">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_178</div>
+        <h3>Ivory trumpet, made of the j)oint of an elephant&#x27;s tusk</h3>
+        <p>Ivory trumpet, made of the j)oint of an elephant&#x27;s tusk. Mouth-hole on The butt end is ornamented with two snakes in two the convex side. bands, tails in mouths.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_229.html">
+      <img src="../plates/fig_229_plate.jpg" alt="Necklace of agate cylindrical beads">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_229</div>
+        <h3>Necklace of agate cylindrical beads</h3>
+        <p>Necklace of agate cylindrical beads. 62 Antique Works of Art from Benin.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_256.html">
+      <img src="../plates/fig_256_plate.jpg" alt="Carved wooden Jekri jjaddle, neighbourhood of Benin">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_256</div>
+        <h3>Carved wooden Jekri jjaddle, neighbourhood of Benin</h3>
+        <p>Carved wooden Jekri jjaddle, neighbourhood of Benin. link shaft. Face on handle end. Pierced work blade.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_257.html">
+      <img src="../plates/fig_257_plate.jpg" alt="Carved wooden Jekri paddle, neighbourhood of Benin">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_257</div>
+        <h3>Carved wooden Jekri paddle, neighbourhood of Benin</h3>
+        <p>Carved wooden Jekri paddle, neighbourhood of Benin. Modern. Chain Modern. Chain link shaft. with human figures, crocodiles, etc. Full length human figure on handle end. Pierced work blade,, 249 250 PLATE 33. 257 in •ii Hi III- K 2 68 Antique Works of Art from ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_267.html">
+      <img src="../plates/fig_267_plate.jpg" alt="Brass bottle and chain, rudely cast">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_267</div>
+        <h3>Brass bottle and chain, rudely cast</h3>
+        <p>Brass bottle and chain, rudely cast.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_275.html">
+      <img src="../plates/fig_275_plate.jpg" alt="Small iron knife or bill-hook ; the edge on the convex side ; with brass handle terminatin">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_275</div>
+        <h3>Small iron knife or bill-hook ; the edge on the convex side ; with brass handle terminatin</h3>
+        <p>Small iron knife or bill-hook ; the edge on the convex side ; with brass handle terminating in a pommel representing a human hand.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_309.html">
+      <img src="../plates/fig_309_plate.jpg" alt="Square brass lamp, with four recejytacles for wicks, one at each corner">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_309</div>
+        <h3>Square brass lamp, with four recejytacles for wicks, one at each corner</h3>
+        <p>Square brass lamp, with four recejytacles for wicks, one at each corner. Ornamented with dots of repousse Avork, and suspended by an iron chain with long links and a hook.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_339.html">
+      <img src="../plates/fig_339_plate.jpg" alt="Bronze sword, perhaps an execution sword, but rather too small for that purpose ; ornament">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_339</div>
+        <h3>Bronze sword, perhaps an execution sword, but rather too small for that purpose ; ornament</h3>
+        <p>Bronze sword, perhaps an execution sword, but rather too small for that purpose ; ornamented with incised semicircles, like Fig. 338, and chevrons The grip ornamented with parallel incised The blade is also ornamented with peculiar filled with parallel incised...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_352.html">
+      <img src="../plates/fig_352_plate.jpg" alt="Bronze staff, probably intended to be held in the middle">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_352</div>
+        <h3>Bronze staff, probably intended to be held in the middle</h3>
+        <p>Bronze staff, probably intended to be held in the middle. Ornamented at both ends with human figures back to back. The stem ornamented with loops as in Figs. 208 and 209, Plate XXIX.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_380.html">
+      <img src="../plates/fig_380_plate.jpg" alt="Iron weapon of an old make">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_380</div>
+        <h3>Iron weapon of an old make</h3>
+        <p>Iron weapon of an old make. The blade is decorated with an incised figure of a snake.</p>
+      </div>
+    </a>
+    
+          </div>
+        </section>
+        
+        <section class="room" id="room-10">
+        <div class="room-header">
+        <div class="room-number">Room 10</div>
+        <h2>Female Figures, Plaques, and Leopards</h2>
+        <p class="wall-text">This group, titled &#x27;Female Figures, Plaques, and Leopards&#x27;, brings together works centered around coral, plate, ornamented. These objects reflect recurring visual and symbolic elements within Benin court art, suggesting shared functions, status markers, or narrative roles. Motifs such as left, head-dress, three appear frequently, pointing to connections between material culture, hierarchy, and ceremonial expression. Taken together, the works in this section reveal how form, ornament, and iconography combine to communicate authority, identity, and continuity within the Benin artistic tradition.</p>
+        </div>
+        <div class="room-grid">
+            
+    <a class="artifact-card" href="artifact_pages/fig_002.html">
+      <img src="../plates/fig_002_plate.jpg" alt="Bronze plaque, representing two figures holding plaques or books in front">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_002</div>
+        <h3>Bronze plaque, representing two figures holding plaques or books in front</h3>
+        <p>Bronze plaque, representing two figures holding plaques or books in front. Coral chokers, badge of rank. similar to that represented in Plate XXI, Fig. 121. Barbed objects of unknown use behind left shoulders, ornamented with straight line diaper Reticulated h...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_018.html">
+      <img src="../plates/fig_018_plate.jpg" alt="Bronze plaque, figure of warrior">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_018</div>
+        <h3>Bronze plaque, figure of warrior</h3>
+        <p>Bronze plaque, figure of warrior. Coral choker, badge of rank. Peculiarly ornamented head-dress. Leopards&#x27; teeth necklace. Broad leaf- Leopard&#x27;s mask shaped sword in right hand. Coral sash on breast. Small figure of boy, naked, hanging on left side. ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_031.html">
+      <img src="../plates/fig_031_plate.jpg" alt="Ivory carving of female">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_031</div>
+        <h3>Ivory carving of female</h3>
+        <p>Ivory carving of female. The design as rude as found in any part of Africa. Necklet and armlets the same as on the bronze figures.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_035.html">
+      <img src="../plates/fig_035_plate.jpg" alt="Lion in bronze">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_035</div>
+        <h3>Lion in bronze</h3>
+        <p>Lion in bronze. as a foot to some object.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_041.html">
+      <img src="../plates/fig_041_plate.jpg" alt="Figure of a warrior in bronze, with leopard&#x27;s skin dress ; javelins in one hand and shield">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_041</div>
+        <h3>Figure of a warrior in bronze, with leopard&#x27;s skin dress ; javelins in one hand and shield</h3>
+        <p>Figure of a warrior in bronze, with leopard&#x27;s skin dress ; javelins in one hand and shield in the other. Head-dress of peculiar form, with feathers. Leopards&#x27; teeth necklace. Quadrangular bell on breast.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_043.html">
+      <img src="../plates/fig_043_plate.jpg" alt="Female figure in bronze, holding up a tablet in right hand">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_043</div>
+        <h3>Female figure in bronze, holding up a tablet in right hand</h3>
+        <p>Female figure in bronze, holding up a tablet in right hand. Three tribal marks over each Head-dress, necklace, &amp;c. , of coral or agate. eye.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_056.html">
+      <img src="../plates/fig_056_plate.jpg" alt="Bronze bottle or power flask, representing a female with barbed arrow-points extending fro">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_056</div>
+        <h3>Bronze bottle or power flask, representing a female with barbed arrow-points extending fro</h3>
+        <p>Bronze bottle or power flask, representing a female with barbed arrow-points extending from both sides of the mouth ; perhaps symbolical ; and holding a four-pronged instrument in the right hand. Three tribal marks over each eye ; coral necklace. Ld I-&lt; - I...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_064.html">
+      <img src="../plates/fig_064_plate.jpg" alt="Bronze vase">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_064</div>
+        <h3>Bronze vase</h3>
+        <p>Bronze vase. It is ornamented with four human masks, two of which are ribbed. two elephants&#x27; heads with tusks, but no trunks over each ribbed head. There are Four bands of plain guilloche pattern arranged vertically between the Concentric circles. Thickne...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_090.html">
+      <img src="../plates/fig_090_plate.jpg" alt="Human figure standing in bronze">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_090</div>
+        <h3>Human figure standing in bronze</h3>
+        <p>Human figure standing in bronze. Negro features. Three tribal marks over each eye. Curved lines of circles and hatchings above and below the eyes. Three radiating lines branching from the corners of the The ears mouth. Pot helmet, with brim and reticulated orn...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_092.html">
+      <img src="../plates/fig_092_plate.jpg" alt="Female, in bronze, with staff in left hand">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_092</div>
+        <h3>Female, in bronze, with staff in left hand</h3>
+        <p>Female, in bronze, with staff in left hand. Skirt ornamented with three bands of guilloche pattern. Head-dress of coral or agate. Coral choker, and tribal marks. 86 87 PLATE 15. 39 &lt;r 92 93 » J. 4 32 Antique Works of Art from Benin.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_096.html">
+      <img src="../plates/fig_096_plate.jpg" alt="-Human head in brass">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_096</div>
+        <h3>-Human head in brass</h3>
+        <p>-Human head in brass. Marked negro features, tattoed with dots and hatchings above and below the eyes. Branch-like figures, perhaps coral, growing out of the eyes. Three tribal marks over each eye. Pupils of eyes inlaid with iron. agate, similar to those repre...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_100.html">
+      <img src="../plates/fig_100_plate.jpg" alt="Bronze cast of human head">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_100</div>
+        <h3>Bronze cast of human head</h3>
+        <p>Bronze cast of human head. Marked negro features, rudely formed. Three tribal marks over each eye. Peculiar pointed reticulated head-dress of coral or agate. Curious lines of incised circles above and Bands of coral or agate Coral choker, badge of rank. below ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_111.html">
+      <img src="../plates/fig_111_plate.jpg" alt="Bronze regis, representing a chief standing with attendants holding up his hands in a mann">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_111</div>
+        <h3>Bronze regis, representing a chief standing with attendants holding up his hands in a mann</h3>
+        <p>Bronze regis, representing a chief standing with attendants holding up his hands in a manner similar to Figs. 76-78, Plate XII, and Figs. 167 and 168, Plate XXVIII. Cylindrical spikes on head- Frogs between the feet. dresses.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_119.html">
+      <img src="../plates/fig_119_plate.jpg" alt="Bronze human head for holding carved elephants&#x27; tusks">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_119</div>
+        <h3>Bronze human head for holding carved elephants&#x27; tusks</h3>
+        <p>Bronze human head for holding carved elephants&#x27; tusks. head-dress, pointed and reticulated, representing coral or agate. tribal marks over each eye. The Four Six vertical bands of inlaid iron-work over the The head-dress resembles nose. The pupils of the ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_126.html">
+      <img src="../plates/fig_126_plate.jpg" alt="Human mask of brass ; the pupils of the eyes inlaid with iron">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_126</div>
+        <h3>Human mask of brass ; the pupils of the eyes inlaid with iron</h3>
+        <p>Human mask of brass ; the pupils of the eyes inlaid with iron. Coral band above Reticulated head-dress, with rosettes probably of agate. the forehead. Three tribal marks over each eye. Ears badly formed. Coral choker, badge of rank. Guilloche pattern, with pel...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_217.html">
+      <img src="../plates/fig_217_plate.jpg" alt="Carved cocoa-nut, with carving representing a European in boat with spear in right hand an">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_217</div>
+        <h3>Carved cocoa-nut, with carving representing a European in boat with spear in right hand an</h3>
+        <p>Carved cocoa-nut, with carving representing a European in boat with spear in right hand and apparently a paddle in the left hand. Figure armed with hoe, and another cutting a palm-tree, with a kind of One of the figures has chisel in the right hand and a bill-...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_232.html">
+      <img src="../plates/fig_232_plate.jpg" alt="Bronze statuette, representing a figure standing ; with broad leaf- shaped sword, similar ">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_232</div>
+        <h3>Bronze statuette, representing a figure standing ; with broad leaf- shaped sword, similar </h3>
+        <p>Bronze statuette, representing a figure standing ; with broad leaf- shaped sword, similar to Figs. 326, 327, 328 and 329, having a twisted ring pommel in right hand, and a sistrum in left hand. Three tribal marks over each eye. Coral choker, badge of Agate hea...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_235.html">
+      <img src="../plates/fig_235_plate.jpg" alt="Bronze figure of a native, holding what appears to be a flint- lock gun, but the hammer of">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_235</div>
+        <h3>Bronze figure of a native, holding what appears to be a flint- lock gun, but the hammer of</h3>
+        <p>Bronze figure of a native, holding what appears to be a flint- lock gun, but the hammer of the lock is broken off. The stock is ornamented with a debased human head. The figure has a leopard&#x27;s skin on front and back, tail and hind legs of which are shown ...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_262.html">
+      <img src="../plates/fig_262_plate.jpg" alt="Bronze plaque">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_262</div>
+        <h3>Bronze plaque</h3>
+        <p>Bronze plaque. A figure holding a so-called key in right hand. Head-dress, probably of agate or coral. No Ornamented with bands of Coral choker, badge of rank. broken guilloche pattern. cross on dress.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_277.html">
+      <img src="../plates/fig_277_plate.jpg" alt="Head carved in hard wood">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_277</div>
+        <h3>Head carved in hard wood</h3>
+        <p>Head carved in hard wood. The coral choker, the band round the head-dress, the feather on left side and the base are entirely covered head. with thin brass or bronze. duction of metal casting, it is difficult to say. of the head-dress are left uncovered with m...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_286.html">
+      <img src="../plates/fig_286_plate.jpg" alt="Bronze plaque, representing a figure standing and holding in his left hand a staff with an">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_286</div>
+        <h3>Bronze plaque, representing a figure standing and holding in his left hand a staff with an</h3>
+        <p>Bronze plaque, representing a figure standing and holding in his left hand a staff with an eagle on the top. A staff with a bird on the top is represented in one of the figures of No. 139. PLATE 37 283 1 76 Antique Works of Art from Benin.</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_293.html">
+      <img src="../plates/fig_293_plate.jpg" alt="Bronze statuette, representing a negro figure holding a so-called The figure has three tri">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_293</div>
+        <h3>Bronze statuette, representing a negro figure holding a so-called The figure has three tri</h3>
+        <p>Bronze statuette, representing a negro figure holding a so-called The figure has three tribal marks over each eye, and The pupils three radiating lines branching from the corners of the mouth. of the eyes are inlaid with iron. A cross on the breast hanging fro...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_320.html">
+      <img src="../plates/fig_320_plate.jpg" alt="Wooden bird resembling a turkey">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_320</div>
+        <h3>Wooden bird resembling a turkey</h3>
+        <p>Wooden bird resembling a turkey. The inlaying oi the eyes has disappeared ; the feathers are conventionally represented by carved squares and lines of herring-bone pattern. On the top is a rudely-cut vertical pro- jection 5 inches high and 2|- inches broad, th...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_324.html">
+      <img src="../plates/fig_324_plate.jpg" alt="Bronze group of three human figures, the front figure kneeling, the hands in an attitude o">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_324</div>
+        <h3>Bronze group of three human figures, the front figure kneeling, the hands in an attitude o</h3>
+        <p>Bronze group of three human figures, the front figure kneeling, the hands in an attitude of prayer. The upper part naked, the lower part covered by a pleated kilt or skirt, similar to Figs. 129, 235, 236, and 247. The corners of the eyes ornamented with a rais...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_345.html">
+      <img src="../plates/fig_345_plate.jpg" alt="Bronze leopard, tail deficient; total height, 154; inches">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_345</div>
+        <h3>Bronze leopard, tail deficient; total height, 154; inches</h3>
+        <p>Bronze leopard, tail deficient; total height, 154; inches. One of the hind The leopard The pupils of&quot; legs broken off and repaired by natives with a piece of ivory. is covered with incised spots and small punch marks all over. the eyes are inlaid with iro...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_358.html">
+      <img src="../plates/fig_358_plate.jpg" alt="Bronze seated figure, apparently of an European">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_358</div>
+        <h3>Bronze seated figure, apparently of an European</h3>
+        <p>Bronze seated figure, apparently of an European. The dress The hat, with brim, is ornamented with has large buttons on one side. chevrons filled with parallel straight lines ; the moustache very long ; the nose aquiline and very large; the shoulders guarded by...</p>
+      </div>
+    </a>
+    
+    <a class="artifact-card" href="artifact_pages/fig_374.html">
+      <img src="../plates/fig_374_plate.jpg" alt="Bronze statuette of a musician in the act of playing a wind instrument">
+      <div class="artifact-overlay">
+        <div class="artifact-id">fig_374</div>
+        <h3>Bronze statuette of a musician in the act of playing a wind instrument</h3>
+        <p>Bronze statuette of a musician in the act of playing a wind instrument. He wears a pot hat, a collar, and loose necklet hanging down over the chest, also armlets and wristlets. He wears a decorated loin cloth, with a border representing a row of feathers, and ...</p>
+      </div>
+    </a>
+    
+          </div>
+        </section>
+        
+
+      <div class="footer">
+        Generated from paired plates, CLIP visual clustering, and enriched catalog metadata.
+      </div>
     </body>
     </html>
     

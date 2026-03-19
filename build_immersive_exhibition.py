@@ -7,6 +7,7 @@ BASE_DIR = Path("benin_output")
 CSV_PATH = BASE_DIR / "artifact_manifest_enriched.csv"
 PLATES_DIR = BASE_DIR / "plates"
 OUT_DIR = BASE_DIR / "immersive_exhibition"
+ROOT_OUT = Path("index.html")
 
 CLUSTER_NAMES_PATH = BASE_DIR / "cluster_names.csv"
 import csv
@@ -414,7 +415,9 @@ def main():
 
     out_file = OUT_DIR / "index.html"
     out_file.write_text(html_doc, encoding="utf-8")
+    ROOT_OUT.write_text(html_doc, encoding="utf-8")
     print(f"Saved immersive exhibition: {out_file}")
+    print(f"Also saved root site: {ROOT_OUT}")
 
 
 if __name__ == "__main__":
