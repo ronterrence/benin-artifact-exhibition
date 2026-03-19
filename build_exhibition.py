@@ -45,7 +45,7 @@ def build_card(row: pd.Series, img_path: str) -> str:
 
     return f"""
     <article class="card" data-artifact="{artifact_id.lower()}" data-text="{search_text}">
-      <img src="{img_path}" alt="{artifact_id}">
+      <img src="{img_path}" alt="{artifact_id}" onclick="openLightbox(this.src)">
       <div class="card-content">
         <div class="artifact-id">{artifact_id}</div>
         <div class="title">{title}</div>
@@ -183,10 +183,12 @@ def main() -> None:
     }
 
     .card img {
-      width: 100%;
-      display: block;
-      background: #fff;
-      filter: grayscale(100%);
+    width: 100%;
+    display: block;
+    background: #fff;
+    filter: grayscale(100%);
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
     }
 
     .card-content {
@@ -212,9 +214,11 @@ def main() -> None:
     }
 
     .description {
-      font-size: 14px;
-      color: #bbb;
-      line-height: 1.7;
+    font-size: 13px;
+    color: #999;
+    line-height: 1.6;
+    max-height: 120px;
+    overflow: hidden;
     }
 
     .hidden {
@@ -227,7 +231,25 @@ def main() -> None:
       text-align: center;
       border-top: 1px solid #222;
     }
+    #lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+    }
     """
+    
 
     js = """
     const searchBox = document.getElementById('searchBox');
@@ -248,7 +270,16 @@ def main() -> None:
         section.classList.toggle('hidden', visibleCards.length === 0);
       });
     }
+    function openLightbox(src) {
+        const lb = document.getElementById('lightbox');
+        const img = document.getElementById('lightbox-img');
+        img.src = src;
+        lb.style.display = 'flex';
+    }
 
+    function closeLightbox() {
+        document.getElementById('lightbox').style.display = 'none';
+    }
     searchBox.addEventListener('input', applyFilter);
     """
 
@@ -279,6 +310,9 @@ def main() -> None:
       </footer>
 
       <script>{js}</script>
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img">
+    </div>
     </body>
     </html>
     """
