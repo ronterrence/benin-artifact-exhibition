@@ -95,185 +95,143 @@ def main() -> None:
         if cards:
             sections.append(f"""
             <section class="cluster-section" id="cluster-{cluster_id}">
-              <div class="section-header">
-                <h2>{esc(label)}</h2>
-                <p>{esc(CLUSTER_DESCRIPTIONS.get(cluster_id, ""))}</p>
+  
+              <div class="cluster-header">
+                <h2>Cluster {cluster_id:02d}</h2>
+                <p>{len(cards)+1} artifacts</p>
               </div>
               <div class="featured">
                 {featured_card}
               </div>
+
               <div class="grid">
                 {''.join(cards)}
               </div>
+
             </section>
             """)
 
     css = """
     body {
-      margin: 0;
-      font-family: Georgia, serif;
-      background: #0f0f0f;
-      color: #eaeaea;
-    }
-    
-    header {
-      padding: 60px 40px;
-      background: #111;
-      border-bottom: 1px solid #222;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+    margin: 0;
+    font-family: "Georgia", serif;
+    background: #0b0b0b;
+    color: #eaeaea;
     }
 
-    h1 {
-      margin: 0;
-      font-size: 42px;
-      font-weight: 500;
+    /* HERO */
+    .hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #000;
     }
 
-    .subtitle {
-      color: #aaa;
-      margin-top: 10px;
-      max-width: 800px;
-      line-height: 1.6;
+    .hero-inner {
+    max-width: 700px;
     }
 
-    .toolbar {
-      margin-top: 20px;
+    .hero h1 {
+    font-size: 48px;
+    font-weight: 500;
+    margin-bottom: 20px;
     }
 
-    input[type="search"] {
-      padding: 12px 14px;
-      min-width: 320px;
-      border: 1px solid #333;
-      border-radius: 10px;
-      background: #1a1a1a;
-      color: #eee;
-      font-size: 1rem;
+    .hero-sub {
+    color: #aaa;
+    font-size: 16px;
+    margin-bottom: 30px;
     }
 
-    main {
-      max-width: 1600px;
-      margin: 0 auto;
+    .enter-btn {
+    color: white;
+    text-decoration: none;
+    border: 1px solid #444;
+    padding: 12px 24px;
+    border-radius: 30px;
+    transition: 0.3s;
     }
 
+    .enter-btn:hover {
+    background: white;
+    color: black;
+    }
+
+    /* CLUSTERS */
     .cluster-section {
-      padding: 60px 40px;
+    padding: 100px 60px;
+    border-top: 1px solid #1a1a1a;
     }
 
-    .section-header h2 {
+    .cluster-header h2 {
       font-size: 28px;
-      font-weight: 400;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
 
-    .section-header p {
-      color: #888;
-      margin-bottom: 30px;
+    .cluster-header p {
+      color: #777;
+      margin-bottom: 40px;
     }
 
+    /* FEATURED */
+    .featured {
+      max-width: 900px;
+      margin-bottom: 60px;
+    }
+
+    .featured img {
+      width: 100%;
+      filter: grayscale(100%);
+    }
+
+    /* GRID */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 40px;
     }
 
+    /* CARD */
     .card {
-      background: #151515;
+      background: #111;
       border: 1px solid #222;
-      border-radius: 8px;
+      border-radius: 6px;
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: 0.3s;
     }
 
     .card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
     .card img {
-    width: 100%;
-    display: block;
-    background: #fff;
-    filter: grayscale(100%);
-    aspect-ratio: 1 / 1;
-    object-fit: contain;
+      width: 100%;
+      display: block;
+      filter: grayscale(100%);
     }
 
     .card-content {
-      padding: 20px;
+      padding: 16px;
     }
 
     .artifact-id {
       font-size: 12px;
       color: #888;
-      margin-bottom: 6px;
     }
 
     .title {
-      font-size: 22px;
-      margin-bottom: 10px;
-      line-height: 1.35;
-    }
-
-    .meta {
-      font-size: 13px;
-      color: #888;
-      margin-bottom: 12px;
+      margin-top: 6px;
+      font-size: 14px;
     }
 
     .description {
-    font-size: 13px;
-    color: #999;
-    line-height: 1.6;
-    max-height: 120px;
-    overflow: hidden;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-    .featured {
-    max-width: 900px;
-    margin-bottom: 40px;
-    }
-
-    .featured .card {
-    transform: scale(1.02);
-    border: 1px solid #444;
-    }
-
-    .section-header p {
-    max-width: 700px;
-    line-height: 1.6;
-    }
-
-    footer {
-      padding: 40px;
-      color: #888;
-      text-align: center;
-      border-top: 1px solid #222;
-    }
-    #lightbox {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.9);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-    }
-
-    #lightbox img {
-        max-width: 90%;
-        max-height: 90%;
+      margin-top: 8px;
+      font-size: 12px;
+      color: #aaa;
     }
     """
-    
-
     js = """
     const searchBox = document.getElementById('searchBox');
     const cards = Array.from(document.querySelectorAll('.card'));
@@ -283,7 +241,7 @@ def main() -> None:
       const q = searchBox.value.trim().toLowerCase();
 
       cards.forEach(card => {
-        const hay = (card.dataset.text || '') + ' ' + (card.dataset.artifact || '');
+        const hay = card.dataset.text + ' ' + card.dataset.artifact;
         const show = !q || hay.includes(q);
         card.classList.toggle('hidden', !show);
       });
@@ -293,19 +251,34 @@ def main() -> None:
         section.classList.toggle('hidden', visibleCards.length === 0);
       });
     }
-    function openLightbox(src) {
-        const lb = document.getElementById('lightbox');
-        const img = document.getElementById('lightbox-img');
-        img.src = src;
-        lb.style.display = 'flex';
-    }
 
+    searchBox.addEventListener('input', applyFilter);
+
+    #/* ✅ ADD THIS PART BELOW */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href'))
+          .scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+    
     function closeLightbox() {
         document.getElementById('lightbox').style.display = 'none';
     }
     searchBox.addEventListener('input', applyFilter);
     """
-
+    hero = f"""
+    <section class="hero">
+    <div class="hero-inner">
+    <h1>Benin Digital Exhibition</h1>
+    <p class="hero-sub">
+      A machine-generated visual grouping of Benin artifacts based on image similarity.
+    </p>
+    <a href="#cluster-0" class="enter-btn">Enter Archive </a>
+    </div>
+    </section>
+    """
     html_doc = f"""
     <!doctype html>
     <html lang="en">
@@ -323,15 +296,14 @@ def main() -> None:
           <input id="searchBox" type="search" placeholder="Search by artifact ID, title, or description">
         </div>
       </header>
-
+      {hero}
       <main>
         {''.join(sections)}
       </main>
-
       <footer>
         Generated from paired artifact plates, CLIP clusters, and catalog descriptions.
       </footer>
-
+    
       <script>{js}</script>
     <div id="lightbox" onclick="closeLightbox()">
         <img id="lightbox-img">
