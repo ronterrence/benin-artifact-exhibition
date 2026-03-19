@@ -275,7 +275,10 @@ def main() -> None:
     <p class="hero-sub">
       A machine-generated visual grouping of Benin artifacts based on image similarity.
     </p>
-    <a href="#cluster-0" class="enter-btn">Enter Archive </a>
+    <div class="toolbar">
+      <input id="searchBox" type="search" placeholder="Search by artifact ID, title, or description">
+    </div>
+    <a href="#cluster-00" class="enter-btn">Enter Archive ↓</a>
     </div>
     </section>
     """
@@ -289,13 +292,6 @@ def main() -> None:
       <style>{css}</style>
     </head>
     <body>
-      <header>
-        <h1>Benin Digital Exhibition</h1>
-        <div class="subtitle">{esc(INTRO_TEXT)}</div>
-        <div class="toolbar">
-          <input id="searchBox" type="search" placeholder="Search by artifact ID, title, or description">
-        </div>
-      </header>
       {hero}
       <main>
         {''.join(sections)}
