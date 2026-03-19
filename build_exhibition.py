@@ -88,16 +88,15 @@ def main():
         cards = []
         for _, row in group.iterrows():
             artifact_id = str(row["artifact_id"]).strip().lower()
-            plate_path = PLATES_DIR / f"{artifact_id}_plate.jpg"
+            plate_path = Path("benin_output") / "plates" / f"{artifact_id}_plate.jpg"
 
             if not plate_path.exists():
-                # Skip if there is no generated plate
                 continue
 
-            rel_plate_path = os.path.relpath(plate_path, OUT_DIR).replace("\\", "/")
+            rel_plate_path = plate_path.as_posix()
             cards.append(build_card(row, rel_plate_path))
 
-        if cards:
+    if cards:
             sections.append(f"""
             <section class="cluster-section" id="cluster-{cluster_id}">
               <div class="section-header">
