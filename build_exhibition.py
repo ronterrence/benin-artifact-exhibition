@@ -6,8 +6,12 @@ import pandas as pd
 BASE_DIR = Path("benin_output")
 CSV_PATH = BASE_DIR / "artifact_manifest_enriched.csv"
 PLATES_DIR = BASE_DIR / "plates"
-OUT_DIR = BASE_DIR / "html_exhibition"
 
+#OUT_DIR = BASE_DIR / "html_exhibition"
+OUT_DIR = Path(".")
+ROOT_OUT = Path("index.html")
+HTML_OUT_DIR = BASE_DIR / "html_exhibition"
+HTML_OUT_DIR.mkdir(parents=True, exist_ok=True)
 # Optional human-readable cluster labels
 CLUSTER_LABELS = {
     0: "Cluster 00",
@@ -286,10 +290,15 @@ def main():
     </html>
     """
 
-    out_file = OUT_DIR / "index.html"
-    out_file.write_text(html_doc, encoding="utf-8")
-    print(f"Saved exhibition: {out_file}")
-
+    #out_file = OUT_DIR / "index.html"
+    #out_file.write_text(html_doc, encoding="utf-8")
+    # write BOTH versions
+    ROOT_OUT.write_text(html_doc, encoding="utf-8")
+    (HTML_OUT_DIR / "index.html").write_text(html_doc, encoding="utf-8")
+    
+    #print(f"Saved exhibition: {out_file}")
+    print(f"Saved exhibition: {ROOT_OUT}")
+    print(f"Also saved copy: {HTML_OUT_DIR / 'index.html'}")
 
 if __name__ == "__main__":
     main()
