@@ -75,6 +75,7 @@ def main() -> None:
     for cluster_id, group in grouped:
         label = CLUSTER_LABELS.get(cluster_id, f"Cluster {cluster_id}")
         cards = []
+        featured_card = None
 
         for _, row in group.iterrows():
             artifact_id = str(row["artifact_id"]).strip().lower()
@@ -84,14 +85,22 @@ def main() -> None:
                 continue
 
             rel_plate_path = plate_path.as_posix()
-            cards.append(build_card(row, rel_plate_path))
+            card_html = build_card(row, rel_plate_path)
+
+        if featured_card is None:
+            featured_card = card_html
+        else:
+            cards.append(card_html)
 
         if cards:
             sections.append(f"""
             <section class="cluster-section" id="cluster-{cluster_id}">
               <div class="section-header">
                 <h2>{esc(label)}</h2>
-                <p>{len(cards)} artifacts</p>
+                <p>{esc(CLUSTER_DESCRIPTIONS.get(cluster_id, ""))}</p>
+              </div>
+              <div class="featured">
+                {featured_card}
               </div>
               <div class="grid">
                 {''.join(cards)}
@@ -106,7 +115,7 @@ def main() -> None:
       background: #0f0f0f;
       color: #eaeaea;
     }
-
+    
     header {
       padding: 60px 40px;
       background: #111;
@@ -223,6 +232,20 @@ def main() -> None:
 
     .hidden {
       display: none !important;
+    }
+    .featured {
+    max-width: 900px;
+    margin-bottom: 40px;
+    }
+
+    .featured .card {
+    transform: scale(1.02);
+    border: 1px solid #444;
+    }
+
+    .section-header p {
+    max-width: 700px;
+    line-height: 1.6;
     }
 
     footer {
