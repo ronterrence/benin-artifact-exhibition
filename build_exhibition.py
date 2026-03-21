@@ -237,19 +237,19 @@ def main() -> None:
             rel_plate_path = plate_path.as_posix()
             card_html = build_card(row, rel_plate_path)
 
-        if featured_card is None:
-            featured_card = card_html
-        else:
-            cards.append(card_html)
+            if featured_card is None:
+                featured_card = card_html
+            else:
+                cards.append(card_html)
 
-        if cards:
+        if featured_card is not None:
             sections.append(f"""
             <section class="cluster-section" id="cluster-{cluster_id:02d}">
-  
               <div class="cluster-header">
                 <h2>Cluster {cluster_id:02d}</h2>
-                <p>{len(cards)+1} artifacts</p>
+                <p>{1 + len(cards)} artifacts</p>
               </div>
+
               <div class="featured">
                 {featured_card}
               </div>
@@ -257,7 +257,6 @@ def main() -> None:
               <div class="grid">
                 {''.join(cards)}
               </div>
-
             </section>
             """)
 
