@@ -210,6 +210,8 @@ def main() -> None:
         raise FileNotFoundError(f"Missing CSV: {CSV_PATH}")
 
     df = pd.read_csv(CSV_PATH)
+    cluster_ids = sorted(df["cluster"].dropna().astype(int).unique())
+    first_cluster_anchor = f"cluster-{cluster_ids[0]:02d}" if cluster_ids else "cluster-00"
 
     if "artifact_id" not in df.columns:
         raise ValueError("CSV must contain an 'artifact_id' column.")
@@ -434,20 +436,22 @@ def main() -> None:
       document.getElementById('lightbox').style.display = 'none';
     }
     """
+
     hero = f"""
     <section class="hero">
-    <div class="hero-inner">
-    <h1>Benin Digital Exhibition</h1>
-    <p class="hero-sub">
-      A machine-generated visual grouping of Benin artifacts based on image similarity.
-    </p>
-    <div class="toolbar">
-      <input id="searchBox" type="search" placeholder="Search by artifact ID, title, or description">
-    </div>
-    <a href="#cluster-00" class="enter-btn">Enter Archive ↓</a>
-    </div>
+      <div class="hero-inner">
+        <h1>Benin Digital Exhibition</h1>
+        <p class="hero-sub">
+          A machine-generated visual grouping of Benin artifacts based on image similarity.
+        </p>
+        <div class="toolbar">
+          <input id="searchBox" type="search" placeholder="Search by artifact ID, title, or description">
+        </div>
+        <a href="#{first_cluster_anchor}" class="enter-btn">Enter Archive ↓</a>
+      </div>
     </section>
     """
+    
     html_doc = f"""
     <!doctype html>
     <html lang="en">
