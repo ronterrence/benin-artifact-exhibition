@@ -92,7 +92,28 @@ def resize_to_height(img: Image.Image, target_height: int) -> Image.Image:
     ratio = target_height / img.height
     new_width = int(img.width * ratio)
     return img.resize((new_width, target_height), Image.Resampling.LANCZOS)
+    
+def create_single_plate(img_path: Path, output_path: Path, artifact_id: str, subtitle: str = "single view"):
+    img = Image.open(img_path).convert("RGB")
 
+    padding = 30
+    title_height = 60
+
+    canvas_w = img.width + padding * 2
+    canvas_h = img.height + title_height + padding * 2
+
+    canvas = Image.new("RGB", (canvas_w, canvas_h), "white")
+    draw = ImageDraw.Draw(canvas)
+
+    title_font = get_font(26)
+    small_font = get_font(18)
+
+    draw.text((padding, 15), artifact_id.upper(), fill="black", font=title_font)
+    draw.text((padding, 45), subtitle, fill="dimgray", font=small_font)
+
+    canvas.paste(img, (padding, title_height))
+    canvas.save(output_path, quality=95)
+    
 
 def create_plate(main_path: Path, detail_path: Path, output_path: Path, artifact_id: str):
     img_main = Image.open(main_path).convert("RGB")
@@ -397,14 +418,42 @@ def main():
 
     print("\n2. Creating exhibition plates...")
     paired_count = 0
+    single_count = 0
+
     for artifact_id, paths in tqdm(artifacts.items(), desc="Creating plates"):
-        if "main" in paths and "detail" in paths:
-            out_path = output_dir / "plates" / f"{artifact_id}_plate.jpg"
-            try:
-                create_plate(paths["main"], paths["detail"], out_path, artifact_id)
-                paired_count += 1
-            except Exception as e:
-                print(f"Plate failed for {artifact_id}: {e}")
+        out_path = output_dir / "plates" / f"{artifact_id}_plate.jpg"
+
+        try:
+            # Case 1: both main and detail exist
+            if "main" in paths and "detail" in paths:
+                main_path = paths["main"]
+                detail_path = paths["detail"]
+
+                # If detail is an h-image, treat it as zoom/detail
+                if detail_path.stem.endswith("h"):
+                    # Use the zoomed/detail image as the hero plate
+                    create_single_plate(detail_path, out_path, artifact_id, subtitle="detail view")
+                    single_count += 1
+                else:
+                    # True alternate pair
+                    create_plate(main_path, detail_path, out_path, artifact_id)
+                    paired_count += 1
+
+            # Case 2: only main exists
+            elif "main" in paths:
+                create_single_plate(paths["main"], out_path, artifact_id, subtitle="single view")
+                single_count += 1
+
+            # Case 3: only detail exists
+            elif "detail" in paths:
+                create_single_plate(paths["detail"], out_path, artifact_id, subtitle="detail view")
+                single_count += 1
+
+        except Exception as e:
+            print(f"Plate failed for {artifact_id}: {e}")
+
+    print(f"Two-panel plates created: {paired_count}")
+    print(f"Single-image plates created: {single_count}")
 
     print(f"Plates created: {paired_count}")
 

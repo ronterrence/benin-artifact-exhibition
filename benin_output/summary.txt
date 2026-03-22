@@ -3,7 +3,7 @@ Benin Artifact Pipeline Summary
 
 Total artifact IDs: 239
 Artifacts embedded: 239
-Paired exhibition plates created: 180
+Paired exhibition plates created: 0
 Clusters: 11
 
 Cluster representatives:
