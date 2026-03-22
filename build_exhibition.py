@@ -47,7 +47,7 @@ def build_card(row: pd.Series, img_path: str) -> str:
     return f"""
     <a class="card" href="benin_output/html_exhibition/artifact_pages/{artifact_id}.html"
        data-artifact="{artifact_id.lower()}" data-text="{search_text}">
-      <img src="{img_path}" alt="{artifact_id}" onclick="event.preventDefault(); openLightbox(this.src)">
+      <img src="{img_path}" alt="{artifact_id}">
       <div class="card-content">
         <div class="artifact-id">{artifact_id}</div>
         <div class="title">{title}</div>
@@ -61,7 +61,7 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
     artifact_id = esc(row.get("artifact_id", ""))
     title = esc(row.get("title", "Untitled")) or artifact_id
     description = esc(row.get("description", ""))
-    cluster = esc(row.get("cluster", ""))
+    cluster = int(row["cluster"])
 
     plate_path = f"../../plates/{artifact_id.lower()}_plate.jpg"
 
@@ -183,7 +183,7 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
     </head>
     <body>
       <div class="page">
-        <a class="back" href="../../../index.html#cluster-{int(cluster):02d}">← Back to exhibition</a>
+        <a class="back" href="../../../index.html#cluster-{cluster:02d}">← Back to exhibition</a>
         <div class="hero">
           <div>
             <img src="{plate_path}" alt="{artifact_id}">
