@@ -218,11 +218,12 @@ def main() -> None:
 
     HTML_OUT_DIR.mkdir(parents=True, exist_ok=True)
     ARTIFACT_PAGES_DIR.mkdir(parents=True, exist_ok=True)
-
+ 
     sections = []
 
     grouped = df.sort_values(["cluster", "artifact_id"]).groupby("cluster")
     for cluster_id, group in grouped:
+        print(f"Building cluster {cluster_id} with {len(group)} rows")
         label = CLUSTER_LABELS.get(cluster_id, f"Cluster {cluster_id}")
         cards = []
         featured_card = None
@@ -232,6 +233,7 @@ def main() -> None:
             plate_path = Path("benin_output") / "plates" / f"{artifact_id}_plate.jpg"
 
             if not plate_path.exists():
+                print(f"Missing plate: {plate_path}")
                 continue
 
             rel_plate_path = plate_path.as_posix()
@@ -241,6 +243,8 @@ def main() -> None:
                 featured_card = card_html
             else:
                 cards.append(card_html)
+
+        print(f"Cluster {cluster_id}: featured_card set = {featured_card is not None}, extra cards = {len(cards)}")
 
         if featured_card is not None:
             sections.append(f"""
@@ -259,6 +263,8 @@ def main() -> None:
               </div>
             </section>
             """)
+
+    print(f"Total sections built: {len(sections)}")
 
     css = """
     body {
@@ -393,7 +399,7 @@ def main() -> None:
       const q = searchBox.value.trim().toLowerCase();
 
       cards.forEach(card => {
-        const hay = card.dataset.text + ' ' + card.dataset.artifact;
+        const hay = (card.dataset.text || '') + ' ' + (card.dataset.artifact || '');
         const show = !q || hay.includes(q);
         card.classList.toggle('hidden', !show);
       });
@@ -406,19 +412,26 @@ def main() -> None:
 
     searchBox.addEventListener('input', applyFilter);
 
-    #/* ✅ ADD THIS PART BELOW */
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href'))
-          .scrollIntoView({ behavior: 'smooth' });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
       });
     });
-    
-    function closeLightbox() {
-        document.getElementById('lightbox').style.display = 'none';
+
+    function openLightbox(src) {
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      lb.style.display = 'flex';
     }
-    searchBox.addEventListener('input', applyFilter);
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
     """
     hero = f"""
     <section class="hero">
