@@ -384,11 +384,48 @@ def main() -> None:
       margin-top: 6px;
       font-size: 14px;
     }
+    .hidden {
+      display: none !important;
+    }
 
     .description {
       margin-top: 8px;
       font-size: 12px;
       color: #aaa;
+    }
+    html {
+  scroll-behavior: smooth;
+    }
+
+    .toolbar {
+      margin-top: 18px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .toolbar input[type="search"] {
+      width: min(520px, 90vw);
+      padding: 12px 16px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      background: #141414;
+      color: #eee;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .toolbar input[type="search"]::placeholder {
+      color: #888;
+    }
+
+    .enter-btn {
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    .hidden {
+      display: none !important;
     }
     """
 
@@ -398,10 +435,10 @@ def main() -> None:
     const sections = Array.from(document.querySelectorAll('.cluster-section'));
 
     function applyFilter() {
-      const q = searchBox.value.trim().toLowerCase();
+      const q = (searchBox.value || '').trim().toLowerCase();
 
       cards.forEach(card => {
-        const hay = (card.dataset.text || '') + ' ' + (card.dataset.artifact || '');
+        const hay = ((card.dataset.text || '') + ' ' + (card.dataset.artifact || '')).toLowerCase();
         const show = !q || hay.includes(q);
         card.classList.toggle('hidden', !show);
       });
@@ -412,7 +449,9 @@ def main() -> None:
       });
     }
 
-    searchBox.addEventListener('input', applyFilter);
+    if (searchBox) {
+      searchBox.addEventListener('input', applyFilter);
+    }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
@@ -427,12 +466,14 @@ def main() -> None:
     function openLightbox(src) {
       const lb = document.getElementById('lightbox');
       const img = document.getElementById('lightbox-img');
+      if (!lb || !img) return;
       img.src = src;
       lb.style.display = 'flex';
     }
 
     function closeLightbox() {
-      document.getElementById('lightbox').style.display = 'none';
+      const lb = document.getElementById('lightbox');
+      if (lb) lb.style.display = 'none';
     }
     """
 
