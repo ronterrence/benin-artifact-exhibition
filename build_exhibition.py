@@ -390,6 +390,7 @@ def main() -> None:
       color: #aaa;
     }
     """
+
     js = """
     const searchBox = document.getElementById('searchBox');
     const cards = Array.from(document.querySelectorAll('.card'));
