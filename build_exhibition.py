@@ -475,6 +475,20 @@ def main() -> None:
       const lb = document.getElementById('lightbox');
       if (lb) lb.style.display = 'none';
     }
+    
+    function enterArchive(e) {
+      e.preventDefault();
+      
+      if (searchBox) {
+      searchBox.value = '';
+      applyFilter();
+    }
+
+      const target = document.querySelector(e.currentTarget.getAttribute('href'));
+      if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
     """
 
     hero = f"""
@@ -487,7 +501,7 @@ def main() -> None:
         <div class="toolbar">
           <input id="searchBox" type="search" placeholder="Search by artifact ID, title, or description">
         </div>
-        <a href="#{first_cluster_anchor}" class="enter-btn">Enter Archive ↓</a>
+        <a href="#{first_cluster_anchor}" class="enter-btn" onclick="enterArchive(event)">Enter Archive ↓</a>
       </div>
     </section>
     """

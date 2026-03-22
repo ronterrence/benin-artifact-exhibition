@@ -178,7 +178,7 @@
         <div class="toolbar">
           <input id="searchBox" type="search" placeholder="Search by artifact ID, title, or description">
         </div>
-        <a href="#cluster-00" class="enter-btn">Enter Archive ↓</a>
+        <a href="#cluster-00" class="enter-btn" onclick="enterArchive(event)">Enter Archive ↓</a>
       </div>
     </section>
     
@@ -3028,6 +3028,20 @@
     function closeLightbox() {
       const lb = document.getElementById('lightbox');
       if (lb) lb.style.display = 'none';
+    }
+    
+    function enterArchive(e) {
+      e.preventDefault();
+      
+      if (searchBox) {
+      searchBox.value = '';
+      applyFilter();
+    }
+
+      const target = document.querySelector(e.currentTarget.getAttribute('href'));
+      if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+      }
     }
     </script>
     <div id="lightbox" onclick="closeLightbox()">
