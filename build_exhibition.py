@@ -183,8 +183,7 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
     </head>
     <body>
       <div class="page">
-        <a class="back" href="../../../index.html">← Back to exhibition</a>
-
+        <a class="back" href="../../../index.html#cluster-{int(cluster):02d}">← Back to exhibition</a>
         <div class="hero">
           <div>
             <img src="{plate_path}" alt="{artifact_id}">
