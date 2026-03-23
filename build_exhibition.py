@@ -63,7 +63,16 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
     description = esc(row.get("description", ""))
     cluster = int(row["cluster"])
 
-    plate_path = f"../../plates/{artifact_id.lower()}_plate.jpg"
+    original_path = f"../../plates/{artifact_id.lower()}_plate.jpg"
+    enhanced_path = f"../../enhanced_plates/{artifact_id.lower()}_enhanced.jpg"
+    
+    has_enhanced = Path(
+    f"benin_output/enhanced_plates/{artifact_id.lower()}_enhanced.jpg"
+    ).exists()
+
+    plate_path = enhanced_path if Path(
+        f"benin_output/enhanced_plates/{artifact_id.lower()}_enhanced.jpg"
+    ).exists() else original_path
 
     related_cards = []
     for _, rel in related_rows.iterrows():
@@ -185,9 +194,16 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
       <div class="page">
         <a class="back" href="../../../index.html#cluster-{cluster:02d}">← Back to exhibition</a>
         <div class="hero">
-          <div>
-            <img src="{plate_path}" alt="{artifact_id}">
-          </div>
+          <div class="image-compare">
+            <div class="image-panel">
+                <h3>Original scan</h3>
+                <img src="{original_path}" alt="{artifact_id} original">
+                
+           </div>
+           
+           {"<div class='image-panel'><h3>AI-enhanced</h3><img src='" + enhanced_path + "' alt='" + artifact_id + " enhanced'></div>" if has_enhanced else ""}
+            </div>
+           {"<p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>" if has_enhanced else ""}
           <div>
             <div class="meta">Artifact: {artifact_id}</div>
             <div class="meta">Cluster: {cluster}</div>
@@ -426,6 +442,40 @@ def main() -> None:
 
     .hidden {
       display: none !important;
+    }
+    .image-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .image-panel h3 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: #aaa;
+      font-weight: normal;
+      letter-spacing: 0.02em;
+    }
+
+    .image-panel img {
+      width: 100%;
+      display: block;
+      background: white;
+      border-radius: 8px;
+    }
+
+    .ai-note {
+      margin-top: 12px;
+      color: #aaa;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      .image-compare {
+        grid-template-columns: 1fr;
+      }
     }
     """
 
