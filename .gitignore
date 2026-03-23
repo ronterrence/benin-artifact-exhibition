@@ -2,10 +2,15 @@
 __pycache__/
 *.pyc
 
-# Large outputs
+# Virtual environment
+enhance_env/
+
+# Model weights
+weights/
+
+# Large / nonessential outputs
 benin_output/clusters/
 archive/
-
 
 # OS junk
 Thumbs.db
