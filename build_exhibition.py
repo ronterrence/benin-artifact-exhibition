@@ -229,12 +229,6 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
             <div class="meta">Cluster: {cluster}</div>
             <h1>{title}</h1>
             <div class="description">{description}</div>
-            note_htlm = ""
-            if has_enhanced: 
-                note_html="<p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>"
-            {note_html}
-            if has_enhanced else ""
-
           </div>
 
         </div>
