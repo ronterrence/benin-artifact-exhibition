@@ -165,11 +165,17 @@
     .hidden {
       display: none !important;
     }
-    .image-compare {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-bottom: 40px;
+    
+    .comparison-container {
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .image-panel {
+      flex: 1 1 420px;
+      max-width: 520px;
     }
 
     .image-panel h3 {
@@ -187,6 +193,10 @@
       border-radius: 8px;
     }
 
+    .text-panel {
+      min-width: 280px;
+    }
+
     .ai-note {
       margin-top: 12px;
       color: #aaa;
@@ -194,11 +204,19 @@
       line-height: 1.5;
     }
 
-    @media (max-width: 900px) {
-      .image-compare {
-        grid-template-columns: 1fr;
-      }
-    }
+   @media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-container {
+    flex-direction: column;
+  }
+
+  .image-panel {
+    max-width: 100%;
+  }
+}
     </style>
     </head>
     <body>

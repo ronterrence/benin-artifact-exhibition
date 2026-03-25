@@ -70,6 +70,23 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
     f"benin_output/enhanced_plates/{artifact_id.lower()}_enhanced.jpg"
     ).exists()
 
+    enhanced_html = ""
+    if has_enhanced:
+        enhanced_html = f"""
+        <div class="image-panel">
+          <h3>AI-enhanced</h3>
+          <img src="{enhanced_path}" alt="{artifact_id} enhanced">
+        </div>
+        """
+    note_html = ""
+    if has_enhanced:
+        note_html = (
+            "<p class='ai-note'>"
+            "The enhanced image is an AI-assisted restoration for legibility and comparison. "
+            "The original scan remains the primary archival reference."
+            "</p>"
+        )
+
     plate_path = enhanced_path if Path(
         f"benin_output/enhanced_plates/{artifact_id.lower()}_enhanced.jpg"
     ).exists() else original_path
@@ -114,8 +131,8 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
     }
     .hero {
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 32px;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 40px;
       align-items: start;
       margin-bottom: 48px;
     }
@@ -180,7 +197,7 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
       }
     }
     """
-
+    
     return f"""
     <!doctype html>
     <html lang="en">
@@ -193,32 +210,47 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
     <body>
       <div class="page">
         <a class="back" href="../../../index.html#cluster-{cluster:02d}">← Back to exhibition</a>
+
         <div class="hero">
-          <div class="image-compare">
+
+          <div class="comparison-container">
+
             <div class="image-panel">
-                <h3>Original scan</h3>
-                <img src="{original_path}" alt="{artifact_id} original">
-                
-           </div>
-           
-           {"<div class='image-panel'><h3>AI-enhanced</h3><img src='" + enhanced_path + "' alt='" + artifact_id + " enhanced'></div>" if has_enhanced else ""}
+              <h3>Original scan</h3>
+              <img src="{original_path}" alt="{artifact_id} original">
             </div>
-           {"<p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>" if has_enhanced else ""}
-          <div>
+
+            {enhanced_html}
+
+          </div>
+
+          <div class="text-panel">
             <div class="meta">Artifact: {artifact_id}</div>
             <div class="meta">Cluster: {cluster}</div>
             <h1>{title}</h1>
             <div class="description">{description}</div>
+            note_htlm = ""
+            if has_enhanced: 
+                note_html="<p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>"
+            {note_html}
+            if has_enhanced else ""
+
           </div>
+
         </div>
 
-        <h2>Related artifacts in this cluster</h2>
-        <div class="related-grid">
-          {related_html}
-        </div>
       </div>
     </body>
     </html>
+    """
+    f"""    
+    <h2>Related artifacts in this cluster</h2>
+      <div class="related-grid">
+          {related_html}
+      </div>
+      </div>
+    </body>
+    </html>    
     """    
 def main() -> None:
     if not CSV_PATH.exists():
@@ -443,11 +475,17 @@ def main() -> None:
     .hidden {
       display: none !important;
     }
-    .image-compare {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-bottom: 40px;
+    
+    .comparison-container {
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .image-panel {
+      flex: 1 1 420px;
+      max-width: 520px;
     }
 
     .image-panel h3 {
@@ -465,6 +503,10 @@ def main() -> None:
       border-radius: 8px;
     }
 
+    .text-panel {
+      min-width: 280px;
+    }
+
     .ai-note {
       margin-top: 12px;
       color: #aaa;
@@ -472,11 +514,19 @@ def main() -> None:
       line-height: 1.5;
     }
 
-    @media (max-width: 900px) {
-      .image-compare {
-        grid-template-columns: 1fr;
-      }
-    }
+   @media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-container {
+    flex-direction: column;
+  }
+
+  .image-panel {
+    max-width: 100%;
+  }
+}
     """
 
     js = """

@@ -25,8 +25,8 @@
     }
     .hero {
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 32px;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 40px;
       align-items: start;
       margin-bottom: 48px;
     }
@@ -95,93 +95,35 @@
     <body>
       <div class="page">
         <a class="back" href="../../../index.html#cluster-09">← Back to exhibition</a>
+
         <div class="hero">
-          <div class="image-compare">
+
+          <div class="comparison-container">
+
             <div class="image-panel">
-                <h3>Original scan</h3>
-                <img src="../../plates/fig_104_plate.jpg" alt="fig_104 original">
-                
-           </div>
-           
-           
+              <h3>Original scan</h3>
+              <img src="../../plates/fig_104_plate.jpg" alt="fig_104 original">
             </div>
-           
-          <div>
+
+            
+
+          </div>
+
+          <div class="text-panel">
             <div class="meta">Artifact: fig_104</div>
             <div class="meta">Cluster: 9</div>
             <h1>Iron dart, 3 feet 7\ inches long, with barbed head and iron shaft</h1>
             <div class="description">Iron dart, 3 feet 7\ inches long, with barbed head and iron shaft.</div>
+            note_htlm = ""
+            if has_enhanced: 
+                note_html="<p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>"
+            
+            if has_enhanced else ""
+
           </div>
+
         </div>
 
-        <h2>Related artifacts in this cluster</h2>
-        <div class="related-grid">
-          
-        <a class="related-card" href="fig_103.html">
-          <img src="../../plates/fig_103_plate.jpg" alt="fig_103">
-          <div class="related-meta">
-            <div class="artifact-id">fig_103</div>
-            <div class="title">Iron dart, or spear, 5 feet 1 inch long, with wooden shaft</div>
-          </div>
-        </a>
-        
-        <a class="related-card" href="fig_110.html">
-          <img src="../../plates/fig_110_plate.jpg" alt="fig_110">
-          <div class="related-meta">
-            <div class="artifact-id">fig_110</div>
-            <div class="title">Iron execution sword, 3 feet 1 inch long, hilt and pommel of brass, with The edge is on th</div>
-          </div>
-        </a>
-        
-        <a class="related-card" href="fig_135.html">
-          <img src="../../plates/fig_135_plate.jpg" alt="fig_135">
-          <div class="related-meta">
-            <div class="artifact-id">fig_135</div>
-            <div class="title">Brass bottle, hung by chain, and ornamented with representation of twisted The rings twine</div>
-          </div>
-        </a>
-        
-        <a class="related-card" href="fig_166.html">
-          <img src="../../plates/fig_166_plate.jpg" alt="fig_166">
-          <div class="related-meta">
-            <div class="artifact-id">fig_166</div>
-            <div class="title">Coral whip or whisk, probably a badge of office</div>
-          </div>
-        </a>
-        
-        <a class="related-card" href="fig_178.html">
-          <img src="../../plates/fig_178_plate.jpg" alt="fig_178">
-          <div class="related-meta">
-            <div class="artifact-id">fig_178</div>
-            <div class="title">Ivory trumpet, made of the j)oint of an elephant&#x27;s tusk</div>
-          </div>
-        </a>
-        
-        <a class="related-card" href="fig_214.html">
-          <img src="../../plates/fig_214_plate.jpg" alt="fig_214">
-          <div class="related-meta">
-            <div class="artifact-id">fig_214</div>
-            <div class="title">Iron spear-head, modern, with ogee section, similar to those of Benin</div>
-          </div>
-        </a>
-        
-        <a class="related-card" href="fig_229.html">
-          <img src="../../plates/fig_229_plate.jpg" alt="fig_229">
-          <div class="related-meta">
-            <div class="artifact-id">fig_229</div>
-            <div class="title">Necklace of agate cylindrical beads</div>
-          </div>
-        </a>
-        
-        <a class="related-card" href="fig_256.html">
-          <img src="../../plates/fig_256_plate.jpg" alt="fig_256">
-          <div class="related-meta">
-            <div class="artifact-id">fig_256</div>
-            <div class="title">Carved wooden Jekri jjaddle, neighbourhood of Benin</div>
-          </div>
-        </a>
-        
-        </div>
       </div>
     </body>
     </html>

@@ -25,8 +25,8 @@
     }
     .hero {
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 32px;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 40px;
       align-items: start;
       margin-bottom: 48px;
     }
@@ -95,93 +95,35 @@
     <body>
       <div class="page">
         <a class="back" href="../../../index.html#cluster-00">← Back to exhibition</a>
+
         <div class="hero">
-          <div class="image-compare">
+
+          <div class="comparison-container">
+
             <div class="image-panel">
-                <h3>Original scan</h3>
-                <img src="../../plates/fig_248_plate.jpg" alt="fig_248 original">
-                
-           </div>
-           
-           
+              <h3>Original scan</h3>
+              <img src="../../plates/fig_248_plate.jpg" alt="fig_248 original">
             </div>
-           
-          <div>
+
+            
+
+          </div>
+
+          <div class="text-panel">
             <div class="meta">Artifact: fig_248</div>
             <div class="meta">Cluster: 0</div>
             <h1>Bronze plaque, representing a figure playing a drum with sticks ; quad- rangular bell on n</h1>
             <div class="description">Bronze plaque, representing a figure playing a drum with sticks ; quad- rangular bell on neck, ornamented with a sinuous snake, head downwards. Head-dress with two feathers. Hair combed straight and coiled in plaits. A peculiar kind of straight line diaper pattern on drum. This drum has pegs with nobs to fasten down the skin, similar to that represented on the plaque, Fig. 181 Plate XXVII, and to the Jekri drum figured in &quot; Journ. Anthrop. Inst.,&quot; Vol I, New Series, Plate VIII, Fig. 5. Ground orna- mented with incised leaf-shaped foil ornaments and punch-marks. K 66 Antique Works of Art from Benin.</div>
+            note_htlm = ""
+            if has_enhanced: 
+                note_html="<p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>"
+            
+            if has_enhanced else ""
+
           </div>
+
         </div>
 
-        <h2>Related artifacts in this cluster</h2>
-        <div class="related-grid">
-          
-        <a class="related-card" href="fig_001.html">
-          <img src="../../plates/fig_001_plate.jpg" alt="fig_001">
-          <div class="related-meta">
-            <div class="artifact-id">fig_001</div>
-            <div class="title">Bronze plaque, representing two warriors with broad leaf-shaped swords in their right hand</div>
-          </div>
-        </a>
-        
-        <a class="related-card" href="fig_003.html">
-          <img src="../../plates/fig_003_plate.jpg" alt="fig_003">
-          <div class="related-meta">
-            <div class="artifact-id">fig_003</div>
-            <div class="title">Bronze plaque, representing three warriors, two with feathers in head-dress The latter and</div>
-          </div>
-        </a>
-        
-        <a class="related-card" href="fig_004.html">
-          <img src="../../plates/fig_004_plate.jpg" alt="fig_004">
-          <div class="related-meta">
-            <div class="artifact-id">fig_004</div>
-            <div class="title">Bronze plaque, figure of warrior with spear in right hand, shield on left Head-dress of co</div>
-          </div>
-        </a>
-        
-        <a class="related-card" href="fig_005.html">
-          <img src="../../plates/fig_005_plate.jpg" alt="fig_005">
-          <div class="related-meta">
-            <div class="artifact-id">fig_005</div>
-            <div class="title">Bronze plaque, representing a warrior in centre, turned to his left</div>
-          </div>
-        </a>
-        
-        <a class="related-card" href="fig_007.html">
-          <img src="../../plates/fig_007_plate.jpg" alt="fig_007">
-          <div class="related-meta">
-            <div class="artifact-id">fig_007</div>
-            <div class="title">Bronze plaque, representing a king or noble on horseback sitting sideways, his hands uphel</div>
-          </div>
-        </a>
-        
-        <a class="related-card" href="fig_009.html">
-          <img src="../../plates/fig_009_plate.jpg" alt="fig_009">
-          <div class="related-meta">
-            <div class="artifact-id">fig_009</div>
-            <div class="title">Bronze plaque, naked figure of boy ; hair in conventional bands ; three tribal marks over </div>
-          </div>
-        </a>
-        
-        <a class="related-card" href="fig_010.html">
-          <img src="../../plates/fig_010_plate.jpg" alt="fig_010">
-          <div class="related-meta">
-            <div class="artifact-id">fig_010</div>
-            <div class="title">Bronze j&gt;laque, figure of warrior with helmet or hair rejaresented by ribs</div>
-          </div>
-        </a>
-        
-        <a class="related-card" href="fig_011.html">
-          <img src="../../plates/fig_011_plate.jpg" alt="fig_011">
-          <div class="related-meta">
-            <div class="artifact-id">fig_011</div>
-            <div class="title">Bronze plaque, representing a figure holding a ball, perhaps a Three tribal marks Skirt wo</div>
-          </div>
-        </a>
-        
-        </div>
       </div>
     </body>
     </html>
