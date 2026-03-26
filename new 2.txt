@@ -1,0 +1,2 @@
+enhance_env\Scripts\activate
+python build_exhibition.py

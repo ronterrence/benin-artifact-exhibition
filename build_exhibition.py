@@ -65,9 +65,9 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
 
     original_path = f"../../plates/{artifact_id.lower()}_plate.jpg"
     enhanced_path = f"../../enhanced_plates/{artifact_id.lower()}_enhanced.jpg"
-    
+
     has_enhanced = Path(
-    f"benin_output/enhanced_plates/{artifact_id.lower()}_enhanced.jpg"
+        f"benin_output/enhanced_plates/{artifact_id.lower()}_enhanced.jpg"
     ).exists()
 
     enhanced_html = ""
@@ -78,6 +78,7 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
           <img src="{enhanced_path}" alt="{artifact_id} enhanced">
         </div>
         """
+
     note_html = ""
     if has_enhanced:
         note_html = (
@@ -86,10 +87,6 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
             "The original scan remains the primary archival reference."
             "</p>"
         )
-
-    plate_path = enhanced_path if Path(
-        f"benin_output/enhanced_plates/{artifact_id.lower()}_enhanced.jpg"
-    ).exists() else original_path
 
     related_cards = []
     for _, rel in related_rows.iterrows():
@@ -119,7 +116,7 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
       color: #eaeaea;
     }
     .page {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 48px 24px 80px;
     }
@@ -129,18 +126,33 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
       color: #bbb;
       text-decoration: none;
     }
-    .hero {
+    .comparison-container {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
       align-items: start;
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }
-    .hero img {
+    .image-panel {
       width: 100%;
-      background: white;
+      min-width: 0;
+    }
+    .image-panel h3 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: #aaa;
+      font-weight: normal;
+      letter-spacing: 0.02em;
+    }
+    .image-panel img {
+      width: 100%;
       display: block;
+      background: white;
       border-radius: 8px;
+    }
+    .text-panel {
+      max-width: 900px;
+      margin-bottom: 48px;
     }
     .meta {
       color: #999;
@@ -155,6 +167,12 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
       color: #cfcfcf;
       line-height: 1.8;
       font-size: 1rem;
+    }
+    .ai-note {
+      margin-top: 14px;
+      color: #aaa;
+      font-size: 0.92rem;
+      line-height: 1.5;
     }
     h2 {
       margin-top: 56px;
@@ -192,12 +210,15 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
       line-height: 1.4;
     }
     @media (max-width: 900px) {
-      .hero {
+      .comparison-container {
         grid-template-columns: 1fr;
+      }
+      .image-panel {
+        max-width: 100%;
       }
     }
     """
-    
+
     return f"""
     <!doctype html>
     <html lang="en">
@@ -211,41 +232,33 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
       <div class="page">
         <a class="back" href="../../../index.html#cluster-{cluster:02d}">← Back to exhibition</a>
 
-        <div class="hero">
-
-          <div class="comparison-container">
-
-            <div class="image-panel">
-              <h3>Original scan</h3>
-              <img src="{original_path}" alt="{artifact_id} original">
-            </div>
-
-            {enhanced_html}
-
+        <div class="comparison-container">
+          <div class="image-panel">
+            <h3>Original scan</h3>
+            <img src="{original_path}" alt="{artifact_id} original">
           </div>
-
-          <div class="text-panel">
-            <div class="meta">Artifact: {artifact_id}</div>
-            <div class="meta">Cluster: {cluster}</div>
-            <h1>{title}</h1>
-            <div class="description">{description}</div>
-          </div>
-
+          {enhanced_html}
         </div>
 
+        <div class="text-panel">
+          <div class="meta">Artifact: {artifact_id}</div>
+          <div class="meta">Cluster: {cluster}</div>
+          <h1>{title}</h1>
+          <div class="description">{description}</div>
+          {note_html}
+        </div>
+
+        <h2>Related artifacts in this cluster</h2>
+        <div class="related-grid">
+          {related_html}
+        </div>
       </div>
     </body>
     </html>
     """
-    f"""    
-    <h2>Related artifacts in this cluster</h2>
-      <div class="related-grid">
-          {related_html}
-      </div>
-      </div>
-    </body>
-    </html>    
-    """    
+    
+    
+    
 def main() -> None:
     if not CSV_PATH.exists():
         raise FileNotFoundError(f"Missing CSV: {CSV_PATH}")
@@ -317,15 +330,7 @@ def main() -> None:
     color: #eaeaea;
     }
 
-    /* HERO */
-    .hero {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: #000;
-    }
+
 
     .hero-inner {
     max-width: 700px;
@@ -471,15 +476,14 @@ def main() -> None:
     }
     
     .comparison-container {
-      display: flex;
-      gap: 28px;
-      align-items: flex-start;
-      flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: start;
     }
 
     .image-panel {
-      flex: 1 1 420px;
-      max-width: 520px;
+    min-width: 0;
     }
 
     .image-panel h3 {

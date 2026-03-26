@@ -13,7 +13,7 @@
       color: #eaeaea;
     }
     .page {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 48px 24px 80px;
     }
@@ -23,18 +23,33 @@
       color: #bbb;
       text-decoration: none;
     }
-    .hero {
+    .comparison-container {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
       align-items: start;
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }
-    .hero img {
+    .image-panel {
       width: 100%;
-      background: white;
+      min-width: 0;
+    }
+    .image-panel h3 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: #aaa;
+      font-weight: normal;
+      letter-spacing: 0.02em;
+    }
+    .image-panel img {
+      width: 100%;
       display: block;
+      background: white;
       border-radius: 8px;
+    }
+    .text-panel {
+      max-width: 900px;
+      margin-bottom: 48px;
     }
     .meta {
       color: #999;
@@ -49,6 +64,12 @@
       color: #cfcfcf;
       line-height: 1.8;
       font-size: 1rem;
+    }
+    .ai-note {
+      margin-top: 14px;
+      color: #aaa;
+      font-size: 0.92rem;
+      line-height: 1.5;
     }
     h2 {
       margin-top: 56px;
@@ -86,8 +107,11 @@
       line-height: 1.4;
     }
     @media (max-width: 900px) {
-      .hero {
+      .comparison-container {
         grid-template-columns: 1fr;
+      }
+      .image-panel {
+        max-width: 100%;
       }
     }
     </style>
@@ -96,28 +120,90 @@
       <div class="page">
         <a class="back" href="../../../index.html#cluster-10">← Back to exhibition</a>
 
-        <div class="hero">
-
-          <div class="comparison-container">
-
-            <div class="image-panel">
-              <h3>Original scan</h3>
-              <img src="../../plates/fig_293_plate.jpg" alt="fig_293 original">
-            </div>
-
-            
-
+        <div class="comparison-container">
+          <div class="image-panel">
+            <h3>Original scan</h3>
+            <img src="../../plates/fig_293_plate.jpg" alt="fig_293 original">
           </div>
-
-          <div class="text-panel">
-            <div class="meta">Artifact: fig_293</div>
-            <div class="meta">Cluster: 10</div>
-            <h1>Bronze statuette, representing a negro figure holding a so-called The figure has three tri</h1>
-            <div class="description">Bronze statuette, representing a negro figure holding a so-called The figure has three tribal marks over each eye, and The pupils three radiating lines branching from the corners of the mouth. of the eyes are inlaid with iron. A cross on the breast hanging from the neck by a cord. No coral choker, but a necklace perhaps of coral or agate. A pot hat with a narrow straight brim. This figure exactly resembles The face No. 90. The skirt is The ears are very rudely formed. No hair is shown. is very prognathous and the nose broad and flat, not aquiline. only slightly hooked up. 289 292 290 PLATE 38. -&quot;- &#x27; C 293 1 5 294 291 78 Antique Works of Art from Benin.</div>
-          </div>
-
+          
         </div>
 
+        <div class="text-panel">
+          <div class="meta">Artifact: fig_293</div>
+          <div class="meta">Cluster: 10</div>
+          <h1>Bronze statuette, representing a negro figure holding a so-called The figure has three tri</h1>
+          <div class="description">Bronze statuette, representing a negro figure holding a so-called The figure has three tribal marks over each eye, and The pupils three radiating lines branching from the corners of the mouth. of the eyes are inlaid with iron. A cross on the breast hanging from the neck by a cord. No coral choker, but a necklace perhaps of coral or agate. A pot hat with a narrow straight brim. This figure exactly resembles The face No. 90. The skirt is The ears are very rudely formed. No hair is shown. is very prognathous and the nose broad and flat, not aquiline. only slightly hooked up. 289 292 290 PLATE 38. -&quot;- &#x27; C 293 1 5 294 291 78 Antique Works of Art from Benin.</div>
+          
+        </div>
+
+        <h2>Related artifacts in this cluster</h2>
+        <div class="related-grid">
+          
+        <a class="related-card" href="fig_002.html">
+          <img src="../../plates/fig_002_plate.jpg" alt="fig_002">
+          <div class="related-meta">
+            <div class="artifact-id">fig_002</div>
+            <div class="title">Bronze plaque, representing two figures holding plaques or books in front</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_018.html">
+          <img src="../../plates/fig_018_plate.jpg" alt="fig_018">
+          <div class="related-meta">
+            <div class="artifact-id">fig_018</div>
+            <div class="title">Bronze plaque, figure of warrior</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_031.html">
+          <img src="../../plates/fig_031_plate.jpg" alt="fig_031">
+          <div class="related-meta">
+            <div class="artifact-id">fig_031</div>
+            <div class="title">Ivory carving of female</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_035.html">
+          <img src="../../plates/fig_035_plate.jpg" alt="fig_035">
+          <div class="related-meta">
+            <div class="artifact-id">fig_035</div>
+            <div class="title">Lion in bronze</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_041.html">
+          <img src="../../plates/fig_041_plate.jpg" alt="fig_041">
+          <div class="related-meta">
+            <div class="artifact-id">fig_041</div>
+            <div class="title">Figure of a warrior in bronze, with leopard&#x27;s skin dress ; javelins in one hand and shield</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_043.html">
+          <img src="../../plates/fig_043_plate.jpg" alt="fig_043">
+          <div class="related-meta">
+            <div class="artifact-id">fig_043</div>
+            <div class="title">Female figure in bronze, holding up a tablet in right hand</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_056.html">
+          <img src="../../plates/fig_056_plate.jpg" alt="fig_056">
+          <div class="related-meta">
+            <div class="artifact-id">fig_056</div>
+            <div class="title">Bronze bottle or power flask, representing a female with barbed arrow-points extending fro</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_064.html">
+          <img src="../../plates/fig_064_plate.jpg" alt="fig_064">
+          <div class="related-meta">
+            <div class="artifact-id">fig_064</div>
+            <div class="title">Bronze vase</div>
+          </div>
+        </a>
+        
+        </div>
       </div>
     </body>
     </html>

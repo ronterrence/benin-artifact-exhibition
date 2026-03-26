@@ -13,7 +13,7 @@
       color: #eaeaea;
     }
     .page {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 48px 24px 80px;
     }
@@ -23,18 +23,33 @@
       color: #bbb;
       text-decoration: none;
     }
-    .hero {
+    .comparison-container {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
       align-items: start;
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }
-    .hero img {
+    .image-panel {
       width: 100%;
-      background: white;
+      min-width: 0;
+    }
+    .image-panel h3 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: #aaa;
+      font-weight: normal;
+      letter-spacing: 0.02em;
+    }
+    .image-panel img {
+      width: 100%;
       display: block;
+      background: white;
       border-radius: 8px;
+    }
+    .text-panel {
+      max-width: 900px;
+      margin-bottom: 48px;
     }
     .meta {
       color: #999;
@@ -49,6 +64,12 @@
       color: #cfcfcf;
       line-height: 1.8;
       font-size: 1rem;
+    }
+    .ai-note {
+      margin-top: 14px;
+      color: #aaa;
+      font-size: 0.92rem;
+      line-height: 1.5;
     }
     h2 {
       margin-top: 56px;
@@ -86,8 +107,11 @@
       line-height: 1.4;
     }
     @media (max-width: 900px) {
-      .hero {
+      .comparison-container {
         grid-template-columns: 1fr;
+      }
+      .image-panel {
+        max-width: 100%;
       }
     }
     </style>
@@ -96,28 +120,90 @@
       <div class="page">
         <a class="back" href="../../../index.html#cluster-08">← Back to exhibition</a>
 
-        <div class="hero">
-
-          <div class="comparison-container">
-
-            <div class="image-panel">
-              <h3>Original scan</h3>
-              <img src="../../plates/fig_082_plate.jpg" alt="fig_082 original">
-            </div>
-
-            
-
+        <div class="comparison-container">
+          <div class="image-panel">
+            <h3>Original scan</h3>
+            <img src="../../plates/fig_082_plate.jpg" alt="fig_082 original">
           </div>
-
-          <div class="text-panel">
-            <div class="meta">Artifact: fig_082</div>
-            <div class="meta">Cluster: 8</div>
-            <h1>Well-formed bronze head of a negress</h1>
-            <div class="description">Well-formed bronze head of a negress. Reticulated head-dress Coral necklace. of agate or coral. been inlaid probably with brass. The pupils of the eyes inlaid apparently with iron. Pendant of agate on centre of forehead. The upper lip has Eleven bands of coral or agate hang from This and Figs. 88 and 89, the head-dress on each side. Plate XV, and Figs. 98 and 99, Plate XVII, are the best formed heads in Well-formed ears. the collection.</div>
-          </div>
-
+          
         </div>
 
+        <div class="text-panel">
+          <div class="meta">Artifact: fig_082</div>
+          <div class="meta">Cluster: 8</div>
+          <h1>Well-formed bronze head of a negress</h1>
+          <div class="description">Well-formed bronze head of a negress. Reticulated head-dress Coral necklace. of agate or coral. been inlaid probably with brass. The pupils of the eyes inlaid apparently with iron. Pendant of agate on centre of forehead. The upper lip has Eleven bands of coral or agate hang from This and Figs. 88 and 89, the head-dress on each side. Plate XV, and Figs. 98 and 99, Plate XVII, are the best formed heads in Well-formed ears. the collection.</div>
+          
+        </div>
+
+        <h2>Related artifacts in this cluster</h2>
+        <div class="related-grid">
+          
+        <a class="related-card" href="fig_025.html">
+          <img src="../../plates/fig_025_plate.jpg" alt="fig_025">
+          <div class="related-meta">
+            <div class="artifact-id">fig_025</div>
+            <div class="title">Ivory carving of a human face</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_086.html">
+          <img src="../../plates/fig_086_plate.jpg" alt="fig_086">
+          <div class="related-meta">
+            <div class="artifact-id">fig_086</div>
+            <div class="title">Brass head inlaid with a copper band along the nose</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_088.html">
+          <img src="../../plates/fig_088_plate.jpg" alt="fig_088">
+          <div class="related-meta">
+            <div class="artifact-id">fig_088</div>
+            <div class="title">Well-formed head in bronze, the forehead decorated with two The pupils of the The hair in </div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_094.html">
+          <img src="../../plates/fig_094_plate.jpg" alt="fig_094">
+          <div class="related-meta">
+            <div class="artifact-id">fig_094</div>
+            <div class="title">Bronze cast of human head</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_098.html">
+          <img src="../../plates/fig_098_plate.jpg" alt="fig_098">
+          <div class="related-meta">
+            <div class="artifact-id">fig_098</div>
+            <div class="title">Well-formed head in bronze, the forehead decorated with two The inlaid bands and four rais</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_124.html">
+          <img src="../../plates/fig_124_plate.jpg" alt="fig_124">
+          <div class="related-meta">
+            <div class="artifact-id">fig_124</div>
+            <div class="title">Human mask of brass ; the pupils of the eyes inlaid with iron</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_132.html">
+          <img src="../../plates/fig_132_plate.jpg" alt="fig_132">
+          <div class="related-meta">
+            <div class="artifact-id">fig_132</div>
+            <div class="title">Small head of boy, in bronze, with three raised tribal marks over each eye, and two vertic</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_137.html">
+          <img src="../../plates/fig_137_plate.jpg" alt="fig_137">
+          <div class="related-meta">
+            <div class="artifact-id">fig_137</div>
+            <div class="title">A very rude head of bronze; probably used as the stand for a Four tribal marks over each e</div>
+          </div>
+        </a>
+        
+        </div>
       </div>
     </body>
     </html>

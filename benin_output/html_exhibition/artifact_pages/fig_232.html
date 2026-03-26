@@ -13,7 +13,7 @@
       color: #eaeaea;
     }
     .page {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 48px 24px 80px;
     }
@@ -23,18 +23,33 @@
       color: #bbb;
       text-decoration: none;
     }
-    .hero {
+    .comparison-container {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
       align-items: start;
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }
-    .hero img {
+    .image-panel {
       width: 100%;
-      background: white;
+      min-width: 0;
+    }
+    .image-panel h3 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: #aaa;
+      font-weight: normal;
+      letter-spacing: 0.02em;
+    }
+    .image-panel img {
+      width: 100%;
       display: block;
+      background: white;
       border-radius: 8px;
+    }
+    .text-panel {
+      max-width: 900px;
+      margin-bottom: 48px;
     }
     .meta {
       color: #999;
@@ -49,6 +64,12 @@
       color: #cfcfcf;
       line-height: 1.8;
       font-size: 1rem;
+    }
+    .ai-note {
+      margin-top: 14px;
+      color: #aaa;
+      font-size: 0.92rem;
+      line-height: 1.5;
     }
     h2 {
       margin-top: 56px;
@@ -86,8 +107,11 @@
       line-height: 1.4;
     }
     @media (max-width: 900px) {
-      .hero {
+      .comparison-container {
         grid-template-columns: 1fr;
+      }
+      .image-panel {
+        max-width: 100%;
       }
     }
     </style>
@@ -96,28 +120,90 @@
       <div class="page">
         <a class="back" href="../../../index.html#cluster-10">← Back to exhibition</a>
 
-        <div class="hero">
-
-          <div class="comparison-container">
-
-            <div class="image-panel">
-              <h3>Original scan</h3>
-              <img src="../../plates/fig_232_plate.jpg" alt="fig_232 original">
-            </div>
-
-            
-
+        <div class="comparison-container">
+          <div class="image-panel">
+            <h3>Original scan</h3>
+            <img src="../../plates/fig_232_plate.jpg" alt="fig_232 original">
           </div>
-
-          <div class="text-panel">
-            <div class="meta">Artifact: fig_232</div>
-            <div class="meta">Cluster: 10</div>
-            <h1>Bronze statuette, representing a figure standing ; with broad leaf- shaped sword, similar </h1>
-            <div class="description">Bronze statuette, representing a figure standing ; with broad leaf- shaped sword, similar to Figs. 326, 327, 328 and 329, having a twisted ring pommel in right hand, and a sistrum in left hand. Three tribal marks over each eye. Coral choker, badge of Agate head-dress, similar to rank. Fig. 121, Plate XXI, and curved agate joendants on each side. A large twisted ring rises out of the head-dress, which looks as if intended to enclose some thick band of cloth or other substance to suspend it. The crown of the head-dress terminates in a thick cylindrical spike with a flat top, like Fig. Ill, Plate XIX, Fig. 155, Plate XXV, and Figs. 167 and 168, Plate XXVI. The sistrum is ornamented with a full-length human figure, holding a staff in right hand and the so-called key or axe in left hand. Beneath the bowl of the sistrum are three projecting cruciform bars, and the upper edge of the bowl is ornamented on each side with two heads very Dr. Felix Roth, in the &quot;Halifax Naturalist,&quot; June, 1898, rudely cast, p. 33, speaks of these projecting prongs as being used for killing victims for sacrificial purposes, but the fact of their being sistri is shown in connec- tion with Fig. 181, Plate XXVII. bowl of the sistrum. with small imitations of itself. Sinuous serpents cover the shaft and The leaf-shaped sword is ornamented, front and back, The figure has bands, probably of coral, The skirt is ornamented with conventionalized coral anklets. crossing on the breast. human heads with long hair and rows of guilloche pattern. Ankles have The skirt is bound up in the usual manner in a band behind There is a band of small bells round the hips, and a This figure was obtained the left shoulder. human head and a bunch of bells on the left side. from the Liverpool Museum, in the report of which it described and figured with three others like it. &quot; Bulletin of the Liverpool is elaborately Museums,&quot; Vol. I, No. 2, p. 59. Museum. It is of considerable weight, being cast solid. There is a figure like this in the British CO 111 H &lt; Q. Antique Works of Art from Benin. 63</div>
-          </div>
-
+          
         </div>
 
+        <div class="text-panel">
+          <div class="meta">Artifact: fig_232</div>
+          <div class="meta">Cluster: 10</div>
+          <h1>Bronze statuette, representing a figure standing ; with broad leaf- shaped sword, similar </h1>
+          <div class="description">Bronze statuette, representing a figure standing ; with broad leaf- shaped sword, similar to Figs. 326, 327, 328 and 329, having a twisted ring pommel in right hand, and a sistrum in left hand. Three tribal marks over each eye. Coral choker, badge of Agate head-dress, similar to rank. Fig. 121, Plate XXI, and curved agate joendants on each side. A large twisted ring rises out of the head-dress, which looks as if intended to enclose some thick band of cloth or other substance to suspend it. The crown of the head-dress terminates in a thick cylindrical spike with a flat top, like Fig. Ill, Plate XIX, Fig. 155, Plate XXV, and Figs. 167 and 168, Plate XXVI. The sistrum is ornamented with a full-length human figure, holding a staff in right hand and the so-called key or axe in left hand. Beneath the bowl of the sistrum are three projecting cruciform bars, and the upper edge of the bowl is ornamented on each side with two heads very Dr. Felix Roth, in the &quot;Halifax Naturalist,&quot; June, 1898, rudely cast, p. 33, speaks of these projecting prongs as being used for killing victims for sacrificial purposes, but the fact of their being sistri is shown in connec- tion with Fig. 181, Plate XXVII. bowl of the sistrum. with small imitations of itself. Sinuous serpents cover the shaft and The leaf-shaped sword is ornamented, front and back, The figure has bands, probably of coral, The skirt is ornamented with conventionalized coral anklets. crossing on the breast. human heads with long hair and rows of guilloche pattern. Ankles have The skirt is bound up in the usual manner in a band behind There is a band of small bells round the hips, and a This figure was obtained the left shoulder. human head and a bunch of bells on the left side. from the Liverpool Museum, in the report of which it described and figured with three others like it. &quot; Bulletin of the Liverpool is elaborately Museums,&quot; Vol. I, No. 2, p. 59. Museum. It is of considerable weight, being cast solid. There is a figure like this in the British CO 111 H &lt; Q. Antique Works of Art from Benin. 63</div>
+          
+        </div>
+
+        <h2>Related artifacts in this cluster</h2>
+        <div class="related-grid">
+          
+        <a class="related-card" href="fig_002.html">
+          <img src="../../plates/fig_002_plate.jpg" alt="fig_002">
+          <div class="related-meta">
+            <div class="artifact-id">fig_002</div>
+            <div class="title">Bronze plaque, representing two figures holding plaques or books in front</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_018.html">
+          <img src="../../plates/fig_018_plate.jpg" alt="fig_018">
+          <div class="related-meta">
+            <div class="artifact-id">fig_018</div>
+            <div class="title">Bronze plaque, figure of warrior</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_031.html">
+          <img src="../../plates/fig_031_plate.jpg" alt="fig_031">
+          <div class="related-meta">
+            <div class="artifact-id">fig_031</div>
+            <div class="title">Ivory carving of female</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_035.html">
+          <img src="../../plates/fig_035_plate.jpg" alt="fig_035">
+          <div class="related-meta">
+            <div class="artifact-id">fig_035</div>
+            <div class="title">Lion in bronze</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_041.html">
+          <img src="../../plates/fig_041_plate.jpg" alt="fig_041">
+          <div class="related-meta">
+            <div class="artifact-id">fig_041</div>
+            <div class="title">Figure of a warrior in bronze, with leopard&#x27;s skin dress ; javelins in one hand and shield</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_043.html">
+          <img src="../../plates/fig_043_plate.jpg" alt="fig_043">
+          <div class="related-meta">
+            <div class="artifact-id">fig_043</div>
+            <div class="title">Female figure in bronze, holding up a tablet in right hand</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_056.html">
+          <img src="../../plates/fig_056_plate.jpg" alt="fig_056">
+          <div class="related-meta">
+            <div class="artifact-id">fig_056</div>
+            <div class="title">Bronze bottle or power flask, representing a female with barbed arrow-points extending fro</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_064.html">
+          <img src="../../plates/fig_064_plate.jpg" alt="fig_064">
+          <div class="related-meta">
+            <div class="artifact-id">fig_064</div>
+            <div class="title">Bronze vase</div>
+          </div>
+        </a>
+        
+        </div>
       </div>
     </body>
     </html>

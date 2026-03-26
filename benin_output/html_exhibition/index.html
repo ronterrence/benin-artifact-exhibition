@@ -13,15 +13,7 @@
     color: #eaeaea;
     }
 
-    /* HERO */
-    .hero {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: #000;
-    }
+
 
     .hero-inner {
     max-width: 700px;
@@ -167,15 +159,14 @@
     }
     
     .comparison-container {
-      display: flex;
-      gap: 28px;
-      align-items: flex-start;
-      flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: start;
     }
 
     .image-panel {
-      flex: 1 1 420px;
-      max-width: 520px;
+    min-width: 0;
     }
 
     .image-panel h3 {

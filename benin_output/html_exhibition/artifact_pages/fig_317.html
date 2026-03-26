@@ -13,7 +13,7 @@
       color: #eaeaea;
     }
     .page {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 48px 24px 80px;
     }
@@ -23,18 +23,33 @@
       color: #bbb;
       text-decoration: none;
     }
-    .hero {
+    .comparison-container {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
       align-items: start;
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }
-    .hero img {
+    .image-panel {
       width: 100%;
-      background: white;
+      min-width: 0;
+    }
+    .image-panel h3 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: #aaa;
+      font-weight: normal;
+      letter-spacing: 0.02em;
+    }
+    .image-panel img {
+      width: 100%;
       display: block;
+      background: white;
       border-radius: 8px;
+    }
+    .text-panel {
+      max-width: 900px;
+      margin-bottom: 48px;
     }
     .meta {
       color: #999;
@@ -49,6 +64,12 @@
       color: #cfcfcf;
       line-height: 1.8;
       font-size: 1rem;
+    }
+    .ai-note {
+      margin-top: 14px;
+      color: #aaa;
+      font-size: 0.92rem;
+      line-height: 1.5;
     }
     h2 {
       margin-top: 56px;
@@ -86,8 +107,11 @@
       line-height: 1.4;
     }
     @media (max-width: 900px) {
-      .hero {
+      .comparison-container {
         grid-template-columns: 1fr;
+      }
+      .image-panel {
+        max-width: 100%;
       }
     }
     </style>
@@ -96,28 +120,90 @@
       <div class="page">
         <a class="back" href="../../../index.html#cluster-03">← Back to exhibition</a>
 
-        <div class="hero">
-
-          <div class="comparison-container">
-
-            <div class="image-panel">
-              <h3>Original scan</h3>
-              <img src="../../plates/fig_317_plate.jpg" alt="fig_317 original">
-            </div>
-
-            
-
+        <div class="comparison-container">
+          <div class="image-panel">
+            <h3>Original scan</h3>
+            <img src="../../plates/fig_317_plate.jpg" alt="fig_317 original">
           </div>
-
-          <div class="text-panel">
-            <div class="meta">Artifact: fig_317</div>
-            <div class="meta">Cluster: 3</div>
-            <h1>Wooden plaque, ornamented in the centre by a coil of interlaced strap On one side a broad </h1>
-            <div class="description">Wooden plaque, ornamented in the centre by a coil of interlaced strap On one side a broad leaf work, bounded by two lines of zigzag pattern. shaped sword with a ring pommel, similar to Figs. 326 and 327, Plate XLII, The handle is ornamented with a and Figs. 328 and 329, Plate XLIII. On the other side is represented an execution straight line diaper pattern. sword, similar to Fig. 110, Plate XVIII. braces. and riveted.</div>
-          </div>
-
+          
         </div>
 
+        <div class="text-panel">
+          <div class="meta">Artifact: fig_317</div>
+          <div class="meta">Cluster: 3</div>
+          <h1>Wooden plaque, ornamented in the centre by a coil of interlaced strap On one side a broad </h1>
+          <div class="description">Wooden plaque, ornamented in the centre by a coil of interlaced strap On one side a broad leaf work, bounded by two lines of zigzag pattern. shaped sword with a ring pommel, similar to Figs. 326 and 327, Plate XLII, The handle is ornamented with a and Figs. 328 and 329, Plate XLIII. On the other side is represented an execution straight line diaper pattern. sword, similar to Fig. 110, Plate XVIII. braces. and riveted.</div>
+          
+        </div>
+
+        <h2>Related artifacts in this cluster</h2>
+        <div class="related-grid">
+          
+        <a class="related-card" href="fig_027.html">
+          <img src="../../plates/fig_027_plate.jpg" alt="fig_027">
+          <div class="related-meta">
+            <div class="artifact-id">fig_027</div>
+            <div class="title">Carved wooden panel, consisting of a chief in the centre ; broad leaf-shaped sword, with r</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_102.html">
+          <img src="../../plates/fig_102_plate.jpg" alt="fig_102">
+          <div class="related-meta">
+            <div class="artifact-id">fig_102</div>
+            <div class="title">Brass shield, 2 feet in diameter and &quot;08 inch in thickness, ornamented The outer one repre</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_112.html">
+          <img src="../../plates/fig_112_plate.jpg" alt="fig_112">
+          <div class="related-meta">
+            <div class="artifact-id">fig_112</div>
+            <div class="title">Bronze segis, representing man on horseback to left, wearing single-edged sword with guard</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_117.html">
+          <img src="../../plates/fig_117_plate.jpg" alt="fig_117">
+          <div class="related-meta">
+            <div class="artifact-id">fig_117</div>
+            <div class="title">Brass bell, with reticulated pierced work</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_122.html">
+          <img src="../../plates/fig_122_plate.jpg" alt="fig_122">
+          <div class="related-meta">
+            <div class="artifact-id">fig_122</div>
+            <div class="title">-Circular brass box, ornamented on the top with a central figure in repousse work, holding</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_128.html">
+          <img src="../../plates/fig_128_plate.jpg" alt="fig_128">
+          <div class="related-meta">
+            <div class="artifact-id">fig_128</div>
+            <div class="title">Armlet entirely of brass, without other metal</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_129.html">
+          <img src="../../plates/fig_129_plate.jpg" alt="fig_129">
+          <div class="related-meta">
+            <div class="artifact-id">fig_129</div>
+            <div class="title">Bronze plaque, representing human figure with beard, riding to right ; a ranseur of the si</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_134.html">
+          <img src="../../plates/fig_134_plate.jpg" alt="fig_134">
+          <div class="related-meta">
+            <div class="artifact-id">fig_134</div>
+            <div class="title">Figures in bronze, representing two rude human figures, male and female, attending an anim</div>
+          </div>
+        </a>
+        
+        </div>
       </div>
     </body>
     </html>

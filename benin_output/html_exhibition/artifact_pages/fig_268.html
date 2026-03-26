@@ -13,7 +13,7 @@
       color: #eaeaea;
     }
     .page {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 48px 24px 80px;
     }
@@ -23,18 +23,33 @@
       color: #bbb;
       text-decoration: none;
     }
-    .hero {
+    .comparison-container {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
       align-items: start;
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }
-    .hero img {
+    .image-panel {
       width: 100%;
-      background: white;
+      min-width: 0;
+    }
+    .image-panel h3 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: #aaa;
+      font-weight: normal;
+      letter-spacing: 0.02em;
+    }
+    .image-panel img {
+      width: 100%;
       display: block;
+      background: white;
       border-radius: 8px;
+    }
+    .text-panel {
+      max-width: 900px;
+      margin-bottom: 48px;
     }
     .meta {
       color: #999;
@@ -49,6 +64,12 @@
       color: #cfcfcf;
       line-height: 1.8;
       font-size: 1rem;
+    }
+    .ai-note {
+      margin-top: 14px;
+      color: #aaa;
+      font-size: 0.92rem;
+      line-height: 1.5;
     }
     h2 {
       margin-top: 56px;
@@ -86,8 +107,11 @@
       line-height: 1.4;
     }
     @media (max-width: 900px) {
-      .hero {
+      .comparison-container {
         grid-template-columns: 1fr;
+      }
+      .image-panel {
+        max-width: 100%;
       }
     }
     </style>
@@ -96,28 +120,90 @@
       <div class="page">
         <a class="back" href="../../../index.html#cluster-03">← Back to exhibition</a>
 
-        <div class="hero">
-
-          <div class="comparison-container">
-
-            <div class="image-panel">
-              <h3>Original scan</h3>
-              <img src="../../plates/fig_268_plate.jpg" alt="fig_268 original">
-            </div>
-
-            
-
+        <div class="comparison-container">
+          <div class="image-panel">
+            <h3>Original scan</h3>
+            <img src="../../plates/fig_268_plate.jpg" alt="fig_268 original">
           </div>
-
-          <div class="text-panel">
-            <div class="meta">Artifact: fig_268</div>
-            <div class="meta">Cluster: 3</div>
-            <h1>Long oval wooden bowl carved out of the solid</h1>
-            <div class="description">Long oval wooden bowl carved out of the solid. On one side (Fig. 269) is a row of five human figures in relief; the central figure has his hands upheld by attendants, who hold in their other hands shields having barbed javelins, points upward behind them. The shields are ornamented with straight line diaper pattern. object under the arm, perhaps a drum or a food vessel. Another figure holds an At both ends there is a representation of a degenerate elephants&#x27;s head, the proboscis terminating in a human hand holding a branch, similar to Figs. 72, 167, At one end is a rude representation of a degenerate mud-fish. and 316. The other side of the bowl (Fig. 268) is ornamented with a broad guilloche pattern and a square interlaced figure. The interior of the bowl is very The carving is rudely chiselled out, showing marks of the tool all over. very rough and much in the style of the execution block, Figs. 259 and 260, Plate XXXIV.</div>
-          </div>
-
+          
         </div>
 
+        <div class="text-panel">
+          <div class="meta">Artifact: fig_268</div>
+          <div class="meta">Cluster: 3</div>
+          <h1>Long oval wooden bowl carved out of the solid</h1>
+          <div class="description">Long oval wooden bowl carved out of the solid. On one side (Fig. 269) is a row of five human figures in relief; the central figure has his hands upheld by attendants, who hold in their other hands shields having barbed javelins, points upward behind them. The shields are ornamented with straight line diaper pattern. object under the arm, perhaps a drum or a food vessel. Another figure holds an At both ends there is a representation of a degenerate elephants&#x27;s head, the proboscis terminating in a human hand holding a branch, similar to Figs. 72, 167, At one end is a rude representation of a degenerate mud-fish. and 316. The other side of the bowl (Fig. 268) is ornamented with a broad guilloche pattern and a square interlaced figure. The interior of the bowl is very The carving is rudely chiselled out, showing marks of the tool all over. very rough and much in the style of the execution block, Figs. 259 and 260, Plate XXXIV.</div>
+          
+        </div>
+
+        <h2>Related artifacts in this cluster</h2>
+        <div class="related-grid">
+          
+        <a class="related-card" href="fig_027.html">
+          <img src="../../plates/fig_027_plate.jpg" alt="fig_027">
+          <div class="related-meta">
+            <div class="artifact-id">fig_027</div>
+            <div class="title">Carved wooden panel, consisting of a chief in the centre ; broad leaf-shaped sword, with r</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_102.html">
+          <img src="../../plates/fig_102_plate.jpg" alt="fig_102">
+          <div class="related-meta">
+            <div class="artifact-id">fig_102</div>
+            <div class="title">Brass shield, 2 feet in diameter and &quot;08 inch in thickness, ornamented The outer one repre</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_112.html">
+          <img src="../../plates/fig_112_plate.jpg" alt="fig_112">
+          <div class="related-meta">
+            <div class="artifact-id">fig_112</div>
+            <div class="title">Bronze segis, representing man on horseback to left, wearing single-edged sword with guard</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_117.html">
+          <img src="../../plates/fig_117_plate.jpg" alt="fig_117">
+          <div class="related-meta">
+            <div class="artifact-id">fig_117</div>
+            <div class="title">Brass bell, with reticulated pierced work</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_122.html">
+          <img src="../../plates/fig_122_plate.jpg" alt="fig_122">
+          <div class="related-meta">
+            <div class="artifact-id">fig_122</div>
+            <div class="title">-Circular brass box, ornamented on the top with a central figure in repousse work, holding</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_128.html">
+          <img src="../../plates/fig_128_plate.jpg" alt="fig_128">
+          <div class="related-meta">
+            <div class="artifact-id">fig_128</div>
+            <div class="title">Armlet entirely of brass, without other metal</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_129.html">
+          <img src="../../plates/fig_129_plate.jpg" alt="fig_129">
+          <div class="related-meta">
+            <div class="artifact-id">fig_129</div>
+            <div class="title">Bronze plaque, representing human figure with beard, riding to right ; a ranseur of the si</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_134.html">
+          <img src="../../plates/fig_134_plate.jpg" alt="fig_134">
+          <div class="related-meta">
+            <div class="artifact-id">fig_134</div>
+            <div class="title">Figures in bronze, representing two rude human figures, male and female, attending an anim</div>
+          </div>
+        </a>
+        
+        </div>
       </div>
     </body>
     </html>

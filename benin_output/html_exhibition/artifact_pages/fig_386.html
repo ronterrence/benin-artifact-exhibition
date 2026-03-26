@@ -13,7 +13,7 @@
       color: #eaeaea;
     }
     .page {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 48px 24px 80px;
     }
@@ -23,18 +23,33 @@
       color: #bbb;
       text-decoration: none;
     }
-    .hero {
+    .comparison-container {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
       align-items: start;
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }
-    .hero img {
+    .image-panel {
       width: 100%;
-      background: white;
+      min-width: 0;
+    }
+    .image-panel h3 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: #aaa;
+      font-weight: normal;
+      letter-spacing: 0.02em;
+    }
+    .image-panel img {
+      width: 100%;
       display: block;
+      background: white;
       border-radius: 8px;
+    }
+    .text-panel {
+      max-width: 900px;
+      margin-bottom: 48px;
     }
     .meta {
       color: #999;
@@ -49,6 +64,12 @@
       color: #cfcfcf;
       line-height: 1.8;
       font-size: 1rem;
+    }
+    .ai-note {
+      margin-top: 14px;
+      color: #aaa;
+      font-size: 0.92rem;
+      line-height: 1.5;
     }
     h2 {
       margin-top: 56px;
@@ -86,8 +107,11 @@
       line-height: 1.4;
     }
     @media (max-width: 900px) {
-      .hero {
+      .comparison-container {
         grid-template-columns: 1fr;
+      }
+      .image-panel {
+        max-width: 100%;
       }
     }
     </style>
@@ -96,28 +120,90 @@
       <div class="page">
         <a class="back" href="../../../index.html#cluster-04">← Back to exhibition</a>
 
-        <div class="hero">
-
-          <div class="comparison-container">
-
-            <div class="image-panel">
-              <h3>Original scan</h3>
-              <img src="../../plates/fig_386_plate.jpg" alt="fig_386 original">
-            </div>
-
-            
-
+        <div class="comparison-container">
+          <div class="image-panel">
+            <h3>Original scan</h3>
+            <img src="../../plates/fig_386_plate.jpg" alt="fig_386 original">
           </div>
-
-          <div class="text-panel">
-            <div class="meta">Artifact: fig_386</div>
-            <div class="meta">Cluster: 4</div>
-            <h1>Wooden comb, with carved design</h1>
-            <div class="description">Wooden comb, with carved design.</div>
-          </div>
-
+          
         </div>
 
+        <div class="text-panel">
+          <div class="meta">Artifact: fig_386</div>
+          <div class="meta">Cluster: 4</div>
+          <h1>Wooden comb, with carved design</h1>
+          <div class="description">Wooden comb, with carved design.</div>
+          
+        </div>
+
+        <h2>Related artifacts in this cluster</h2>
+        <div class="related-grid">
+          
+        <a class="related-card" href="fig_033.html">
+          <img src="../../plates/fig_033_plate.jpg" alt="fig_033">
+          <div class="related-meta">
+            <div class="artifact-id">fig_033</div>
+            <div class="title">Ivory, cup, stained brown</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_105.html">
+          <img src="../../plates/fig_105_plate.jpg" alt="fig_105">
+          <div class="related-meta">
+            <div class="artifact-id">fig_105</div>
+            <div class="title">Iron dagger, or short sword, length 16^ inches; the incised ornamentation is on alternate </div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_106.html">
+          <img src="../../plates/fig_106_plate.jpg" alt="fig_106">
+          <div class="related-meta">
+            <div class="artifact-id">fig_106</div>
+            <div class="title">Iron leaf-shaped sword, length 19½ inches, similar in form to those frequently represented</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_107.html">
+          <img src="../../plates/fig_107_plate.jpg" alt="fig_107">
+          <div class="related-meta">
+            <div class="artifact-id">fig_107</div>
+            <div class="title">Iron leaf-shaped sword, length 19-^ inches, with alternating ornamentation on the ojyposit</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_186.html">
+          <img src="../../plates/fig_186_plate.jpg" alt="fig_186">
+          <div class="related-meta">
+            <div class="artifact-id">fig_186</div>
+            <div class="title">Curved iron knife, with handle carved as a human figure</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_188.html">
+          <img src="../../plates/fig_188_plate.jpg" alt="fig_188">
+          <div class="related-meta">
+            <div class="artifact-id">fig_188</div>
+            <div class="title">Dagger in leather sheath</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_198.html">
+          <img src="../../plates/fig_198_plate.jpg" alt="fig_198">
+          <div class="related-meta">
+            <div class="artifact-id">fig_198</div>
+            <div class="title">Broad knife-shaped sword of iron ; the wooden handle bound On one side the blade is engrav</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_200.html">
+          <img src="../../plates/fig_200_plate.jpg" alt="fig_200">
+          <div class="related-meta">
+            <div class="artifact-id">fig_200</div>
+            <div class="title">Brass bracelet, having amongst other ornaments a band of straight fine diaper pattern</div>
+          </div>
+        </a>
+        
+        </div>
       </div>
     </body>
     </html>

@@ -13,7 +13,7 @@
       color: #eaeaea;
     }
     .page {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 48px 24px 80px;
     }
@@ -23,18 +23,33 @@
       color: #bbb;
       text-decoration: none;
     }
-    .hero {
+    .comparison-container {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
       align-items: start;
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }
-    .hero img {
+    .image-panel {
       width: 100%;
-      background: white;
+      min-width: 0;
+    }
+    .image-panel h3 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: #aaa;
+      font-weight: normal;
+      letter-spacing: 0.02em;
+    }
+    .image-panel img {
+      width: 100%;
       display: block;
+      background: white;
       border-radius: 8px;
+    }
+    .text-panel {
+      max-width: 900px;
+      margin-bottom: 48px;
     }
     .meta {
       color: #999;
@@ -49,6 +64,12 @@
       color: #cfcfcf;
       line-height: 1.8;
       font-size: 1rem;
+    }
+    .ai-note {
+      margin-top: 14px;
+      color: #aaa;
+      font-size: 0.92rem;
+      line-height: 1.5;
     }
     h2 {
       margin-top: 56px;
@@ -86,8 +107,11 @@
       line-height: 1.4;
     }
     @media (max-width: 900px) {
-      .hero {
+      .comparison-container {
         grid-template-columns: 1fr;
+      }
+      .image-panel {
+        max-width: 100%;
       }
     }
     </style>
@@ -96,28 +120,90 @@
       <div class="page">
         <a class="back" href="../../../index.html#cluster-06">← Back to exhibition</a>
 
-        <div class="hero">
-
-          <div class="comparison-container">
-
-            <div class="image-panel">
-              <h3>Original scan</h3>
-              <img src="../../plates/fig_143_plate.jpg" alt="fig_143 original">
-            </div>
-
-            
-
+        <div class="comparison-container">
+          <div class="image-panel">
+            <h3>Original scan</h3>
+            <img src="../../plates/fig_143_plate.jpg" alt="fig_143 original">
           </div>
-
-          <div class="text-panel">
-            <div class="meta">Artifact: fig_143</div>
-            <div class="meta">Cluster: 6</div>
-            <h1>Bronze or brass figure of cock, 22 inches high, including The feathers are represented in </h1>
-            <div class="description">Bronze or brass figure of cock, 22 inches high, including The feathers are represented in straight and curved lines of The pupils of the eyes are inlaid copper, of lozenge-shaped On the top of the pedestal in The sides of the base are ornamented with interlaced strap-work, and represen- tations of three ox&#x27;s heads are on the front. A fine specimen of barbaric front is a Maltese cross, with a band of interlaced strap-work. The tarsus is unnaturally broad. form. art.</div>
-          </div>
-
+          
         </div>
 
+        <div class="text-panel">
+          <div class="meta">Artifact: fig_143</div>
+          <div class="meta">Cluster: 6</div>
+          <h1>Bronze or brass figure of cock, 22 inches high, including The feathers are represented in </h1>
+          <div class="description">Bronze or brass figure of cock, 22 inches high, including The feathers are represented in straight and curved lines of The pupils of the eyes are inlaid copper, of lozenge-shaped On the top of the pedestal in The sides of the base are ornamented with interlaced strap-work, and represen- tations of three ox&#x27;s heads are on the front. A fine specimen of barbaric front is a Maltese cross, with a band of interlaced strap-work. The tarsus is unnaturally broad. form. art.</div>
+          
+        </div>
+
+        <h2>Related artifacts in this cluster</h2>
+        <div class="related-grid">
+          
+        <a class="related-card" href="fig_034.html">
+          <img src="../../plates/fig_034_plate.jpg" alt="fig_034">
+          <div class="related-meta">
+            <div class="artifact-id">fig_034</div>
+            <div class="title">Bronze drinking cup, the same as represented in wood-carving, Fig</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_045.html">
+          <img src="../../plates/fig_045_plate.jpg" alt="fig_045">
+          <div class="related-meta">
+            <div class="artifact-id">fig_045</div>
+            <div class="title">Bronze vessel, somewhat in the form of a coffee-pot</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_051.html">
+          <img src="../../plates/fig_051_plate.jpg" alt="fig_051">
+          <div class="related-meta">
+            <div class="artifact-id">fig_051</div>
+            <div class="title">Bronze pointed dish on stand, with ribbed cover, rabbetted</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_142.html">
+          <img src="../../plates/fig_142_plate.jpg" alt="fig_142">
+          <div class="related-meta">
+            <div class="artifact-id">fig_142</div>
+            <div class="title">Bronze open-mouthed vessel, with six projecting eyelets round the neck, and a handle</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_151.html">
+          <img src="../../plates/fig_151_plate.jpg" alt="fig_151">
+          <div class="related-meta">
+            <div class="artifact-id">fig_151</div>
+            <div class="title">Brass A^essel, resembling a coffee pot</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_219.html">
+          <img src="../../plates/fig_219_plate.jpg" alt="fig_219">
+          <div class="related-meta">
+            <div class="artifact-id">fig_219</div>
+            <div class="title">Carved cocoa-nut, representing a native on a horse to left, hold- ing up chain-bridle in l</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_249.html">
+          <img src="../../plates/fig_249_plate.jpg" alt="fig_249">
+          <div class="related-meta">
+            <div class="artifact-id">fig_249</div>
+            <div class="title">Large bronze cover, use unknown ; the ribs ornamented in the usual incised style of Benin </div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_253.html">
+          <img src="../../plates/fig_253_plate.jpg" alt="fig_253">
+          <div class="related-meta">
+            <div class="artifact-id">fig_253</div>
+            <div class="title">Bronze round bell, similar to those attached to the dresses on the plaques, Fig</div>
+          </div>
+        </a>
+        
+        </div>
       </div>
     </body>
     </html>

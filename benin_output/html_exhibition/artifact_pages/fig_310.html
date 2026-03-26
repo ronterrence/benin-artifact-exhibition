@@ -13,7 +13,7 @@
       color: #eaeaea;
     }
     .page {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 48px 24px 80px;
     }
@@ -23,18 +23,33 @@
       color: #bbb;
       text-decoration: none;
     }
-    .hero {
+    .comparison-container {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
       align-items: start;
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }
-    .hero img {
+    .image-panel {
       width: 100%;
-      background: white;
+      min-width: 0;
+    }
+    .image-panel h3 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: #aaa;
+      font-weight: normal;
+      letter-spacing: 0.02em;
+    }
+    .image-panel img {
+      width: 100%;
       display: block;
+      background: white;
       border-radius: 8px;
+    }
+    .text-panel {
+      max-width: 900px;
+      margin-bottom: 48px;
     }
     .meta {
       color: #999;
@@ -49,6 +64,12 @@
       color: #cfcfcf;
       line-height: 1.8;
       font-size: 1rem;
+    }
+    .ai-note {
+      margin-top: 14px;
+      color: #aaa;
+      font-size: 0.92rem;
+      line-height: 1.5;
     }
     h2 {
       margin-top: 56px;
@@ -86,8 +107,11 @@
       line-height: 1.4;
     }
     @media (max-width: 900px) {
-      .hero {
+      .comparison-container {
         grid-template-columns: 1fr;
+      }
+      .image-panel {
+        max-width: 100%;
       }
     }
     </style>
@@ -96,28 +120,82 @@
       <div class="page">
         <a class="back" href="../../../index.html#cluster-01">← Back to exhibition</a>
 
-        <div class="hero">
-
-          <div class="comparison-container">
-
-            <div class="image-panel">
-              <h3>Original scan</h3>
-              <img src="../../plates/fig_310_plate.jpg" alt="fig_310 original">
-            </div>
-
-            
-
+        <div class="comparison-container">
+          <div class="image-panel">
+            <h3>Original scan</h3>
+            <img src="../../plates/fig_310_plate.jpg" alt="fig_310 original">
           </div>
-
-          <div class="text-panel">
-            <div class="meta">Artifact: fig_310</div>
-            <div class="meta">Cluster: 1</div>
-            <h1>Bronze lamp, aiyparently with gold in its composition</h1>
-            <div class="description">Bronze lamp, aiyparently with gold in its composition. The basin The bands for suspension ornamented patched and riveted with copper. with straight line diaper pattern (Fig. 312) and broken guilloche pattern (Fig. 313), united at top in a human figure (Fig. 311), having the private There are only one or two objects in this parts strongly pronounced. collection in which this peculiarity occurs, which is so prevalent in the art of most savages. M 82 Antique Works of Art from Benin.</div>
-          </div>
-
+          
         </div>
 
+        <div class="text-panel">
+          <div class="meta">Artifact: fig_310</div>
+          <div class="meta">Cluster: 1</div>
+          <h1>Bronze lamp, aiyparently with gold in its composition</h1>
+          <div class="description">Bronze lamp, aiyparently with gold in its composition. The basin The bands for suspension ornamented patched and riveted with copper. with straight line diaper pattern (Fig. 312) and broken guilloche pattern (Fig. 313), united at top in a human figure (Fig. 311), having the private There are only one or two objects in this parts strongly pronounced. collection in which this peculiarity occurs, which is so prevalent in the art of most savages. M 82 Antique Works of Art from Benin.</div>
+          
+        </div>
+
+        <h2>Related artifacts in this cluster</h2>
+        <div class="related-grid">
+          
+        <a class="related-card" href="fig_039.html">
+          <img src="../../plates/fig_039_plate.jpg" alt="fig_039">
+          <div class="related-meta">
+            <div class="artifact-id">fig_039</div>
+            <div class="title">Brass bracelet, with negro heads of copper inlaid</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_049.html">
+          <img src="../../plates/fig_049_plate.jpg" alt="fig_049">
+          <div class="related-meta">
+            <div class="artifact-id">fig_049</div>
+            <div class="title">Narrow armlet of brass, with a succession of animals (? Lizards) in relief on the edge</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_058.html">
+          <img src="../../plates/fig_058_plate.jpg" alt="fig_058">
+          <div class="related-meta">
+            <div class="artifact-id">fig_058</div>
+            <div class="title">Leopard&#x27;s mask head of brass, the pupils of the eyes represented by a copper band</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_060.html">
+          <img src="../../plates/fig_060_plate.jpg" alt="fig_060">
+          <div class="related-meta">
+            <div class="artifact-id">fig_060</div>
+            <div class="title">Leopard&#x27;s mask head of brass, the pupils of the eyes represented by bands</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_062.html">
+          <img src="../../plates/fig_062_plate.jpg" alt="fig_062">
+          <div class="related-meta">
+            <div class="artifact-id">fig_062</div>
+            <div class="title">Leopard&#x27;s head in brass, the spots and pupils of eyes in copper</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_153.html">
+          <img src="../../plates/fig_153_plate.jpg" alt="fig_153">
+          <div class="related-meta">
+            <div class="artifact-id">fig_153</div>
+            <div class="title">Carved ivory head of leopard, the spots of lead, inlaid</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_223.html">
+          <img src="../../plates/fig_223_plate.jpg" alt="fig_223">
+          <div class="related-meta">
+            <div class="artifact-id">fig_223</div>
+            <div class="title">Brass bracelet, ornamented with brass representations of rows of cowrie shells, in groups </div>
+          </div>
+        </a>
+        
+        </div>
       </div>
     </body>
     </html>

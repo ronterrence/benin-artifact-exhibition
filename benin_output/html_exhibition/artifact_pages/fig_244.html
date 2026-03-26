@@ -13,7 +13,7 @@
       color: #eaeaea;
     }
     .page {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 48px 24px 80px;
     }
@@ -23,18 +23,33 @@
       color: #bbb;
       text-decoration: none;
     }
-    .hero {
+    .comparison-container {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
       align-items: start;
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }
-    .hero img {
+    .image-panel {
       width: 100%;
-      background: white;
+      min-width: 0;
+    }
+    .image-panel h3 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: #aaa;
+      font-weight: normal;
+      letter-spacing: 0.02em;
+    }
+    .image-panel img {
+      width: 100%;
       display: block;
+      background: white;
       border-radius: 8px;
+    }
+    .text-panel {
+      max-width: 900px;
+      margin-bottom: 48px;
     }
     .meta {
       color: #999;
@@ -49,6 +64,12 @@
       color: #cfcfcf;
       line-height: 1.8;
       font-size: 1rem;
+    }
+    .ai-note {
+      margin-top: 14px;
+      color: #aaa;
+      font-size: 0.92rem;
+      line-height: 1.5;
     }
     h2 {
       margin-top: 56px;
@@ -86,8 +107,11 @@
       line-height: 1.4;
     }
     @media (max-width: 900px) {
-      .hero {
+      .comparison-container {
         grid-template-columns: 1fr;
+      }
+      .image-panel {
+        max-width: 100%;
       }
     }
     </style>
@@ -96,28 +120,90 @@
       <div class="page">
         <a class="back" href="../../../index.html#cluster-05">← Back to exhibition</a>
 
-        <div class="hero">
-
-          <div class="comparison-container">
-
-            <div class="image-panel">
-              <h3>Original scan</h3>
-              <img src="../../plates/fig_244_plate.jpg" alt="fig_244 original">
-            </div>
-
-            
-
+        <div class="comparison-container">
+          <div class="image-panel">
+            <h3>Original scan</h3>
+            <img src="../../plates/fig_244_plate.jpg" alt="fig_244 original">
           </div>
-
-          <div class="text-panel">
-            <div class="meta">Artifact: fig_244</div>
-            <div class="meta">Cluster: 5</div>
-            <h1>Brass bracelet, with clusters of rows of circular knobs or shells</h1>
-            <div class="description">Brass bracelet, with clusters of rows of circular knobs or shells.</div>
-          </div>
-
+          
         </div>
 
+        <div class="text-panel">
+          <div class="meta">Artifact: fig_244</div>
+          <div class="meta">Cluster: 5</div>
+          <h1>Brass bracelet, with clusters of rows of circular knobs or shells</h1>
+          <div class="description">Brass bracelet, with clusters of rows of circular knobs or shells.</div>
+          
+        </div>
+
+        <h2>Related artifacts in this cluster</h2>
+        <div class="related-grid">
+          
+        <a class="related-card" href="fig_037.html">
+          <img src="../../plates/fig_037_plate.jpg" alt="fig_037">
+          <div class="related-meta">
+            <div class="artifact-id">fig_037</div>
+            <div class="title">Bracelet of brass, somewhat twisted</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_038.html">
+          <img src="../../plates/fig_038_plate.jpg" alt="fig_038">
+          <div class="related-meta">
+            <div class="artifact-id">fig_038</div>
+            <div class="title">Bracelet of brass, with five projections set with agate</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_073.html">
+          <img src="../../plates/fig_073_plate.jpg" alt="fig_073">
+          <div class="related-meta">
+            <div class="artifact-id">fig_073</div>
+            <div class="title">Three triangular brass bells</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_116.html">
+          <img src="../../plates/fig_116_plate.jpg" alt="fig_116">
+          <div class="related-meta">
+            <div class="artifact-id">fig_116</div>
+            <div class="title">Bronze stand for the game of mancala, with ten holes and two irregular- It is the same gam</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_118.html">
+          <img src="../../plates/fig_118_plate.jpg" alt="fig_118">
+          <div class="related-meta">
+            <div class="artifact-id">fig_118</div>
+            <div class="title">Entire tortoise shell, upper and under sides, in brass; ornamented on the upper side with </div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_121.html">
+          <img src="../../plates/fig_121_plate.jpg" alt="fig_121">
+          <div class="related-meta">
+            <div class="artifact-id">fig_121</div>
+            <div class="title">Head-dress composed entirely of agate</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_169.html">
+          <img src="../../plates/fig_169_plate.jpg" alt="fig_169">
+          <div class="related-meta">
+            <div class="artifact-id">fig_169</div>
+            <div class="title">Ivory ring, carved, with 3 birds</div>
+          </div>
+        </a>
+        
+        <a class="related-card" href="fig_170.html">
+          <img src="../../plates/fig_170_plate.jpg" alt="fig_170">
+          <div class="related-meta">
+            <div class="artifact-id">fig_170</div>
+            <div class="title">Ivory bracelet, rudely carved, with representations of leopards&#x27; and elephants&#x27; heads and </div>
+          </div>
+        </a>
+        
+        </div>
       </div>
     </body>
     </html>
