@@ -64,10 +64,10 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
     cluster = int(row["cluster"])
 
     original_path = f"../../plates/{artifact_id.lower()}_plate.jpg"
-    enhanced_path = f"../../enhanced_plates/{artifact_id.lower()}_enhanced.jpg"
+    enhanced_path = f"../../enhanced_plates/{artifact_id.lower()}_plate_enhanced.jpg"
 
     has_enhanced = Path(
-        f"benin_output/enhanced_plates/{artifact_id.lower()}_enhanced.jpg"
+        f"benin_output/enhanced_plates/{artifact_id.lower()}_plate_enhanced.jpg"
     ).exists()
 
     enhanced_html = ""
