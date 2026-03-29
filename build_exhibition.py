@@ -231,31 +231,34 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
     <body>
       <div class="page">
         <a class="back" href="../../../index.html#cluster-{cluster:02d}">← Back to exhibition</a>
-        <div class="comparison-container">
-          {f"""
-          <div class="slider-container">
-            <img src="{original_path}" class="slider-img base">
-            <img src="{enhanced_path}" class="slider-img overlay" id="overlay-{artifact_id}">
 
-            <div class="slider-handle" id="handle-{artifact_id}"></div>
+        <div class="hero">
+          <div class="comparison-container">
+            {f"""
+            <div class="slider-container">
+              <img src="{original_path}" class="slider-img base" alt="{artifact_id} original">
+              <img src="{enhanced_path}" class="slider-img overlay" alt="{artifact_id} enhanced">
 
-            <div class="slider-label left">Original</div>
-            <div class="slider-label right">AI Enhanced</div>
-  </div>
-  """ if has_enhanced else f"""
-  <div class="image-panel">
-    <h3>Original scan</h3>
-    <img src="{original_path}" alt="{artifact_id} original">
-  </div>
-  """}
-        </div>
+              <div class="slider-handle"></div>
 
-        <div class="text-panel">
-          <div class="meta">Artifact: {artifact_id}</div>
-          <div class="meta">Cluster: {cluster}</div>
-          <h1>{title}</h1>
-          <div class="description">{description}</div>
-          {note_html}
+              <div class="slider-label left">Original</div>
+              <div class="slider-label right">AI Enhanced</div>
+            </div>
+            """ if has_enhanced else f"""
+            <div class="image-panel">
+              <h3>Original scan</h3>
+              <img src="{original_path}" alt="{artifact_id} original">
+            </div>
+            """}
+          </div>
+
+          <div class="text-panel">
+            <div class="meta">Artifact: {artifact_id}</div>
+            <div class="meta">Cluster: {cluster}</div>
+            <h1>{title}</h1>
+            <div class="description">{description}</div>
+            {note_html}
+          </div>
         </div>
 
         <h2>Related artifacts in this cluster</h2>
@@ -263,6 +266,45 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
           {related_html}
         </div>
       </div>
+
+      <script>
+      document.querySelectorAll('.slider-container').forEach(container => {{
+        const overlay = container.querySelector('.overlay');
+        const handle = container.querySelector('.slider-handle');
+
+        let isDragging = false;
+
+        const move = (x) => {{
+          const rect = container.getBoundingClientRect();
+          let pos = (x - rect.left) / rect.width;
+          pos = Math.max(0, Math.min(1, pos));
+
+          overlay.style.width = (pos * 100) + "%";
+          handle.style.left = (pos * 100) + "%";
+        }};
+
+        container.addEventListener('mousedown', e => {{
+          isDragging = true;
+          move(e.clientX);
+        }});
+
+        window.addEventListener('mouseup', () => {{
+          isDragging = false;
+        }});
+
+        window.addEventListener('mousemove', e => {{
+          if (isDragging) move(e.clientX);
+        }});
+
+        container.addEventListener('touchstart', e => {{
+          move(e.touches[0].clientX);
+        }});
+
+        container.addEventListener('touchmove', e => {{
+          move(e.touches[0].clientX);
+        }});
+      }});
+      </script>
     </body>
     </html>
     """
