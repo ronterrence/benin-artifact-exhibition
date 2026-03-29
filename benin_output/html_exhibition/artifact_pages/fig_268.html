@@ -120,25 +120,31 @@
       <div class="page">
         <a class="back" href="../../../index.html#cluster-03">← Back to exhibition</a>
 
-        <div class="comparison-container">
-          <div class="image-panel">
-            <h3>Original scan</h3>
-            <img src="../../plates/fig_268_plate.jpg" alt="fig_268 original">
-          </div>
-          
-        <div class="image-panel">
-          <h3>AI-enhanced</h3>
-          <img src="../../enhanced_plates/fig_268_plate_enhanced.jpg" alt="fig_268 enhanced">
+        <div class="hero">
+          <div class="comparison-container">
+            
+        <div class="slider-container">
+          <img src="../../plates/fig_268_plate.jpg" class="slider-img base" alt="fig_268 original">
+          <img src="../../enhanced_plates/fig_268_plate_enhanced.jpg" class="slider-img overlay" alt="fig_268 enhanced">
+          <div class="slider-handle"></div>
+          <div class="slider-label left">Original</div>
+          <div class="slider-label right">AI Enhanced</div>
         </div>
         
-        </div>
+            <div class="image-panel">
+              <h3>Original scan</h3>
+              <img src="../../plates/fig_268_plate.jpg" alt="fig_268 original">
+            </div>
+            
+          </div>
 
-        <div class="text-panel">
-          <div class="meta">Artifact: fig_268</div>
-          <div class="meta">Cluster: 3</div>
-          <h1>Long oval wooden bowl carved out of the solid</h1>
-          <div class="description">Long oval wooden bowl carved out of the solid. On one side (Fig. 269) is a row of five human figures in relief; the central figure has his hands upheld by attendants, who hold in their other hands shields having barbed javelins, points upward behind them. The shields are ornamented with straight line diaper pattern. object under the arm, perhaps a drum or a food vessel. Another figure holds an At both ends there is a representation of a degenerate elephants&#x27;s head, the proboscis terminating in a human hand holding a branch, similar to Figs. 72, 167, At one end is a rude representation of a degenerate mud-fish. and 316. The other side of the bowl (Fig. 268) is ornamented with a broad guilloche pattern and a square interlaced figure. The interior of the bowl is very The carving is rudely chiselled out, showing marks of the tool all over. very rough and much in the style of the execution block, Figs. 259 and 260, Plate XXXIV.</div>
-          <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
+          <div class="text-panel">
+            <div class="meta">Artifact: fig_268</div>
+            <div class="meta">Cluster: 3</div>
+            <h1>Long oval wooden bowl carved out of the solid</h1>
+            <div class="description">Long oval wooden bowl carved out of the solid. On one side (Fig. 269) is a row of five human figures in relief; the central figure has his hands upheld by attendants, who hold in their other hands shields having barbed javelins, points upward behind them. The shields are ornamented with straight line diaper pattern. object under the arm, perhaps a drum or a food vessel. Another figure holds an At both ends there is a representation of a degenerate elephants&#x27;s head, the proboscis terminating in a human hand holding a branch, similar to Figs. 72, 167, At one end is a rude representation of a degenerate mud-fish. and 316. The other side of the bowl (Fig. 268) is ornamented with a broad guilloche pattern and a square interlaced figure. The interior of the bowl is very The carving is rudely chiselled out, showing marks of the tool all over. very rough and much in the style of the execution block, Figs. 259 and 260, Plate XXXIV.</div>
+            <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
+          </div>
         </div>
 
         <h2>Related artifacts in this cluster</h2>
@@ -210,6 +216,45 @@
         
         </div>
       </div>
+    
+    <script>
+    document.querySelectorAll('.slider-container').forEach(container => {
+      const overlay = container.querySelector('.overlay');
+      const handle = container.querySelector('.slider-handle');
+
+      let isDragging = false;
+
+      const move = (x) => {
+        const rect = container.getBoundingClientRect();
+        let pos = (x - rect.left) / rect.width;
+        pos = Math.max(0, Math.min(1, pos));
+
+        overlay.style.width = (pos * 100) + "%";
+        handle.style.left = (pos * 100) + "%";
+      };
+
+      container.addEventListener('mousedown', e => {
+        isDragging = true;
+        move(e.clientX);
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      window.addEventListener('mousemove', e => {
+        if (isDragging) move(e.clientX);
+      });
+
+      container.addEventListener('touchstart', e => {
+        move(e.touches[0].clientX);
+      });
+
+      container.addEventListener('touchmove', e => {
+        move(e.touches[0].clientX);
+      });
+    });
+    </script>
     </body>
     </html>
     

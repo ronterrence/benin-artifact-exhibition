@@ -218,7 +218,24 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
       }
     }
     """
-
+    slider_html = ""
+    if has_enhanced:
+        slider_html = f"""
+        <div class="slider-container">
+          <img src="{original_path}" class="slider-img base" alt="{artifact_id} original">
+          <img src="{enhanced_path}" class="slider-img overlay" alt="{artifact_id} enhanced">
+          <div class="slider-handle"></div>
+          <div class="slider-label left">Original</div>
+          <div class="slider-label right">AI Enhanced</div>
+        </div>
+        """
+    else:
+        slider_html = f"""
+        <div class="image-panel">
+          <h3>Original scan</h3>
+          <img src="{original_path}" alt="{artifact_id} original">
+        </div>
+        """
     return f"""
     <!doctype html>
     <html lang="en">
@@ -234,22 +251,12 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
 
         <div class="hero">
           <div class="comparison-container">
-            {f"""
-            <div class="slider-container">
-              <img src="{original_path}" class="slider-img base" alt="{artifact_id} original">
-              <img src="{enhanced_path}" class="slider-img overlay" alt="{artifact_id} enhanced">
-
-              <div class="slider-handle"></div>
-
-              <div class="slider-label left">Original</div>
-              <div class="slider-label right">AI Enhanced</div>
-            </div>
-            """ if has_enhanced else f"""
+            {slider_html}
             <div class="image-panel">
               <h3>Original scan</h3>
               <img src="{original_path}" alt="{artifact_id} original">
             </div>
-            """}
+            
           </div>
 
           <div class="text-panel">
@@ -266,45 +273,45 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
           {related_html}
         </div>
       </div>
+    
+    <script>
+    document.querySelectorAll('.slider-container').forEach(container => {{
+      const overlay = container.querySelector('.overlay');
+      const handle = container.querySelector('.slider-handle');
 
-      <script>
-      document.querySelectorAll('.slider-container').forEach(container => {{
-        const overlay = container.querySelector('.overlay');
-        const handle = container.querySelector('.slider-handle');
+      let isDragging = false;
 
-        let isDragging = false;
+      const move = (x) => {{
+        const rect = container.getBoundingClientRect();
+        let pos = (x - rect.left) / rect.width;
+        pos = Math.max(0, Math.min(1, pos));
 
-        const move = (x) => {{
-          const rect = container.getBoundingClientRect();
-          let pos = (x - rect.left) / rect.width;
-          pos = Math.max(0, Math.min(1, pos));
+        overlay.style.width = (pos * 100) + "%";
+        handle.style.left = (pos * 100) + "%";
+      }};
 
-          overlay.style.width = (pos * 100) + "%";
-          handle.style.left = (pos * 100) + "%";
-        }};
-
-        container.addEventListener('mousedown', e => {{
-          isDragging = true;
-          move(e.clientX);
-        }});
-
-        window.addEventListener('mouseup', () => {{
-          isDragging = false;
-        }});
-
-        window.addEventListener('mousemove', e => {{
-          if (isDragging) move(e.clientX);
-        }});
-
-        container.addEventListener('touchstart', e => {{
-          move(e.touches[0].clientX);
-        }});
-
-        container.addEventListener('touchmove', e => {{
-          move(e.touches[0].clientX);
-        }});
+      container.addEventListener('mousedown', e => {{
+        isDragging = true;
+        move(e.clientX);
       }});
-      </script>
+
+      window.addEventListener('mouseup', () => {{
+        isDragging = false;
+      }});
+
+      window.addEventListener('mousemove', e => {{
+        if (isDragging) move(e.clientX);
+      }});
+
+      container.addEventListener('touchstart', e => {{
+        move(e.touches[0].clientX);
+      }});
+
+      container.addEventListener('touchmove', e => {{
+        move(e.touches[0].clientX);
+      }});
+    }});
+    </script>
     </body>
     </html>
     """
@@ -663,109 +670,111 @@ def main() -> None:
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Benin Digital Exhibition</title>
-      <style>
-      {css}
-      .slider-container {
-          position: relative;
-          width: 100%;
-          max-width: 700px;
-          overflow: hidden;
-          border-radius: 10px;
-          cursor: ew-resize;
-        }
+      
+    <style>
+    {css}
 
-        .slider-img {
-          width: 100%;
-          display: block;
-        }
+    .slider-container {{
+      position: relative;
+      width: 100%;
+      max-width: 700px;
+      overflow: hidden;
+      border-radius: 10px;
+      cursor: ew-resize;
+    }}
 
-        .slider-img.overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 50%;
-          overflow: hidden;
-        }
+    .slider-img {{
+      width: 100%;
+      display: block;
+    }}
 
-        .slider-handle {
-          position: absolute;
-          top: 0;
-          left: 50%;
-          width: 2px;
-          height: 100%;
-          background: white;
-          z-index: 5;
-        }
+    .slider-img.overlay {{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      overflow: hidden;
+    }}
 
-        .slider-handle::before {
-          content: "";
-          position: absolute;
-          top: 50%;
-          left: -8px;
-          width: 16px;
-          height: 16px;
-          background: white;
-          border-radius: 50%;
-          transform: translateY(-50%);
-        }
+    .slider-handle {{
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: white;
+      z-index: 5;
+    }}
 
-        .slider-label {
-          position: absolute;
-          top: 10px;
-          font-size: 12px;
-          color: white;
-          background: rgba(0,0,0,0.6);
-          padding: 4px 8px;
-          border-radius: 4px;
-        }
+    .slider-handle::before {{
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: -8px;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }}
 
-        .slider-label.left {
-          left: 10px;
-        }
+    .slider-label {{
+      position: absolute;
+      top: 10px;
+      font-size: 12px;
+      color: white;
+      background: rgba(0,0,0,0.6);
+      padding: 4px 8px;
+      border-radius: 4px;
+    }}
 
-        .slider-label.right {
-          right: 10px;
-        }
-      </style>
+    .slider-label.left {{
+      left: 10px;
+    }}
+
+    .slider-label.right {{
+      right: 10px;
+    }}
+    </style>
     </head>
+    
     <script>
-    document.querySelectorAll('.slider-container').forEach(container => {
+    document.querySelectorAll('.slider-container').forEach(container => {{
       const overlay = container.querySelector('.overlay');
       const handle = container.querySelector('.slider-handle');
 
       let isDragging = false;
 
-      const move = (x) => {
+      const move = (x) => {{
         const rect = container.getBoundingClientRect();
         let pos = (x - rect.left) / rect.width;
         pos = Math.max(0, Math.min(1, pos));
 
         overlay.style.width = (pos * 100) + "%";
         handle.style.left = (pos * 100) + "%";
-      };
+      }};
 
-      container.addEventListener('mousedown', e => {
+      container.addEventListener('mousedown', e => {{
         isDragging = true;
         move(e.clientX);
-      });
+      }});
 
-      window.addEventListener('mouseup', () => {
+      window.addEventListener('mouseup', () => {{
         isDragging = false;
-      });
+      }});
 
-      window.addEventListener('mousemove', e => {
+      window.addEventListener('mousemove', e => {{
         if (isDragging) move(e.clientX);
-      });
+      }});
 
-      // Mobile
-      container.addEventListener('touchstart', e => {
+      container.addEventListener('touchstart', e => {{
         move(e.touches[0].clientX);
-      });
+      }});
 
-      container.addEventListener('touchmove', e => {
+      container.addEventListener('touchmove', e => {{
         move(e.touches[0].clientX);
-      });
-    });
+      }});
+    }});
     </script>
     <body>
       {hero}

@@ -120,25 +120,31 @@
       <div class="page">
         <a class="back" href="../../../index.html#cluster-00">← Back to exhibition</a>
 
-        <div class="comparison-container">
-          <div class="image-panel">
-            <h3>Original scan</h3>
-            <img src="../../plates/fig_113_plate.jpg" alt="fig_113 original">
-          </div>
-          
-        <div class="image-panel">
-          <h3>AI-enhanced</h3>
-          <img src="../../enhanced_plates/fig_113_plate_enhanced.jpg" alt="fig_113 enhanced">
+        <div class="hero">
+          <div class="comparison-container">
+            
+        <div class="slider-container">
+          <img src="../../plates/fig_113_plate.jpg" class="slider-img base" alt="fig_113 original">
+          <img src="../../enhanced_plates/fig_113_plate_enhanced.jpg" class="slider-img overlay" alt="fig_113 enhanced">
+          <div class="slider-handle"></div>
+          <div class="slider-label left">Original</div>
+          <div class="slider-label right">AI Enhanced</div>
         </div>
         
-        </div>
+            <div class="image-panel">
+              <h3>Original scan</h3>
+              <img src="../../plates/fig_113_plate.jpg" alt="fig_113 original">
+            </div>
+            
+          </div>
 
-        <div class="text-panel">
-          <div class="meta">Artifact: fig_113</div>
-          <div class="meta">Cluster: 0</div>
-          <h1>Bronze plaque, rep resenting a figure standing; long sjaear, multibarbed, with ogee-sectio</h1>
-          <div class="description">Bronze plaque, rep resenting a figure standing; long sjaear, multibarbed, with ogee-sectioned blade in right hand, pointing downwards, knob at butt end. There are twelve ducts running from the ground of the In left hand a broad leaf-shaped sword, plaque to the shaft of the spear. with a ring attached to jDommel, like Figs. 4, 13, 114, 131, 254, 255, &amp;c. Dress like a nightshirt, and composed apparently of strings of coral, with bare arms. Dagger or short sword on left side. neck ; teeth necklace ; coral choker, badge of rank. in form somewhat resembling a grenadier cap. and quatrefoil leaves incised. Quadrangular bell on Head-dress of metal, Six rosettes on ground, 111 112 PLATE 19. 114 40 Antique Works of Art from Benin.</div>
-          <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
+          <div class="text-panel">
+            <div class="meta">Artifact: fig_113</div>
+            <div class="meta">Cluster: 0</div>
+            <h1>Bronze plaque, rep resenting a figure standing; long sjaear, multibarbed, with ogee-sectio</h1>
+            <div class="description">Bronze plaque, rep resenting a figure standing; long sjaear, multibarbed, with ogee-sectioned blade in right hand, pointing downwards, knob at butt end. There are twelve ducts running from the ground of the In left hand a broad leaf-shaped sword, plaque to the shaft of the spear. with a ring attached to jDommel, like Figs. 4, 13, 114, 131, 254, 255, &amp;c. Dress like a nightshirt, and composed apparently of strings of coral, with bare arms. Dagger or short sword on left side. neck ; teeth necklace ; coral choker, badge of rank. in form somewhat resembling a grenadier cap. and quatrefoil leaves incised. Quadrangular bell on Head-dress of metal, Six rosettes on ground, 111 112 PLATE 19. 114 40 Antique Works of Art from Benin.</div>
+            <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
+          </div>
         </div>
 
         <h2>Related artifacts in this cluster</h2>
@@ -210,6 +216,45 @@
         
         </div>
       </div>
+    
+    <script>
+    document.querySelectorAll('.slider-container').forEach(container => {
+      const overlay = container.querySelector('.overlay');
+      const handle = container.querySelector('.slider-handle');
+
+      let isDragging = false;
+
+      const move = (x) => {
+        const rect = container.getBoundingClientRect();
+        let pos = (x - rect.left) / rect.width;
+        pos = Math.max(0, Math.min(1, pos));
+
+        overlay.style.width = (pos * 100) + "%";
+        handle.style.left = (pos * 100) + "%";
+      };
+
+      container.addEventListener('mousedown', e => {
+        isDragging = true;
+        move(e.clientX);
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      window.addEventListener('mousemove', e => {
+        if (isDragging) move(e.clientX);
+      });
+
+      container.addEventListener('touchstart', e => {
+        move(e.touches[0].clientX);
+      });
+
+      container.addEventListener('touchmove', e => {
+        move(e.touches[0].clientX);
+      });
+    });
+    </script>
     </body>
     </html>
     

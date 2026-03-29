@@ -120,25 +120,31 @@
       <div class="page">
         <a class="back" href="../../../index.html#cluster-00">← Back to exhibition</a>
 
-        <div class="comparison-container">
-          <div class="image-panel">
-            <h3>Original scan</h3>
-            <img src="../../plates/fig_017_plate.jpg" alt="fig_017 original">
-          </div>
-          
-        <div class="image-panel">
-          <h3>AI-enhanced</h3>
-          <img src="../../enhanced_plates/fig_017_plate_enhanced.jpg" alt="fig_017 enhanced">
+        <div class="hero">
+          <div class="comparison-container">
+            
+        <div class="slider-container">
+          <img src="../../plates/fig_017_plate.jpg" class="slider-img base" alt="fig_017 original">
+          <img src="../../enhanced_plates/fig_017_plate_enhanced.jpg" class="slider-img overlay" alt="fig_017 enhanced">
+          <div class="slider-handle"></div>
+          <div class="slider-label left">Original</div>
+          <div class="slider-label right">AI Enhanced</div>
         </div>
         
-        </div>
+            <div class="image-panel">
+              <h3>Original scan</h3>
+              <img src="../../plates/fig_017_plate.jpg" alt="fig_017 original">
+            </div>
+            
+          </div>
 
-        <div class="text-panel">
-          <div class="meta">Artifact: fig_017</div>
-          <div class="meta">Cluster: 0</div>
-          <h1>Bronze plaque, figure of warrior with spear in right hand, shield in left Quadrangular bel</h1>
-          <div class="description">Bronze plaque, figure of warrior with spear in right hand, shield in left Quadrangular bell hanging from neck. hand ; pot helmet, button on top. Coral choker, badge of rank. Leopard&#x27;s skin dress with head to front. On the ground are two horses&#x27; heads below and Ground ornamented with the usual foil ornaments two rosettes above. Leopards&#x27; teeth necklace. incised.</div>
-          <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
+          <div class="text-panel">
+            <div class="meta">Artifact: fig_017</div>
+            <div class="meta">Cluster: 0</div>
+            <h1>Bronze plaque, figure of warrior with spear in right hand, shield in left Quadrangular bel</h1>
+            <div class="description">Bronze plaque, figure of warrior with spear in right hand, shield in left Quadrangular bell hanging from neck. hand ; pot helmet, button on top. Coral choker, badge of rank. Leopard&#x27;s skin dress with head to front. On the ground are two horses&#x27; heads below and Ground ornamented with the usual foil ornaments two rosettes above. Leopards&#x27; teeth necklace. incised.</div>
+            <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
+          </div>
         </div>
 
         <h2>Related artifacts in this cluster</h2>
@@ -210,6 +216,45 @@
         
         </div>
       </div>
+    
+    <script>
+    document.querySelectorAll('.slider-container').forEach(container => {
+      const overlay = container.querySelector('.overlay');
+      const handle = container.querySelector('.slider-handle');
+
+      let isDragging = false;
+
+      const move = (x) => {
+        const rect = container.getBoundingClientRect();
+        let pos = (x - rect.left) / rect.width;
+        pos = Math.max(0, Math.min(1, pos));
+
+        overlay.style.width = (pos * 100) + "%";
+        handle.style.left = (pos * 100) + "%";
+      };
+
+      container.addEventListener('mousedown', e => {
+        isDragging = true;
+        move(e.clientX);
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      window.addEventListener('mousemove', e => {
+        if (isDragging) move(e.clientX);
+      });
+
+      container.addEventListener('touchstart', e => {
+        move(e.touches[0].clientX);
+      });
+
+      container.addEventListener('touchmove', e => {
+        move(e.touches[0].clientX);
+      });
+    });
+    </script>
     </body>
     </html>
     

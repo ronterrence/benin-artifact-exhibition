@@ -120,25 +120,31 @@
       <div class="page">
         <a class="back" href="../../../index.html#cluster-07">← Back to exhibition</a>
 
-        <div class="comparison-container">
-          <div class="image-panel">
-            <h3>Original scan</h3>
-            <img src="../../plates/fig_066_plate.jpg" alt="fig_066 original">
-          </div>
-          
-        <div class="image-panel">
-          <h3>AI-enhanced</h3>
-          <img src="../../enhanced_plates/fig_066_plate_enhanced.jpg" alt="fig_066 enhanced">
+        <div class="hero">
+          <div class="comparison-container">
+            
+        <div class="slider-container">
+          <img src="../../plates/fig_066_plate.jpg" class="slider-img base" alt="fig_066 original">
+          <img src="../../enhanced_plates/fig_066_plate_enhanced.jpg" class="slider-img overlay" alt="fig_066 enhanced">
+          <div class="slider-handle"></div>
+          <div class="slider-label left">Original</div>
+          <div class="slider-label right">AI Enhanced</div>
         </div>
         
-        </div>
+            <div class="image-panel">
+              <h3>Original scan</h3>
+              <img src="../../plates/fig_066_plate.jpg" alt="fig_066 original">
+            </div>
+            
+          </div>
 
-        <div class="text-panel">
-          <div class="meta">Artifact: fig_066</div>
-          <div class="meta">Cluster: 7</div>
-          <h1>The historic mace ol office of Duboar, late King of Benin ; 5 feet 4 inches long, and made</h1>
-          <div class="description">The historic mace ol office of Duboar, late King of Benin ; 5 feet 4 inches long, and made of brass. This was found by an officer of the expedition in the state apartment of the palaver house, and was evidently left behind by the king&#x27;s people on account of its heavy weight, in their hurried exodus from Benin city ; the king is said to have since recognized this staff, and stated that it had been handed down for many hundreds ot It has the representation of &quot; Overami,&quot; or years from king to king. reigning monarch, on the summit, dressed in the usual manner of Benin warriors. He is standing on an elephant which has a proboscis terminating in a human hand. This peculiarity is represented very often in the bronze antiquities of the Benin country, and especially on the carved tusk, Figs. 167 and 168, Plate XXVI, and must probably represent some great fetish ; the present race, on enquiries being made, could not elucidate this matter, so its history must date back many ages. This elephant is in turn supported The monarch holds in his right hand his by the usual two royal leopards. chief ju-ju, which never leaves him night or day ; in his left hand he holds a neolithic or stone axe head, edge upwards, which are looked up to by the natives even now with great awe and superstition. The interior of the upper part of the mace is hollow, having a piece of metal inside, formed like The broad leaf-shaped a long crotal, and was used as a bell to keep order. mace. with intervening pellets. swords and the execution swords are depicted in several places over the It is ornamented with guilloche pattern of two and three bands Part of the mace is ornamented in imitation of Near the foot of the staff is the figure of another elephant twine binding. with j&gt;roboscis terminating in a human hand, holding a plant like a prickly- Beneath the elephant are two human figures, with Maltese crosses on Below this are two axes breasts, axes in left hands, and sticks in right. halted in serpents&#x27; heads, which have human hands in their mouths and pear. sinuous bodies. Crocodile, head downwards, and two interlaced mud-fish. -IN 24 Antique Works of Art from Benin.</div>
-          <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
+          <div class="text-panel">
+            <div class="meta">Artifact: fig_066</div>
+            <div class="meta">Cluster: 7</div>
+            <h1>The historic mace ol office of Duboar, late King of Benin ; 5 feet 4 inches long, and made</h1>
+            <div class="description">The historic mace ol office of Duboar, late King of Benin ; 5 feet 4 inches long, and made of brass. This was found by an officer of the expedition in the state apartment of the palaver house, and was evidently left behind by the king&#x27;s people on account of its heavy weight, in their hurried exodus from Benin city ; the king is said to have since recognized this staff, and stated that it had been handed down for many hundreds ot It has the representation of &quot; Overami,&quot; or years from king to king. reigning monarch, on the summit, dressed in the usual manner of Benin warriors. He is standing on an elephant which has a proboscis terminating in a human hand. This peculiarity is represented very often in the bronze antiquities of the Benin country, and especially on the carved tusk, Figs. 167 and 168, Plate XXVI, and must probably represent some great fetish ; the present race, on enquiries being made, could not elucidate this matter, so its history must date back many ages. This elephant is in turn supported The monarch holds in his right hand his by the usual two royal leopards. chief ju-ju, which never leaves him night or day ; in his left hand he holds a neolithic or stone axe head, edge upwards, which are looked up to by the natives even now with great awe and superstition. The interior of the upper part of the mace is hollow, having a piece of metal inside, formed like The broad leaf-shaped a long crotal, and was used as a bell to keep order. mace. with intervening pellets. swords and the execution swords are depicted in several places over the It is ornamented with guilloche pattern of two and three bands Part of the mace is ornamented in imitation of Near the foot of the staff is the figure of another elephant twine binding. with j&gt;roboscis terminating in a human hand, holding a plant like a prickly- Beneath the elephant are two human figures, with Maltese crosses on Below this are two axes breasts, axes in left hands, and sticks in right. halted in serpents&#x27; heads, which have human hands in their mouths and pear. sinuous bodies. Crocodile, head downwards, and two interlaced mud-fish. -IN 24 Antique Works of Art from Benin.</div>
+            <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
+          </div>
         </div>
 
         <h2>Related artifacts in this cluster</h2>
@@ -210,6 +216,45 @@
         
         </div>
       </div>
+    
+    <script>
+    document.querySelectorAll('.slider-container').forEach(container => {
+      const overlay = container.querySelector('.overlay');
+      const handle = container.querySelector('.slider-handle');
+
+      let isDragging = false;
+
+      const move = (x) => {
+        const rect = container.getBoundingClientRect();
+        let pos = (x - rect.left) / rect.width;
+        pos = Math.max(0, Math.min(1, pos));
+
+        overlay.style.width = (pos * 100) + "%";
+        handle.style.left = (pos * 100) + "%";
+      };
+
+      container.addEventListener('mousedown', e => {
+        isDragging = true;
+        move(e.clientX);
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      window.addEventListener('mousemove', e => {
+        if (isDragging) move(e.clientX);
+      });
+
+      container.addEventListener('touchstart', e => {
+        move(e.touches[0].clientX);
+      });
+
+      container.addEventListener('touchmove', e => {
+        move(e.touches[0].clientX);
+      });
+    });
+    </script>
     </body>
     </html>
     

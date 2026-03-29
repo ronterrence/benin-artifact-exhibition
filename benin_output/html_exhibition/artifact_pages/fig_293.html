@@ -120,25 +120,31 @@
       <div class="page">
         <a class="back" href="../../../index.html#cluster-10">← Back to exhibition</a>
 
-        <div class="comparison-container">
-          <div class="image-panel">
-            <h3>Original scan</h3>
-            <img src="../../plates/fig_293_plate.jpg" alt="fig_293 original">
-          </div>
-          
-        <div class="image-panel">
-          <h3>AI-enhanced</h3>
-          <img src="../../enhanced_plates/fig_293_plate_enhanced.jpg" alt="fig_293 enhanced">
+        <div class="hero">
+          <div class="comparison-container">
+            
+        <div class="slider-container">
+          <img src="../../plates/fig_293_plate.jpg" class="slider-img base" alt="fig_293 original">
+          <img src="../../enhanced_plates/fig_293_plate_enhanced.jpg" class="slider-img overlay" alt="fig_293 enhanced">
+          <div class="slider-handle"></div>
+          <div class="slider-label left">Original</div>
+          <div class="slider-label right">AI Enhanced</div>
         </div>
         
-        </div>
+            <div class="image-panel">
+              <h3>Original scan</h3>
+              <img src="../../plates/fig_293_plate.jpg" alt="fig_293 original">
+            </div>
+            
+          </div>
 
-        <div class="text-panel">
-          <div class="meta">Artifact: fig_293</div>
-          <div class="meta">Cluster: 10</div>
-          <h1>Bronze statuette, representing a negro figure holding a so-called The figure has three tri</h1>
-          <div class="description">Bronze statuette, representing a negro figure holding a so-called The figure has three tribal marks over each eye, and The pupils three radiating lines branching from the corners of the mouth. of the eyes are inlaid with iron. A cross on the breast hanging from the neck by a cord. No coral choker, but a necklace perhaps of coral or agate. A pot hat with a narrow straight brim. This figure exactly resembles The face No. 90. The skirt is The ears are very rudely formed. No hair is shown. is very prognathous and the nose broad and flat, not aquiline. only slightly hooked up. 289 292 290 PLATE 38. -&quot;- &#x27; C 293 1 5 294 291 78 Antique Works of Art from Benin.</div>
-          <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
+          <div class="text-panel">
+            <div class="meta">Artifact: fig_293</div>
+            <div class="meta">Cluster: 10</div>
+            <h1>Bronze statuette, representing a negro figure holding a so-called The figure has three tri</h1>
+            <div class="description">Bronze statuette, representing a negro figure holding a so-called The figure has three tribal marks over each eye, and The pupils three radiating lines branching from the corners of the mouth. of the eyes are inlaid with iron. A cross on the breast hanging from the neck by a cord. No coral choker, but a necklace perhaps of coral or agate. A pot hat with a narrow straight brim. This figure exactly resembles The face No. 90. The skirt is The ears are very rudely formed. No hair is shown. is very prognathous and the nose broad and flat, not aquiline. only slightly hooked up. 289 292 290 PLATE 38. -&quot;- &#x27; C 293 1 5 294 291 78 Antique Works of Art from Benin.</div>
+            <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
+          </div>
         </div>
 
         <h2>Related artifacts in this cluster</h2>
@@ -210,6 +216,45 @@
         
         </div>
       </div>
+    
+    <script>
+    document.querySelectorAll('.slider-container').forEach(container => {
+      const overlay = container.querySelector('.overlay');
+      const handle = container.querySelector('.slider-handle');
+
+      let isDragging = false;
+
+      const move = (x) => {
+        const rect = container.getBoundingClientRect();
+        let pos = (x - rect.left) / rect.width;
+        pos = Math.max(0, Math.min(1, pos));
+
+        overlay.style.width = (pos * 100) + "%";
+        handle.style.left = (pos * 100) + "%";
+      };
+
+      container.addEventListener('mousedown', e => {
+        isDragging = true;
+        move(e.clientX);
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      window.addEventListener('mousemove', e => {
+        if (isDragging) move(e.clientX);
+      });
+
+      container.addEventListener('touchstart', e => {
+        move(e.touches[0].clientX);
+      });
+
+      container.addEventListener('touchmove', e => {
+        move(e.touches[0].clientX);
+      });
+    });
+    </script>
     </body>
     </html>
     
