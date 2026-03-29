@@ -231,13 +231,23 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
     <body>
       <div class="page">
         <a class="back" href="../../../index.html#cluster-{cluster:02d}">← Back to exhibition</a>
-
         <div class="comparison-container">
-          <div class="image-panel">
-            <h3>Original scan</h3>
-            <img src="{original_path}" alt="{artifact_id} original">
-          </div>
-          {enhanced_html}
+          {f"""
+          <div class="slider-container">
+            <img src="{original_path}" class="slider-img base">
+            <img src="{enhanced_path}" class="slider-img overlay" id="overlay-{artifact_id}">
+
+            <div class="slider-handle" id="handle-{artifact_id}"></div>
+
+            <div class="slider-label left">Original</div>
+            <div class="slider-label right">AI Enhanced</div>
+  </div>
+  """ if has_enhanced else f"""
+  <div class="image-panel">
+    <h3>Original scan</h3>
+    <img src="{original_path}" alt="{artifact_id} original">
+  </div>
+  """}
         </div>
 
         <div class="text-panel">
@@ -611,8 +621,110 @@ def main() -> None:
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Benin Digital Exhibition</title>
-      <style>{css}</style>
+      <style>
+      {css}
+      .slider-container {
+          position: relative;
+          width: 100%;
+          max-width: 700px;
+          overflow: hidden;
+          border-radius: 10px;
+          cursor: ew-resize;
+        }
+
+        .slider-img {
+          width: 100%;
+          display: block;
+        }
+
+        .slider-img.overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 50%;
+          overflow: hidden;
+        }
+
+        .slider-handle {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 2px;
+          height: 100%;
+          background: white;
+          z-index: 5;
+        }
+
+        .slider-handle::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: -8px;
+          width: 16px;
+          height: 16px;
+          background: white;
+          border-radius: 50%;
+          transform: translateY(-50%);
+        }
+
+        .slider-label {
+          position: absolute;
+          top: 10px;
+          font-size: 12px;
+          color: white;
+          background: rgba(0,0,0,0.6);
+          padding: 4px 8px;
+          border-radius: 4px;
+        }
+
+        .slider-label.left {
+          left: 10px;
+        }
+
+        .slider-label.right {
+          right: 10px;
+        }
+      </style>
     </head>
+    <script>
+    document.querySelectorAll('.slider-container').forEach(container => {
+      const overlay = container.querySelector('.overlay');
+      const handle = container.querySelector('.slider-handle');
+
+      let isDragging = false;
+
+      const move = (x) => {
+        const rect = container.getBoundingClientRect();
+        let pos = (x - rect.left) / rect.width;
+        pos = Math.max(0, Math.min(1, pos));
+
+        overlay.style.width = (pos * 100) + "%";
+        handle.style.left = (pos * 100) + "%";
+      };
+
+      container.addEventListener('mousedown', e => {
+        isDragging = true;
+        move(e.clientX);
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      window.addEventListener('mousemove', e => {
+        if (isDragging) move(e.clientX);
+      });
+
+      // Mobile
+      container.addEventListener('touchstart', e => {
+        move(e.touches[0].clientX);
+      });
+
+      container.addEventListener('touchmove', e => {
+        move(e.touches[0].clientX);
+      });
+    });
+    </script>
     <body>
       {hero}
       <main>
