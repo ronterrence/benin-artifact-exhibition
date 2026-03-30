@@ -114,36 +114,31 @@
         max-width: 100%;
       }
     }
-    
     </style>
     </head>
     <body>
       <div class="page">
         <a class="back" href="../../../index.html#cluster-03">← Back to exhibition</a>
 
-        <div class="hero">
-          <div class="comparison-container">
-            <div class="slider-wrapper">
-                
-        <div class="slider-container">
-          <img src="../../plates/fig_027_plate.jpg" class="slider-img base" alt="fig_027 original">
-          <img src="../../enhanced_plates/fig_027_plate_enhanced.jpg" class="slider-img overlay" alt="fig_027 enhanced">
-          <div class="slider-handle"></div>
-          <div class="slider-label left">Original</div>
-          <div class="slider-label right">AI Enhanced</div>
+        <div class="comparison-container">
+          <div class="image-panel">
+            <h3>Original scan</h3>
+            <img src="../../plates/fig_027_plate.jpg" alt="fig_027 original">
+          </div>
+          
+        <div class="image-panel">
+          <h3>AI-enhanced</h3>
+          <img src="../../enhanced_plates/fig_027_plate_enhanced.jpg" alt="fig_027 enhanced">
         </div>
         
-            </div>
-            
-          </div>
+        </div>
 
-          <div class="text-panel">
-            <div class="meta">Artifact: fig_027</div>
-            <div class="meta">Cluster: 3</div>
-            <h1>Carved wooden panel, consisting of a chief in the centre ; broad leaf-shaped sword, with r</h1>
-            <div class="description">Carved wooden panel, consisting of a chief in the centre ; broad leaf-shaped sword, with ring attached to pommel, upheld in right hand, studded with copper nails, and ornamented with representations of itself. In left hand a fan-shaped figure terminating in two hands. Coral choker, badge of rank. Bell on neck and cross-belts. Skirt ornamented with three heads and a Anklets. guilloche pattern of three bands with pellets. Attendant on Serpent with human arm and left holding umbrella over chief&#x27;s head. hand in its mouth, head upwards ; eyes of inlaid glass ; body studded with Leopard, drawn head upwards. On right, figure with jug in left hand and cup in right hand, standing in a trough or open vessel. At top a bottle bound with Small attendant with paddle in right hand. grass, and figure of some object, perhaps a stone celt bound with grass. copper nails. Brass and iron screws are used for ornamentation in this carving. Guilloche pattern of two bands without pellets around the edge of the panel.</div>
-            <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
-          </div>
+        <div class="text-panel">
+          <div class="meta">Artifact: fig_027</div>
+          <div class="meta">Cluster: 3</div>
+          <h1>Carved wooden panel, consisting of a chief in the centre ; broad leaf-shaped sword, with r</h1>
+          <div class="description">Carved wooden panel, consisting of a chief in the centre ; broad leaf-shaped sword, with ring attached to pommel, upheld in right hand, studded with copper nails, and ornamented with representations of itself. In left hand a fan-shaped figure terminating in two hands. Coral choker, badge of rank. Bell on neck and cross-belts. Skirt ornamented with three heads and a Anklets. guilloche pattern of three bands with pellets. Attendant on Serpent with human arm and left holding umbrella over chief&#x27;s head. hand in its mouth, head upwards ; eyes of inlaid glass ; body studded with Leopard, drawn head upwards. On right, figure with jug in left hand and cup in right hand, standing in a trough or open vessel. At top a bottle bound with Small attendant with paddle in right hand. grass, and figure of some object, perhaps a stone celt bound with grass. copper nails. Brass and iron screws are used for ornamentation in this carving. Guilloche pattern of two bands without pellets around the edge of the panel.</div>
+          <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
         </div>
 
         <h2>Related artifacts in this cluster</h2>
@@ -215,45 +210,6 @@
         
         </div>
       </div>
-    
-    <script>
-    document.querySelectorAll('.slider-container').forEach(container => {
-      const overlay = container.querySelector('.overlay');
-      const handle = container.querySelector('.slider-handle');
-
-      let isDragging = false;
-
-      const move = (x) => {
-        const rect = container.getBoundingClientRect();
-        let pos = (x - rect.left) / rect.width;
-        pos = Math.max(0, Math.min(1, pos));
-
-        overlay.style.width = (pos * 100) + "%";
-        handle.style.left = (pos * 100) + "%";
-      };
-
-      container.addEventListener('mousedown', e => {
-        isDragging = true;
-        move(e.clientX);
-      });
-
-      window.addEventListener('mouseup', () => {
-        isDragging = false;
-      });
-
-      window.addEventListener('mousemove', e => {
-        if (isDragging) move(e.clientX);
-      });
-
-      container.addEventListener('touchstart', e => {
-        move(e.touches[0].clientX);
-      });
-
-      container.addEventListener('touchmove', e => {
-        move(e.touches[0].clientX);
-      });
-    });
-    </script>
     </body>
     </html>
     

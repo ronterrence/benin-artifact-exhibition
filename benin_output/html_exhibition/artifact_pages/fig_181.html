@@ -114,36 +114,31 @@
         max-width: 100%;
       }
     }
-    
     </style>
     </head>
     <body>
       <div class="page">
         <a class="back" href="../../../index.html#cluster-00">← Back to exhibition</a>
 
-        <div class="hero">
-          <div class="comparison-container">
-            <div class="slider-wrapper">
-                
-        <div class="slider-container">
-          <img src="../../plates/fig_181_plate.jpg" class="slider-img base" alt="fig_181 original">
-          <img src="../../enhanced_plates/fig_181_plate_enhanced.jpg" class="slider-img overlay" alt="fig_181 enhanced">
-          <div class="slider-handle"></div>
-          <div class="slider-label left">Original</div>
-          <div class="slider-label right">AI Enhanced</div>
+        <div class="comparison-container">
+          <div class="image-panel">
+            <h3>Original scan</h3>
+            <img src="../../plates/fig_181_plate.jpg" alt="fig_181 original">
+          </div>
+          
+        <div class="image-panel">
+          <h3>AI-enhanced</h3>
+          <img src="../../enhanced_plates/fig_181_plate_enhanced.jpg" alt="fig_181 enhanced">
         </div>
         
-            </div>
-            
-          </div>
+        </div>
 
-          <div class="text-panel">
-            <div class="meta">Artifact: fig_181</div>
-            <div class="meta">Cluster: 0</div>
-            <h1>-Bronze plaque, rejiresenting three figures, the central one beating a drum The drum has p</h1>
-            <div class="description">-Bronze plaque, rejiresenting three figures, the central one beating a drum The drum has pegs with knobs to with his fingers, and no drum-sticks. fasten down the skin, like Fig. 248, Plate XXXII, and similar to the Jekri I, New Series, drum figured Both the side figures Quadrangular bell on chest. hold sistri with two bells, like Figs. 76 to 78, Plate XII, upheld in their left Plate VIII, Fig. 5. Inst.,&quot; Vol. Anthrop. &quot;Journ. the in hands, which they are beating with sticks in then right hands. This plaque gives a fair idea of the kind of music used in Benin. 178 PLATE 27. Antique Works of Art from Benin. 55</div>
-            <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
-          </div>
+        <div class="text-panel">
+          <div class="meta">Artifact: fig_181</div>
+          <div class="meta">Cluster: 0</div>
+          <h1>-Bronze plaque, rejiresenting three figures, the central one beating a drum The drum has p</h1>
+          <div class="description">-Bronze plaque, rejiresenting three figures, the central one beating a drum The drum has pegs with knobs to with his fingers, and no drum-sticks. fasten down the skin, like Fig. 248, Plate XXXII, and similar to the Jekri I, New Series, drum figured Both the side figures Quadrangular bell on chest. hold sistri with two bells, like Figs. 76 to 78, Plate XII, upheld in their left Plate VIII, Fig. 5. Inst.,&quot; Vol. Anthrop. &quot;Journ. the in hands, which they are beating with sticks in then right hands. This plaque gives a fair idea of the kind of music used in Benin. 178 PLATE 27. Antique Works of Art from Benin. 55</div>
+          <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
         </div>
 
         <h2>Related artifacts in this cluster</h2>
@@ -215,45 +210,6 @@
         
         </div>
       </div>
-    
-    <script>
-    document.querySelectorAll('.slider-container').forEach(container => {
-      const overlay = container.querySelector('.overlay');
-      const handle = container.querySelector('.slider-handle');
-
-      let isDragging = false;
-
-      const move = (x) => {
-        const rect = container.getBoundingClientRect();
-        let pos = (x - rect.left) / rect.width;
-        pos = Math.max(0, Math.min(1, pos));
-
-        overlay.style.width = (pos * 100) + "%";
-        handle.style.left = (pos * 100) + "%";
-      };
-
-      container.addEventListener('mousedown', e => {
-        isDragging = true;
-        move(e.clientX);
-      });
-
-      window.addEventListener('mouseup', () => {
-        isDragging = false;
-      });
-
-      window.addEventListener('mousemove', e => {
-        if (isDragging) move(e.clientX);
-      });
-
-      container.addEventListener('touchstart', e => {
-        move(e.touches[0].clientX);
-      });
-
-      container.addEventListener('touchmove', e => {
-        move(e.touches[0].clientX);
-      });
-    });
-    </script>
     </body>
     </html>
     

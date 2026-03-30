@@ -114,36 +114,31 @@
         max-width: 100%;
       }
     }
-    
     </style>
     </head>
     <body>
       <div class="page">
         <a class="back" href="../../../index.html#cluster-03">← Back to exhibition</a>
 
-        <div class="hero">
-          <div class="comparison-container">
-            <div class="slider-wrapper">
-                
-        <div class="slider-container">
-          <img src="../../plates/fig_333_plate.jpg" class="slider-img base" alt="fig_333 original">
-          <img src="../../enhanced_plates/fig_333_plate_enhanced.jpg" class="slider-img overlay" alt="fig_333 enhanced">
-          <div class="slider-handle"></div>
-          <div class="slider-label left">Original</div>
-          <div class="slider-label right">AI Enhanced</div>
+        <div class="comparison-container">
+          <div class="image-panel">
+            <h3>Original scan</h3>
+            <img src="../../plates/fig_333_plate.jpg" alt="fig_333 original">
+          </div>
+          
+        <div class="image-panel">
+          <h3>AI-enhanced</h3>
+          <img src="../../enhanced_plates/fig_333_plate_enhanced.jpg" alt="fig_333 enhanced">
         </div>
         
-            </div>
-            
-          </div>
+        </div>
 
-          <div class="text-panel">
-            <div class="meta">Artifact: fig_333</div>
-            <div class="meta">Cluster: 3</div>
-            <h1>Round execution block and stand of wood, elaborately carved with figures of men and animal</h1>
-            <div class="description">Round execution block and stand of wood, elaborately carved with figures of men and animals. On the top is a pointed spike of wood, 5 inches in height, on which the head of the victim appears to have rested, and below this on the surface at the top of the block are two receptacles for The ornamen- the thumbs of the victim, in the form of coiled mud-fish. tation on the top consists of squares and triangles filled with parallel straight lines alternating in direction, and edged with a circle of broken On the sides are three human figures, two of which are holding hands upwards, weapons and shields, and one a curved sword of Between these figures are two boxes or European form, point downwards. stools ; there are also two human hands and other objects on the other side. The bottom of the block is surrounded by a broad guilloche pattern of four The stand on which the block stands is of semicircular The top is ornamented with two animals, resembling crocodiles, On the front of this stand is a row of objects, consisting, in the centre, of a human figure holding something on the abdomen, human hands, animals&#x27; A very similar execution block, but without heads, and other objects. stand, is shown in Figs. 258 to 260, Plate XXXIV. The barbarous carving and ornamentation of such gruesome objects is quite characteristic of conforming to the outline of the curve, and other animals and objects. or five strands. form. Benin art. 88 Antique Works of Art from Benin.</div>
-            <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
-          </div>
+        <div class="text-panel">
+          <div class="meta">Artifact: fig_333</div>
+          <div class="meta">Cluster: 3</div>
+          <h1>Round execution block and stand of wood, elaborately carved with figures of men and animal</h1>
+          <div class="description">Round execution block and stand of wood, elaborately carved with figures of men and animals. On the top is a pointed spike of wood, 5 inches in height, on which the head of the victim appears to have rested, and below this on the surface at the top of the block are two receptacles for The ornamen- the thumbs of the victim, in the form of coiled mud-fish. tation on the top consists of squares and triangles filled with parallel straight lines alternating in direction, and edged with a circle of broken On the sides are three human figures, two of which are holding hands upwards, weapons and shields, and one a curved sword of Between these figures are two boxes or European form, point downwards. stools ; there are also two human hands and other objects on the other side. The bottom of the block is surrounded by a broad guilloche pattern of four The stand on which the block stands is of semicircular The top is ornamented with two animals, resembling crocodiles, On the front of this stand is a row of objects, consisting, in the centre, of a human figure holding something on the abdomen, human hands, animals&#x27; A very similar execution block, but without heads, and other objects. stand, is shown in Figs. 258 to 260, Plate XXXIV. The barbarous carving and ornamentation of such gruesome objects is quite characteristic of conforming to the outline of the curve, and other animals and objects. or five strands. form. Benin art. 88 Antique Works of Art from Benin.</div>
+          <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
         </div>
 
         <h2>Related artifacts in this cluster</h2>
@@ -215,45 +210,6 @@
         
         </div>
       </div>
-    
-    <script>
-    document.querySelectorAll('.slider-container').forEach(container => {
-      const overlay = container.querySelector('.overlay');
-      const handle = container.querySelector('.slider-handle');
-
-      let isDragging = false;
-
-      const move = (x) => {
-        const rect = container.getBoundingClientRect();
-        let pos = (x - rect.left) / rect.width;
-        pos = Math.max(0, Math.min(1, pos));
-
-        overlay.style.width = (pos * 100) + "%";
-        handle.style.left = (pos * 100) + "%";
-      };
-
-      container.addEventListener('mousedown', e => {
-        isDragging = true;
-        move(e.clientX);
-      });
-
-      window.addEventListener('mouseup', () => {
-        isDragging = false;
-      });
-
-      window.addEventListener('mousemove', e => {
-        if (isDragging) move(e.clientX);
-      });
-
-      container.addEventListener('touchstart', e => {
-        move(e.touches[0].clientX);
-      });
-
-      container.addEventListener('touchmove', e => {
-        move(e.touches[0].clientX);
-      });
-    });
-    </script>
     </body>
     </html>
     

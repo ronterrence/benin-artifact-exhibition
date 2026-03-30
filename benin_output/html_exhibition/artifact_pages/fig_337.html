@@ -114,36 +114,31 @@
         max-width: 100%;
       }
     }
-    
     </style>
     </head>
     <body>
       <div class="page">
         <a class="back" href="../../../index.html#cluster-02">← Back to exhibition</a>
 
-        <div class="hero">
-          <div class="comparison-container">
-            <div class="slider-wrapper">
-                
-        <div class="slider-container">
-          <img src="../../plates/fig_337_plate.jpg" class="slider-img base" alt="fig_337 original">
-          <img src="../../enhanced_plates/fig_337_plate_enhanced.jpg" class="slider-img overlay" alt="fig_337 enhanced">
-          <div class="slider-handle"></div>
-          <div class="slider-label left">Original</div>
-          <div class="slider-label right">AI Enhanced</div>
+        <div class="comparison-container">
+          <div class="image-panel">
+            <h3>Original scan</h3>
+            <img src="../../plates/fig_337_plate.jpg" alt="fig_337 original">
+          </div>
+          
+        <div class="image-panel">
+          <h3>AI-enhanced</h3>
+          <img src="../../enhanced_plates/fig_337_plate_enhanced.jpg" alt="fig_337 enhanced">
         </div>
         
-            </div>
-            
-          </div>
+        </div>
 
-          <div class="text-panel">
-            <div class="meta">Artifact: fig_337</div>
-            <div class="meta">Cluster: 2</div>
-            <h1>Half of a bronze circlet or necklet, similar to Fig</h1>
-            <div class="description">Half of a bronze circlet or necklet, similar to Fig. 158, Plate XXV; ornamented with two human forms with attenuated bodies and conventional heads, consisting of circles with five circular punch-marks to rejn-esent the The arms of these features, and two other similar heads without bodies. At the feet of these two two figures are bound together at the wrists. extended figures are two human heads of negro type, very well executed, and a leopard&#x27;s head. It is ornamented in other places by a broad leaf- This remarkable work of savage art is shown in shaped sword and spirals. greater detail in the annexed Avoodcut.</div>
-            <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
-          </div>
+        <div class="text-panel">
+          <div class="meta">Artifact: fig_337</div>
+          <div class="meta">Cluster: 2</div>
+          <h1>Half of a bronze circlet or necklet, similar to Fig</h1>
+          <div class="description">Half of a bronze circlet or necklet, similar to Fig. 158, Plate XXV; ornamented with two human forms with attenuated bodies and conventional heads, consisting of circles with five circular punch-marks to rejn-esent the The arms of these features, and two other similar heads without bodies. At the feet of these two two figures are bound together at the wrists. extended figures are two human heads of negro type, very well executed, and a leopard&#x27;s head. It is ornamented in other places by a broad leaf- This remarkable work of savage art is shown in shaped sword and spirals. greater detail in the annexed Avoodcut.</div>
+          <p class='ai-note'>The enhanced image is an AI-assisted restoration for legibility and comparison. The original scan remains the primary archival reference.</p>
         </div>
 
         <h2>Related artifacts in this cluster</h2>
@@ -215,45 +210,6 @@
         
         </div>
       </div>
-    
-    <script>
-    document.querySelectorAll('.slider-container').forEach(container => {
-      const overlay = container.querySelector('.overlay');
-      const handle = container.querySelector('.slider-handle');
-
-      let isDragging = false;
-
-      const move = (x) => {
-        const rect = container.getBoundingClientRect();
-        let pos = (x - rect.left) / rect.width;
-        pos = Math.max(0, Math.min(1, pos));
-
-        overlay.style.width = (pos * 100) + "%";
-        handle.style.left = (pos * 100) + "%";
-      };
-
-      container.addEventListener('mousedown', e => {
-        isDragging = true;
-        move(e.clientX);
-      });
-
-      window.addEventListener('mouseup', () => {
-        isDragging = false;
-      });
-
-      window.addEventListener('mousemove', e => {
-        if (isDragging) move(e.clientX);
-      });
-
-      container.addEventListener('touchstart', e => {
-        move(e.touches[0].clientX);
-      });
-
-      container.addEventListener('touchmove', e => {
-        move(e.touches[0].clientX);
-      });
-    });
-    </script>
     </body>
     </html>
     

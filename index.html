@@ -5,9 +5,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Benin Digital Exhibition</title>
-      
-    <style>
-    
+      <style>
     body {
     margin: 0;
     font-family: "Georgia", serif;
@@ -209,151 +207,9 @@
   .image-panel {
     max-width: 100%;
   }
-  .slider-wrapper {{
-  width: 100%;
-  max-width: 900px;
-    }}
-
-    .slider-container {{
-      position: relative;
-      width: 100%;
-      aspect-ratio: 3 / 4;   /* keeps nice proportion */
-      overflow: hidden;
-      border-radius: 10px;
-      cursor: ew-resize;
-      background: black;
-    }}
-
-    .slider-img {{
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }}
-
-    .slider-img.overlay {{
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 50%;
-      height: 100%;
-      overflow: hidden;
-    }}
-
-    .slider-handle {{
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 2px;
-      height: 100%;
-      background: white;
-      z-index: 5;
-    }}
 }
-
-    
-
-    .slider-container {
-      position: relative;
-      width: 100%;
-      max-width: 700px;
-      overflow: hidden;
-      border-radius: 10px;
-      cursor: ew-resize;
-    }
-
-    .slider-img {
-      width: 100%;
-      display: block;
-    }
-
-    .slider-img.overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 50%;
-      overflow: hidden;
-    }
-
-    .slider-handle {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 2px;
-      height: 100%;
-      background: white;
-      z-index: 5;
-    }
-
-    .slider-handle::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: -8px;
-      width: 16px;
-      height: 16px;
-      background: white;
-      border-radius: 50%;
-      transform: translateY(-50%);
-    }
-
-    .slider-label {
-      position: absolute;
-      top: 10px;
-      font-size: 12px;
-      color: white;
-      background: rgba(0,0,0,0.6);
-      padding: 4px 8px;
-      border-radius: 4px;
-    }
-
-    .slider-label.left {
-      left: 10px;
-    }
-
-    .slider-label.right {
-      right: 10px;
-    }
     </style>
     </head>
-    
-    <script>
-    document.querySelectorAll('.slider-container').forEach(container => {
-      const overlay = container.querySelector('.overlay');
-      const handle = container.querySelector('.slider-handle');
-
-      let isDragging = false;
-
-      const move = (x) => {
-        const rect = container.getBoundingClientRect();
-        let pos = (x - rect.left) / rect.width;
-        pos = Math.max(0, Math.min(1, pos));
-
-        overlay.style.width = (pos * 100) + "%";
-        handle.style.left = (pos * 100) + "%";
-      };
-
-      container.addEventListener('mousedown', e => {
-        isDragging = true;
-        move(e.clientX);
-      });
-
-      window.addEventListener('mouseup', () => {
-        isDragging = false;
-      });
-
-      window.addEventListener('mousemove', e => {
-        if (isDragging) move(e.clientX);
-      });
-
-      container.addEventListener('touchstart', e => {
-        move(e.touches[0].clientX);
-      });
-
-      container.addEventListener('touchmove', e => {
-        move(e.touches[0].clientX);
-      });
-    });
-    </script>
     <body>
       
     <section class="hero">
