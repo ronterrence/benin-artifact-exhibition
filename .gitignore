@@ -15,3 +15,15 @@ archive/
 # OS junk
 Thumbs.db
 .DS_Store
+
+enhance_env/
+sd_env/
+sd_test.py
+benin_output/sd_recon/
+weights/
+archive/
+benin_output/clusters/
+__pycache__/
+benin_output/sd_recon/
+
+*.pyc
