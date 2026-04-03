@@ -223,7 +223,7 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
       font-size: 14px;
       line-height: 1.4;
     }
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       .comparison-container {
         grid-template-columns: 1fr;
       }
