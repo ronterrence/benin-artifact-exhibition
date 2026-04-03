@@ -142,8 +142,8 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
     }
     .comparison-container {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
       align-items: start;
       margin-bottom: 36px;
     }
@@ -223,7 +223,7 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
       font-size: 14px;
       line-height: 1.4;
     }
-    @media (max-width: 900px) {
+    @media (max-width: 700px) {
       .comparison-container {
         grid-template-columns: 1fr;
       }
