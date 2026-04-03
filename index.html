@@ -164,6 +164,14 @@
     gap: 28px;
     align-items: start;
     }
+    
+    .comparison-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    align-items: start;
+    margin-bottom: 36px;
+    }
 
     .image-panel {
     min-width: 0;
@@ -207,6 +215,41 @@
   .image-panel {
     max-width: 100%;
   }
+  .methodology {
+  margin: 56px auto;
+  padding: 28px;
+  max-width: 1100px;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 10px;
+  }
+
+.methodology h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.8rem;
+  }
+
+.methodology p {
+  color: #ccc;
+  line-height: 1.7;
+  }
+
+.methodology ul {
+  margin-top: 10px;
+  padding-left: 20px;
+  }
+
+.methodology li {
+  margin-bottom: 8px;
+  color: #ccc;
+  }
+
+.methodology .note {
+  margin-top: 18px;
+  font-size: 0.92rem;
+  color: #999;
+  }
 }
     </style>
     </head>
@@ -226,6 +269,43 @@
     </section>
     
       <main>
+        
+    <section class="methodology">
+      <h2>Methodology: AI-Assisted Reconstruction</h2>
+
+      <p>
+        This exhibition presents three visual layers for selected artifacts:
+        the original archival scan, an enhanced version for clarity,
+        and a non-generative bronze reconstruction.
+      </p>
+
+      <p>
+        Unlike generative AI approaches, the bronze reconstruction process does not invent
+        or alter structural details. Instead, it applies controlled image processing
+        techniques to preserve the original geometry while improving material readability.
+      </p>
+
+      <p>The pipeline consists of:</p>
+
+      <ul>
+        <li><strong>Detail Enhancement:</strong> super-resolution (RealESRGAN x2) to recover fine surface features.</li>
+        <li><strong>Structure Preservation:</strong> edge-preserving processing to maintain original carvings and contours.</li>
+        <li><strong>Material Mapping:</strong> deterministic bronze tone mapping based on grayscale intensity.</li>
+        <li><strong>Background Separation:</strong> segmentation to isolate artifacts and prevent color contamination.</li>
+        <li><strong>Reference Calibration:</strong> optional color alignment using real museum bronze samples.</li>
+      </ul>
+
+      <p>
+        This approach keeps the original scan as the primary archival reference while offering
+        enhanced and bronze-rendered views as interpretive visual aids.
+      </p>
+
+      <p class="note">
+        The bronze reconstructions are non-generative, structure-preserving material interpretations.
+        They should not be considered exact historical color restitutions.
+      </p>
+    </section>
+    
         
             <section class="cluster-section" id="cluster-00">
               <div class="cluster-header">

@@ -65,9 +65,14 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
 
     original_path = f"../../plates/{artifact_id.lower()}_plate.jpg"
     enhanced_path = f"../../enhanced_plates/{artifact_id.lower()}_plate_enhanced.jpg"
-
+    bronze_path = f"../../bronze_output/{artifact_id.lower()}_plate_bronze.jpg"
+    
     has_enhanced = Path(
         f"benin_output/enhanced_plates/{artifact_id.lower()}_plate_enhanced.jpg"
+    ).exists()
+    
+    has_bronze = Path(
+    f"benin_output/bronze_output/{artifact_id.lower()}_plate_bronze.jpg"
     ).exists()
 
     enhanced_html = ""
@@ -78,12 +83,21 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
           <img src="{enhanced_path}" alt="{artifact_id} enhanced">
         </div>
         """
+        
+    bronze_html = ""
+    if has_bronze:
+        bronze_html = f"""
+        <div class="image-panel">
+          <h3>Bronze reconstruction</h3>
+          <img src="{bronze_path}" alt="{artifact_id} bronze">
+        </div>
+        """
 
     note_html = ""
-    if has_enhanced:
+    if has_enhanced or has_bronze:
         note_html = (
             "<p class='ai-note'>"
-            "The enhanced image is an AI-assisted restoration for legibility and comparison. "
+            "The enhanced and bronze images are interpretive visualizations for legibility and material comparison. "
             "The original scan remains the primary archival reference."
             "</p>"
         )
@@ -238,6 +252,7 @@ def build_artifact_page(row: pd.Series, related_rows: pd.DataFrame) -> str:
             <img src="{original_path}" alt="{artifact_id} original">
           </div>
           {enhanced_html}
+          {bronze_html}
         </div>
 
         <div class="text-panel">
@@ -481,6 +496,14 @@ def main() -> None:
     gap: 28px;
     align-items: start;
     }
+    
+    .comparison-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    align-items: start;
+    margin-bottom: 36px;
+    }
 
     .image-panel {
     min-width: 0;
@@ -523,6 +546,41 @@ def main() -> None:
 
   .image-panel {
     max-width: 100%;
+  }
+  .methodology {
+  margin: 56px auto;
+  padding: 28px;
+  max-width: 1100px;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 10px;
+  }
+
+.methodology h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.8rem;
+  }
+
+.methodology p {
+  color: #ccc;
+  line-height: 1.7;
+  }
+
+.methodology ul {
+  margin-top: 10px;
+  padding-left: 20px;
+  }
+
+.methodology li {
+  margin-bottom: 8px;
+  color: #ccc;
+  }
+
+.methodology .note {
+  margin-top: 18px;
+  font-size: 0.92rem;
+  color: #999;
   }
 }
     """
@@ -604,6 +662,44 @@ def main() -> None:
     </section>
     """
     
+    methodology_html = """
+    <section class="methodology">
+      <h2>Methodology: AI-Assisted Reconstruction</h2>
+
+      <p>
+        This exhibition presents three visual layers for selected artifacts:
+        the original archival scan, an enhanced version for clarity,
+        and a non-generative bronze reconstruction.
+      </p>
+
+      <p>
+        Unlike generative AI approaches, the bronze reconstruction process does not invent
+        or alter structural details. Instead, it applies controlled image processing
+        techniques to preserve the original geometry while improving material readability.
+      </p>
+
+      <p>The pipeline consists of:</p>
+
+      <ul>
+        <li><strong>Detail Enhancement:</strong> super-resolution (RealESRGAN x2) to recover fine surface features.</li>
+        <li><strong>Structure Preservation:</strong> edge-preserving processing to maintain original carvings and contours.</li>
+        <li><strong>Material Mapping:</strong> deterministic bronze tone mapping based on grayscale intensity.</li>
+        <li><strong>Background Separation:</strong> segmentation to isolate artifacts and prevent color contamination.</li>
+        <li><strong>Reference Calibration:</strong> optional color alignment using real museum bronze samples.</li>
+      </ul>
+
+      <p>
+        This approach keeps the original scan as the primary archival reference while offering
+        enhanced and bronze-rendered views as interpretive visual aids.
+      </p>
+
+      <p class="note">
+        The bronze reconstructions are non-generative, structure-preserving material interpretations.
+        They should not be considered exact historical color restitutions.
+      </p>
+    </section>
+    """
+    
     html_doc = f"""
     <!doctype html>
     <html lang="en">
@@ -616,6 +712,7 @@ def main() -> None:
     <body>
       {hero}
       <main>
+        {methodology_html}
         {''.join(sections)}
       </main>
       <footer>
