@@ -652,7 +652,9 @@ def main() -> None:
       <div class="hero-inner">
         <h1>Benin Digital Exhibition</h1>
         <p class="hero-sub">
-          A machine-generated visual grouping of Benin artifacts based on image similarity.
+          A machine-generated visual grouping of Benin artifacts based on image similarity from
+          "The Antique Works of Art from Benin" by Augustus Henry Lane-Fox Pitt-Rivers is a historical account written in the early 20th century.
+          The publication focuses on the intricate art and artifacts recovered from Benin City following the punitive expedition of 1897 conducted by British forces.
         </p>
         <div class="toolbar">
           <input id="searchBox" type="search" placeholder="Search by artifact ID, title, or description">
